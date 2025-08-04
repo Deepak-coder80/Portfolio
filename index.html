@@ -1,109 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Software Engineer Portfolio - Deepak M S">
-        <meta name="keywords" content="Software Engineer, Python Developer, FastAPI, AWS, CI/CD, System Optimization, Backend Developer">
-          <meta name="author" content="Deepak M S">
-            <title>Deepak M S | Software Engineer Portfolio</title>
-              <style>
-                  body {
-                        font-family: sans-serif;
-                              margin: 0;
-                                    padding: 0;
-                                          line-height: 1.6;
-                                                background: #ffffff;
-                                                      color: #000000;
-                                                          }
-                                                              header {
-                                                                    padding: 2rem;
-                                                                          background: #f4f4f4;
-                                                                                text-align: center;
-                                                                                    }
-                                                                                        nav {
-                                                                                              padding: 1rem;
-                                                                                                    background: #e0e0e0;
-                                                                                                          text-align: center;
-                                                                                                              }
-                                                                                                                  nav a {
-                                                                                                                        margin: 0 1rem;
-                                                                                                                              text-decoration: none;
-                                                                                                                                    color: #000;
-                                                                                                                                        }
-                                                                                                                                            section {
-                                                                                                                                                  max-width: 800px;
-                                                                                                                                                        margin: 2rem auto;
-                                                                                                                                                              padding: 0 1rem;
-                                                                                                                                                                  }
-                                                                                                                                                                      h1, h2 {
-                                                                                                                                                                            margin-top: 0;
-                                                                                                                                                                                }
-                                                                                                                                                                                    footer {
-                                                                                                                                                                                          text-align: center;
-                                                                                                                                                                                                padding: 2rem;
-                                                                                                                                                                                                      background: #f4f4f4;
-                                                                                                                                                                                                          }
-                                                                                                                                                                                                            </style>
-                                                                                                                                                                                                            </head>
-                                                                                                                                                                                                            <body>
-                                                                                                                                                                                                              <header>
-                                                                                                                                                                                                                  <h1>Deepak M S</h1>
-                                                                                                                                                                                                                      <p>Innovative Software Engineer | Backend Specialist | AWS Enthusiast</p>
-                                                                                                                                                                                                                        </header>
+    <meta name="description" content="Deepak M S - Senior Software Engineer specializing in Python, FastAPI, AWS, and backend development. Available for job opportunities and freelance projects.">
+    <meta name="keywords" content="Software Engineer, Python Developer, FastAPI, AWS, Backend Developer, CI/CD, System Optimization, Freelance Developer">
+    <meta name="author" content="Deepak M S">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Deepak M S | Senior Software Engineer">
+    <meta property="og:description" content="Experienced software engineer specializing in backend development, Python, AWS, and system optimization. Open to new opportunities.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepakms.com">
+    <meta property="og:image" content="https://deepakms.com/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Deepak M S | Senior Software Engineer">
+    <meta name="twitter:description" content="Experienced software engineer specializing in backend development, Python, AWS, and system optimization.">
+    
+    <title>Deepak M S | Senior Software Engineer</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-black: #000000;
+            --secondary-gray: #333333;
+            --light-gray: #666666;
+            --border-gray: #e5e5e5;
+            --bg-gray: #fafafa;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-                                                                                                                                                                                                                          <nav>
-                                                                                                                                                                                                                              <a href="#about">About</a>
-                                                                                                                                                                                                                                  <a href="#skills">Skills</a>
-                                                                                                                                                                                                                                      <a href="#projects">Projects</a>
-                                                                                                                                                                                                                                          <a href="#approach">My Approach</a>
-                                                                                                                                                                                                                                              <a href="#contact">Contact</a>
-                                                                                                                                                                                                                                                </nav>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-                                                                                                                                                                                                                                                  <section id="about">
-                                                                                                                                                                                                                                                      <h2>About Me</h2>
-                                                                                                                                                                                                                                                          <p>With 2+ years of experience, I specialize in backend development and infrastructure optimization. I help organizations improve team efficiency and code quality, delivering measurable results in performance and maintainability.</p>
-                                                                                                                                                                                                                                                              <p>I am a constantly growing engineer passionate about building clean, efficient, and scalable software. I actively contribute to the Python ecosystem and have built two open-source Python packages: <strong>env_factory</strong> and <strong>sm_env_read</strong>. These tools help manage environment configurations and secrets in a structured and secure manner across multiple environments.</p>
-                                                                                                                                                                                                                                                                  <p>Technologies used include Python, setuptools, pip packaging, environment variable handling, secrets management, and testing using Pytest.</p>
-                                                                                                                                                                                                                                                                    </section>
+        html {
+            scroll-behavior: smooth;
+        }
 
-                                                                                                                                                                                                                                                                      <section id="skills">
-                                                                                                                                                                                                                                                                          <h2>Key Skills</h2>
-                                                                                                                                                                                                                                                                              <ul>
-                                                                                                                                                                                                                                                                                    <li>Python, FastAPI</li>
-                                                                                                                                                                                                                                                                                          <li>CI/CD, Docker, AWS (EKS, RDS, Private API Gateway)</li>
-                                                                                                                                                                                                                                                                                                <li>System Performance Optimization (Background Tasks, Caching, Parallelization)</li>
-                                                                                                                                                                                                                                                                                                      <li>Code Quality & Maintainability Improvements</li>
-                                                                                                                                                                                                                                                                                                            <li>Infrastructure Architecture & Secure Networking</li>
-                                                                                                                                                                                                                                                                                                                  <li>Python Packaging and Automation Tools (env_factory, sm_env_read)</li>
-                                                                                                                                                                                                                                                                                                                      </ul>
-                                                                                                                                                                                                                                                                                                                        </section>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--secondary-gray);
+            background: var(--white);
+            font-size: 16px;
+        }
 
-                                                                                                                                                                                                                                                                                                                          <section id="projects">
-                                                                                                                                                                                                                                                                                                                              <h2>Project Highlights</h2>
-                                                                                                                                                                                                                                                                                                                                  <ul>
-                                                                                                                                                                                                                                                                                                                                        <li><strong>Backend Modernization:</strong> Migrated backend from JavaScript to Python with FastAPI, significantly boosting API performance.</li>
-                                                                                                                                                                                                                                                                                                                                              <li><strong>Code Quality Upgrade:</strong> Applied advanced software engineering principles to double code maintainability and readability.</li>
-                                                                                                                                                                                                                                                                                                                                                    <li><strong>Performance Optimization:</strong> Introduced background tasks and caching to reduce response times.</li>
-                                                                                                                                                                                                                                                                                                                                                          <li><strong>Cloud CI/CD:</strong> Designed and deployed CI/CD pipeline using AWS EKS to streamline releases.</li>
-                                                                                                                                                                                                                                                                                                                                                                <li><strong>Secure Systems:</strong> Architected network isolation and private gateways for secure API access and data flow.</li>
-                                                                                                                                                                                                                                                                                                                                                                      <li><strong>Open-Source Tools:</strong> Created and published <em>env_factory</em> and <em>sm_env_read</em> to enhance environment management and secret access in Python projects.</li>
-                                                                                                                                                                                                                                                                                                                                                                          </ul>
-                                                                                                                                                                                                                                                                                                                                                                            </section>
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-gray);
+            z-index: 1000;
+            transition: var(--transition);
+        }
 
-                                                                                                                                                                                                                                                                                                                                                                              <section id="approach">
-                                                                                                                                                                                                                                                                                                                                                                                  <h2>My Approach</h2>
-                                                                                                                                                                                                                                                                                                                                                                                      <p>I bring a business-first mindset to engineering. My strength lies in building reliable systems while aligning technical solutions with business goals. I enjoy architecting systems, mentoring teams, and ensuring delivery excellence.</p>
-                                                                                                                                                                                                                                                                                                                                                                                        </section>
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-                                                                                                                                                                                                                                                                                                                                                                                          <section id="contact">
-                                                                                                                                                                                                                                                                                                                                                                                              <h2>Get in Touch</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                  <p>I’m always open to discussing how I can contribute to your team or project. Feel free to drop a message at <a href="mailto:contact@deepakms.com">contact@deepakms.com</a>.</p>
-                                                                                                                                                                                                                                                                                                                                                                                                    </section>
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-decoration: none;
+        }
 
-                                                                                                                                                                                                                                                                                                                                                                                                      <footer>
-                                                                                                                                                                                                                                                                                                                                                                                                          <p>&copy; 2025 Deepak M S. All rights reserved.</p>
-                                                                                                                                                                                                                                                                                                                                                                                                            </footer>
-                                                                                                                                                                                                                                                                                                                                                                                                            </body>
-                                                                                                                                                                                                                                                                                                                                                                                                            </html>
-                                                                                                                                                                                                                                                                                                                                                                                                            
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-black);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-black);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--secondary-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--primary-black);
+            background: var(--primary-black);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border-radius: 0;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary-black);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-black);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-black);
+            color: var(--white);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 2rem;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-gray);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-black);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border: 1px solid var(--border-gray);
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            border-color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-black);
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--secondary-gray);
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-black);
+            transform: translateY(-4px);
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-black);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--secondary-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-gray);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            color: var(--secondary-gray);
+            border: 1px solid var(--border-gray);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            border-color: var(--primary-black);
+            transform: translateY(-2px);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-meta {
+            color: var(--light-gray);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-excerpt {
+            color: var(--secondary-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            opacity: 0.7;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-gray);
+        }
+
+        .contact-item a {
+            color: var(--primary-black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .contact-item a:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-black);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Deepak M S",
+        "jobTitle": "Software Engineer",
+        "description": "Experienced software engineer specializing in backend development, Python, FastAPI, AWS, and system optimization",
+        "url": "https://deepakms.com",
+        "email": "contact@deepakms.com",
+        "knowsAbout": ["Python", "FastAPI", "AWS", "Backend Development", "CI/CD", "System Optimization"],
+        "alumniOf": "Software Engineering",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "KIREAP Technologies Pvt Ltd"
+        }
+    }
+    </script>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Deepak M S</a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Senior Software Engineer</h1>
+            <p class="hero-subtitle">Backend Specialist • AWS Enthusiast • Open Source Contributor</p>
+            <p class="hero-description">
+                With 2+ years of experience, I specialize in backend development and infrastructure optimization. 
+                I help organizations improve team efficiency and code quality, delivering measurable results in 
+                performance and maintainability.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn">Get In Touch</a>
+                <a href="#projects" class="btn btn-outline">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p>I am a constantly growing engineer passionate about building clean, efficient, and scalable software. I actively contribute to the Python ecosystem and have built two open-source Python packages: <strong>env_factory</strong> and <strong>sm_env_read</strong>.</p>
+                    <p>These tools help manage environment configurations and secrets in a structured and secure manner across multiple environments, utilizing Python, setuptools, pip packaging, environment variable handling, secrets management, and comprehensive testing using Pytest.</p>
+                    <p>I bring a business-first mindset to engineering, with strength in building reliable systems while aligning technical solutions with business goals. I enjoy architecting systems, mentoring teams, and ensuring delivery excellence.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Open Source Packages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Technical Expertise</h2>
+            <p class="section-subtitle fade-in">
+                A comprehensive toolkit for modern software development and infrastructure management
+            </p>
+            <div class="skills-grid fade-in">
+                <div class="skill-category">
+                    <h3>Backend Development</h3>
+                    <ul class="skill-list">
+                        <li>Python & FastAPI</li>
+                        <li>RESTful API Design</li>
+                        <li>Database Design & Optimization</li>
+                        <li>Microservices Architecture</li>
+                        <li>Background Tasks & Caching</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <ul class="skill-list">
+                        <li>AWS (EKS, RDS, API Gateway)</li>
+                        <li>Docker & Containerization</li>
+                        <li>CI/CD Pipeline Design</li>
+                        <li>Infrastructure as Code</li>
+                        <li>Monitoring & Logging</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>System Optimization</h3>
+                    <ul class="skill-list">
+                        <li>Performance Optimization</li>
+                        <li>Code Quality Improvement</li>
+                        <li>Security Best Practices</li>
+                        <li>Network Architecture</li>
+                        <li>Scalability Planning</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Automation</h3>
+                    <ul class="skill-list">
+                        <li>Python Packaging (env_factory, sm_env_read)</li>
+                        <li>Testing & Quality Assurance</li>
+                        <li>Environment Management</li>
+                        <li>Secrets Management</li>
+                        <li>Process Automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <!-- <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            <p class="section-subtitle fade-in">
+                Showcasing impactful solutions that drive business value and technical excellence
+            </p>
+            <div class="projects-grid fade-in">
+                <div class="project-card">
+                    <h3>Backend Modernization</h3>
+                    <p>Migrated legacy JavaScript backend to Python with FastAPI, resulting in significantly improved API performance and maintainability. Implemented modern software engineering principles to double code quality metrics.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Details →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Cloud CI/CD Pipeline</h3>
+                    <p>Designed and deployed comprehensive CI/CD pipeline using AWS EKS to streamline releases. Implemented secure network isolation and private gateways for enhanced API security and data flow control.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AWS EKS</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Terraform</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Details →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Open Source Package: env_factory</h3>
+                    <p>Created and published a Python package for structured environment configuration management. Provides secure, scalable environment variable handling across multiple deployment environments.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PyPI</span>
+                        <span class="tech-tag">Pytest</span>
+                        <span class="tech-tag">Setuptools</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">PyPI →</a>
+                        <a href="#" class="project-link">GitHub →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Open Source Package: sm_env_read</h3>
+                    <p>Developed a secure secrets management tool for Python applications. Enables structured and secure access to environment secrets with comprehensive testing and documentation.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Security</span>
+                        <span class="tech-tag">PyPI</span>
+                        <span class="tech-tag">Documentation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">PyPI →</a>
+                        <a href="#" class="project-link">GitHub →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Performance Optimization Suite</h3>
+                    <p>Implemented comprehensive performance optimization including background tasks, intelligent caching strategies, and parallelization techniques. Achieved significant reduction in response times and improved user experience.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Celery</span>
+                        <span class="tech-tag">Monitoring</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Case Study →</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Secure Architecture Design</h3>
+                    <p>Architected enterprise-level network isolation and private API gateways for secure data flow. Implemented comprehensive security measures while maintaining high performance and scalability.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Network Security</span>
+                        <span class="tech-tag">API Gateway</span>
+                        <span class="tech-tag">VPC</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">Architecture →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Latest Articles</h2>
+            <p class="section-subtitle fade-in">
+                Sharing insights on software engineering, best practices, and emerging technologies
+            </p>
+            <div class="blog-grid fade-in">
+                <article class="blog-card">
+                    <div class="blog-content">
+                        <h3>Clone AWS IAM Roles Across Environments/Accounts Using AWS CLI Automation</h3>
+                        <div class="blog-meta">Published on Medium  and Hashnode• 5 min read</div>
+                        <p class="blog-excerpt">
+                            how to automate role creation workflow in AWS cloud
+                        </p>
+                        <a href="https://medium.com/@deepakcoder80/clone-aws-iam-roles-across-environments-accounts-using-aws-cli-automation-2132c520be12" class="read-more">Read Article on Medium →</a>
+                        <a href="https://deepak80.hashnode.dev/clone-aws-iam-roles-across-environmentsaccounts-using-aws-cli-automation" class="read-more">Read Article on Hashnode →</a>
+                    </div>
+                </article>
+                <!-- <article class="blog-card">
+                    <div class="blog-content">
+                        <h3>AWS EKS: Production Deployment Guide</h3>
+                        <div class="blog-meta">Published on Hashnode • 8 min read</div>
+                        <p class="blog-excerpt">
+                            A comprehensive guide to deploying production-ready applications on AWS EKS, covering security, monitoring, and cost optimization strategies.
+                        </p>
+                        <a href="#" class="read-more">Read Article →</a>
+                    </div> -->
+                <!-- </article>
+                <article class="blog-card">
+                    <div class="blog-content">
+                        <h3>Python Package Development: From Idea to PyPI</h3>
+                        <div class="blog-meta">Published on Medium • 12 min read</div>
+                        <p class="blog-excerpt">
+                            Step-by-step guide to creating, testing, and publishing Python packages, based on my experience developing env_factory and sm_env_read.
+                        </p>
+                        <a href="#" class="read-more">Read Article →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-content">
+                        <h3>Optimizing API Performance: Caching Strategies</h3>
+                        <div class="blog-meta">Published on Hashnode • 6 min read</div>
+                        <p class="blog-excerpt">
+                            Explore various caching strategies for APIs, including Redis implementation, cache invalidation patterns, and performance monitoring techniques.
+                        </p>
+                        <a href="#" class="read-more">Read Article →</a>
+                    </div>
+                </article> -->
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn btn-outline">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Work Together</h2>
+            <div class="contact-content fade-in">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    I'm always open to discussing new opportunities, interesting projects, or potential collaborations. 
+                    Whether you're looking for a senior backend developer, need help with system optimization, 
+                    or want to discuss a freelance project, I'd love to hear from you.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <a href="mailto:contact@deepakms.com">contact@deepakms.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://www.linkedin.com/in/iamdeepakms/">LinkedIn Profile</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💻</span>
+                        <a href="https://github.com/Deepak-coder80">GitHub Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Deepak M S. All rights reserved. Built with modern web technologies.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Header scroll effect
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Mobile menu toggle (for future enhancement)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Performance optimization - preload critical resources
+        const preloadLinks = [
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+        ];
+
+        preloadLinks.forEach(href => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'style';
+            link.href = href;
+            document.head.appendChild(link);
+        });
+
+        // Analytics placeholder (replace with actual analytics code)
+        function trackEvent(action, category, label) {
+            // Google Analytics 4 or other analytics service
+            console.log(`Event tracked: ${action} - ${category} - ${label}`);
+        }
+
+        // Track CTA button clicks
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                trackEvent('click', 'CTA', e.target.textContent.trim());
+            });
+        });
+
+        // Track project link clicks
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                trackEvent('click', 'Project', e.target.textContent.trim());
+            });
+        });
+
+        // Track blog article clicks
+        document.querySelectorAll('.read-more').forEach(link => {
+            link.addEventListener('click', (e) => {
+                trackEvent('click', 'Blog', 'Article Read');
+            });
+        });
+
+        // Service Worker registration for PWA capabilities (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Contact form handling (if you add a contact form later)
+        function handleContactForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            // Process form data
+            trackEvent('submit', 'Contact', 'Form Submission');
+            
+            // Show success message
+            alert('Thank you for your message! I\'ll get back to you soon.');
+        }
+
+        // Lazy loading for images (when you add them)
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        // Apply lazy loading to images with data-src attribute
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Keyboard navigation enhancement
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Theme preference detection (for future dark mode support)
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        prefersDarkScheme.addListener((e) => {
+            // Handle theme changes if you implement dark mode
+            console.log('Theme preference changed:', e.matches ? 'dark' : 'light');
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            // Measure page load performance
+            const perfData = performance.getEntriesByType('navigation')[0];
+            const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+            
+            console.log(`Page load time: ${loadTime}ms`);
+            
+            // Track to analytics
+            trackEvent('performance', 'page_load', Math.round(loadTime));
+        });
+
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.error('JavaScript error:', e.error);
+            trackEvent('error', 'javascript', e.error.message);
+        });
+
+        // Initial page load animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Remove loading class to trigger fade-in
+            document.body.classList.remove('loading');
+            
+            // Add stagger effect to hero elements
+            const heroElements = document.querySelectorAll('.hero h1, .hero .hero-subtitle, .hero .hero-description, .hero .cta-buttons');
+            heroElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+                el.classList.add('fade-in', 'visible');
+            });
+        });
+    </script>
+
+    <!-- Additional SEO and Performance optimizations -->
+    <link rel="canonical" href="https://deepakms.com">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
