@@ -1,55 +1,12 @@
 :root {
-    --primary-black: #000000;
-    --secondary-gray: #333333;
-    --light-gray: #666666;
-    --border-gray: #e5e5e5;
-    --bg-gray: #fafafa;
-    --white: #ffffff;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="dark"] {
-    --primary-black: #ffffff;
-    --secondary-gray: #e0e0e0;
+    --primary-white: #ffffff;
+    --secondary-light: #e5e5e5;
     --light-gray: #b0b0b0;
     --border-gray: #333333;
     --bg-gray: #1a1a1a;
-    --white: #121212;
-}
-
-/* Theme Toggle Button */
-.theme-toggle {
-    background: none;
-    border: 2px solid var(--primary-black);
-    color: var(--primary-black);
-    padding: 0.5rem;
-    cursor: pointer;
-    transition: var(--transition);
-    border-radius: 4px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-width: 60px;
-    justify-content: center;
-}
-
-.theme-toggle:hover {
-    background: var(--primary-black);
-    color: var(--white);
-}
-
-.theme-icon {
-    font-size: 1.2rem;
-}
-
-/* Mobile theme toggle */
-@media (max-width: 768px) {
-    .theme-toggle {
-        padding: 0.4rem;
-        min-width: 50px;
-        border-width: 1px;
-    }
+    --dark-bg: #0f0f0f;
+    --primary-black: #121212;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -65,8 +22,8 @@ html {
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: var(--secondary-gray);
-    background: var(--white);
+    color: var(--secondary-light);
+    background: var(--primary-black);
     font-size: 16px;
 }
 
@@ -76,7 +33,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-gray);
     z-index: 1000;
@@ -92,16 +49,10 @@ body {
     align-items: center;
 }
 
-.nav-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     text-decoration: none;
 }
 
@@ -112,7 +63,7 @@ body {
 }
 
 .nav-link {
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -120,7 +71,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-black);
+    color: var(--primary-white);
 }
 
 .nav-link::after {
@@ -130,7 +81,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--primary-black);
+    background: var(--primary-white);
     transition: var(--transition);
 }
 
@@ -150,7 +101,7 @@ body {
 .hero {
     padding: 120px 2rem 80px;
     text-align: center;
-    background: var(--white);
+    background: var(--primary-black);
 }
 
 .hero-container {
@@ -161,7 +112,7 @@ body {
 .hero h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
 }
@@ -175,7 +126,7 @@ body {
 
 .hero-description {
     font-size: 1.1rem;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
@@ -191,9 +142,9 @@ body {
 
 .btn {
     padding: 0.75rem 2rem;
-    border: 2px solid var(--primary-black);
-    background: var(--primary-black);
-    color: var(--white);
+    border: 2px solid var(--primary-white);
+    background: var(--primary-white);
+    color: var(--primary-black);
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
@@ -202,17 +153,17 @@ body {
 
 .btn:hover {
     background: transparent;
-    color: var(--primary-black);
+    color: var(--primary-white);
 }
 
 .btn-outline {
     background: transparent;
-    color: var(--primary-black);
+    color: var(--primary-white);
 }
 
 .btn-outline:hover {
-    background: var(--primary-black);
-    color: var(--white);
+    background: var(--primary-white);
+    color: var(--primary-black);
 }
 
 /* Section Styles */
@@ -232,7 +183,7 @@ body {
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 3rem;
     text-align: center;
     letter-spacing: -0.02em;
@@ -271,14 +222,14 @@ body {
 .stat-item {
     text-align: center;
     padding: 2rem;
-    background: var(--white);
+    background: var(--dark-bg);
     border: 1px solid var(--border-gray);
 }
 
 .stat-number {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     display: block;
 }
 
@@ -301,14 +252,14 @@ body {
 .subsection-title {
     font-size: 1.75rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 2rem;
     border-bottom: 2px solid var(--border-gray);
     padding-bottom: 0.5rem;
 }
 
 .experience-item, .education-item {
-    background: var(--white);
+    background: var(--dark-bg);
     padding: 2rem;
     border: 1px solid var(--border-gray);
     border-radius: 8px;
@@ -326,7 +277,7 @@ body {
 .company-title, .degree-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin: 0;
 }
 
@@ -354,7 +305,7 @@ body {
 .role-title {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     margin: 0;
 }
 
@@ -371,7 +322,7 @@ body {
 .achievements h6, .responsibilities h6 {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 0.75rem;
 }
 
@@ -385,7 +336,7 @@ body {
     position: relative;
     padding-left: 1.5rem;
     line-height: 1.6;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
 }
 
 .achievement-list li::before {
@@ -400,12 +351,12 @@ body {
     position: absolute;
     left: 0;
     top: 0.5rem;
-    color: var(--primary-black);
+    color: var(--primary-white);
     font-weight: 600;
 }
 
 .achievement-list li strong {
-    color: var(--primary-black);
+    color: var(--primary-white);
     font-weight: 600;
 }
 
@@ -416,7 +367,7 @@ body {
 .institution-name {
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     margin: 0 0 0.25rem 0;
 }
 
@@ -428,7 +379,7 @@ body {
 }
 
 .education-highlights {
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     line-height: 1.6;
 }
 
@@ -464,21 +415,21 @@ body {
 }
 
 .skill-category {
-    background: var(--white);
+    background: var(--dark-bg);
     padding: 2rem;
     border: 1px solid var(--border-gray);
     transition: var(--transition);
 }
 
 .skill-category:hover {
-    border-color: var(--primary-black);
+    border-color: var(--primary-white);
     transform: translateY(-2px);
 }
 
 .skill-category h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
@@ -488,7 +439,7 @@ body {
 
 .skill-list li {
     padding: 0.5rem 0;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     border-bottom: 1px solid var(--border-gray);
 }
 
@@ -504,26 +455,26 @@ body {
 }
 
 .project-card {
-    background: var(--white);
+    background: var(--dark-bg);
     border: 1px solid var(--border-gray);
     padding: 2rem;
     transition: var(--transition);
 }
 
 .project-card:hover {
-    border-color: var(--primary-black);
+    border-color: var(--primary-white);
     transform: translateY(-4px);
 }
 
 .project-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
 .project-card p {
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -539,7 +490,7 @@ body {
     background: var(--bg-gray);
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
-    color: var(--secondary-gray);
+    color: var(--secondary-light);
     border: 1px solid var(--border-gray);
 }
 
@@ -549,7 +500,7 @@ body {
 }
 
 .project-link {
-    color: var(--primary-black);
+    color: var(--primary-white);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -571,9 +522,9 @@ body {
 
 .back-btn {
     background: none;
-    border: 2px solid var(--primary-black);
+    border: 2px solid var(--primary-white);
     padding: 0.5rem 1rem;
-    color: var(--primary-black);
+    color: var(--primary-white);
     cursor: pointer;
     transition: var(--transition);
     margin-bottom: 2rem;
@@ -583,14 +534,14 @@ body {
 }
 
 .back-btn:hover {
-    background: var(--primary-black);
-    color: var(--white);
+    background: var(--primary-white);
+    color: var(--black);
 }
 
 .page-title {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
 }
@@ -651,7 +602,7 @@ body {
 .project-title {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
 }
@@ -685,7 +636,7 @@ body {
 .project-content h2 {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin: 3rem 0 1.5rem 0;
     border-bottom: 2px solid var(--border-gray);
     padding-bottom: 0.5rem;
@@ -707,7 +658,7 @@ body {
 .solution-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
@@ -760,7 +711,7 @@ body {
 .feature-item h3 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 0.5rem;
 }
 
@@ -786,7 +737,7 @@ body {
 .install-option h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
@@ -816,7 +767,7 @@ body {
 .example-card h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
@@ -836,7 +787,7 @@ body {
 .tech-detail h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 1rem;
 }
 
@@ -862,7 +813,7 @@ body {
 .impact-number {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-black);
+    color: var(--primary-white);
     display: block;
 }
 
@@ -897,7 +848,7 @@ body {
 }
 
 .contribution-note a {
-    color: var(--primary-black);
+    color: var(--primary-white);
     font-weight: 600;
     text-decoration: none;
 }
@@ -932,7 +883,7 @@ body {
 .blog-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--primary-black);
+    color: var(--primary-white);
     margin-bottom: 0.5rem;
 }
 
@@ -949,7 +900,7 @@ body {
 }
 
 .read-more {
-    color: var(--primary-black);
+    color: var(--primary-white);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -978,11 +929,11 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--secondary-gray);
+    color: var(--primary-white);
 }
 
 .contact-item a {
-    color: var(--primary-black);
+    color: var(--primary-white);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
