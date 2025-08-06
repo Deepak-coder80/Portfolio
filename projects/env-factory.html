@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="env_factory: A flexible Python package for retrieving environment variables from multiple sources including local environment and AWS Secrets Manager.">
+    <meta name="keywords" content="Environment Variables, Python Package, PyPI, AWS Secrets Manager, Configuration Management, Django, FastAPI">
+    <meta name="author" content="Deepak M S">
+    
+    <title>env_factory: Environment Configuration Package | Deepak M S</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">Deepak M S</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Project Detail Page -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
+                <h1 class="project-title">env_factory: Environment Configuration Package</h1>
+                <p class="project-subtitle">A flexible Python package for retrieving environment variables from multiple sources including local environment and AWS Secrets Manager with robust error handling and type safety.</p>
+                
+                <div class="project-badges">
+                    <img src="https://img.shields.io/pypi/v/env-factory.svg" alt="PyPI Version">
+                    <img src="https://img.shields.io/pypi/pyversions/env-factory.svg" alt="Python Versions">
+                    <img src="https://img.shields.io/pypi/wheel/env-factory.svg" alt="Wheel Support">
+                    <img src="https://img.shields.io/github/license/Deepak-coder80/env-factory.svg" alt="License">
+                    <img src="https://img.shields.io/github/last-commit/Deepak-coder80/env-factory.svg" alt="Last Commit">
+                </div>
+            </div>
+
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>🚀 Why env_factory?</h2>
+                    <p>Managing configuration across different environments is a common challenge in Python applications. env_factory provides a unified approach to handle environment variables from multiple sources:</p>
+                    
+                    <div class="problem-solutions">
+                        <div class="solution-card">
+                            <h3>Multi-Source Configuration</h3>
+                            <ul>
+                                <li>Seamless integration with local .env files for development</li>
+                                <li>Production-ready AWS Secrets Manager integration</li>
+                                <li>Factory pattern for flexible source switching</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Developer Experience</h3>
+                            <ul>
+                                <li>Type safety with full type hints</li>
+                                <li>Case-insensitive key matching with fallback</li>
+                                <li>Comprehensive logging for debugging</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Production Reliability</h3>
+                            <ul>
+                                <li>Robust error handling and recovery</li>
+                                <li>Continues processing even if some keys are missing</li>
+                                <li>Environment-specific configuration patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-features">
+                    <h2>✨ Key Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <h3>Multiple Sources</h3>
+                            <p>Support for local environment variables and AWS Secrets Manager</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <h3>Type Safety</h3>
+                            <p>Full type hints and robust error handling throughout</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔧</span>
+                            <h3>Flexible Usage</h3>
+                            <p>Factory pattern and convenience functions for easy integration</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            <h3>Smart Matching</h3>
+                            <p>Case-insensitive key matching with fallback options</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            <h3>Comprehensive Logging</h3>
+                            <p>Debug and warning logs for troubleshooting</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <h3>Error Recovery</h3>
+                            <p>Continues processing even if some keys are missing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="installation-section">
+                    <h2>📦 Installation & Quick Start</h2>
+                    
+                    <div class="install-options">
+                        <div class="install-option">
+                            <h3>Install from PyPI</h3>
+                            <div class="code-block">
+                                <code>pip install env-factory</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Create .env File (MANDATORY)</h3>
+                            <div class="code-block">
+                                <code># .env file - Place in your project root
+API_KEY=my-secret-api-key
+DATABASE_URL=postgresql://localhost:5432/myapp
+DEBUG=true
+
+# For AWS functionality (REQUIRED)
+AWS_ACCOUNT_ID=123456789012</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Load Environment Variables</h3>
+                            <div class="code-block">
+                                <code>from dotenv import load_dotenv
+load_dotenv()  # Load variables from .env file
+
+# Now you can use env_factory
+from env_factory import get_env_variables</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-examples">
+                    <h2>💡 Usage Examples</h2>
+                    
+                    <div class="example-card">
+                        <h3>Basic Local Environment Variables</h3>
+                        <div class="code-block">
+                            <code>from env_factory import get_env_variables
+
+# This will read from your .env file
+config = get_env_variables(['API_KEY', 'DATABASE_URL'])
+print(config)
+# Output: {'API_KEY': 'my-secret-api-key', 'DATABASE_URL': 'postgresql://localhost:5432/myapp'}
+
+# Check if variables exist
+api_key = config.get('API_KEY')
+if api_key:
+    print(f"API Key found: {api_key}")
+else:
+    print("API Key not found!")</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>AWS Secrets Manager Integration</h3>
+                        <div class="code-block">
+                            <code>from env_factory import get_env_variables
+
+# Make sure AWS_ACCOUNT_ID is in your .env file!
+secrets = get_env_variables(
+    keys=['DB_PASSWORD', 'JWT_SECRET'],
+    source='aws',
+    secret_name='my-app-secrets',
+    region='us-east-1',
+    role_name='my-app-role'
+)
+
+print(f"Database password: {secrets.get('DB_PASSWORD')}")</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Real-World Web Application Setup</h3>
+                        <div class="code-block">
+                            <code>from env_factory import get_env_variables
+
+# Load all your app configuration at startup
+app_config = get_env_variables([
+    'API_KEY',
+    'DATABASE_URL',
+    'DEBUG',
+    'PORT'
+])
+
+# Use the configuration
+api_key = app_config['API_KEY']
+database_url = app_config['DATABASE_URL']
+debug_mode = app_config.get('DEBUG', 'false').lower() == 'true'
+port = int(app_config.get('PORT', '8000'))
+
+print(f"Starting app on port {port}, debug mode: {debug_mode}")</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Factory Pattern Usage</h3>
+                        <div class="code-block">
+                            <code>from env_factory import EnvFactory
+
+# Create retrievers using factory
+local_retriever = EnvFactory.create_local_retriever()
+aws_retriever = EnvFactory.create_aws_retriever(
+    secret_name='my-secrets',
+    region='eu-west-1', 
+    role_name='secrets-access-role'
+)
+
+# Use the retrievers
+config = local_retriever.get_env_variables(['PORT', 'HOST'])
+secrets = aws_retriever.get_env_variables(['API_TOKEN', 'WEBHOOK_SECRET'])</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Multi-Environment Configuration</h3>
+                        <div class="code-block">
+                            <code>import os
+from env_factory import get_env_variables
+
+# Determine environment
+environment = os.getenv('ENVIRONMENT', 'development')
+
+if environment == 'production':
+    # Use AWS Secrets Manager in production
+    config = get_env_variables(
+        keys=['DATABASE_PASSWORD', 'API_KEY', 'JWT_SECRET'],
+        source='aws',
+        secret_name='prod-app-secrets',
+        region='us-east-1',
+        role_name='prod-secrets-role'
+    )
+else:
+    # Use local environment variables in development
+    config = get_env_variables([
+        'DATABASE_PASSWORD',
+        'API_KEY', 
+        'JWT_SECRET'
+    ])
+
+print(f"Loaded {len([v for v in config.values() if v is not None])} variables")</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Error Handling Best Practices</h3>
+                        <div class="code-block">
+                            <code>from env_factory import get_env_variables, ConfigurationError, SecretRetrievalError
+
+try:
+    variables = get_env_variables(
+        keys=['API_KEY', 'SECRET_TOKEN'],
+        source='aws',
+        secret_name='app-secrets',
+        region='us-east-1',
+        role_name='secrets-role'
+    )
+except ConfigurationError as e:
+    print(f"Configuration error: {e}")
+except SecretRetrievalError as e:
+    print(f"Failed to retrieve secrets: {e}")
+    
+# Handle missing variables gracefully
+api_key = variables.get('API_KEY')
+if not api_key:
+    print("⚠️  Warning: API_KEY not found")
+    print("Please add it to your .env file: API_KEY=your-key-here")</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-details">
+                    <h2>🔧 Technical Architecture</h2>
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>Factory Pattern Design</h3>
+                            <p>Implements the factory pattern for flexible creation of environment retrievers, allowing easy switching between local and AWS sources based on deployment environment.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Type Safety & Validation</h3>
+                            <p>Full type hints throughout the codebase with robust validation and error handling. Provides meaningful error messages for debugging configuration issues.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Smart Key Matching</h3>
+                            <p>Implements case-insensitive key matching with fallback strategies, ensuring configuration works even with slight key name variations between environments.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Extensible Architecture</h3>
+                            <p>Abstract base class design allows for custom environment retrieval implementations while maintaining consistent interface across different sources.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="api-reference">
+                    <h2>📚 API Reference</h2>
+                    
+                    <div class="example-card">
+                        <h3>Core Functions</h3>
+                        <div class="code-block">
+                            <code># Main convenience function
+get_env_variables(
+    keys: List[str],
+    source: str = "local",  # 'local' or 'aws'
+    **kwargs  # Additional AWS parameters
+) -> Dict[str, Optional[str]]
+
+# Factory methods
+EnvFactory.create_local_retriever() -> LocalEnvRetrieval
+EnvFactory.create_aws_retriever(
+    secret_name: str,
+    region: str,
+    role_name: str
+) -> AWSEnvRetrieval</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Exception Classes</h3>
+                        <div class="code-block">
+                            <code># Base exception for the package
+class EnvFactoryError(Exception):
+    """Base exception for env_factory package"""
+
+# Configuration-related errors
+class ConfigurationError(EnvFactoryError):
+    """Raised when configuration parameters are invalid"""
+
+# Secret retrieval errors
+class SecretRetrievalError(EnvFactoryError):
+    """Raised when secret retrieval from AWS fails"""</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="best-practices">
+                    <h2>📋 Best Practices</h2>
+                    <div class="problem-solutions">
+                        <div class="solution-card">
+                            <h3>Development Setup</h3>
+                            <ul>
+                                <li>Always use .env files in project root (mandatory)</li>
+                                <li>Load .env files with python-dotenv at startup</li>
+                                <li>Include AWS_ACCOUNT_ID for AWS functionality</li>
+                                <li>Add .env files to .gitignore for security</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Production Deployment</h3>
+                            <ul>
+                                <li>Use AWS Secrets Manager for sensitive data</li>
+                                <li>Implement proper IAM roles and permissions</li>
+                                <li>Handle ConfigurationError and SecretRetrievalError</li>
+                                <li>Validate required variables are present</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Code Organization</h3>
+                            <ul>
+                                <li>Load configuration at application startup</li>
+                                <li>Use environment-specific source selection</li>
+                                <li>Implement graceful fallbacks for missing keys</li>
+                                <li>Enable debug logging for troubleshooting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-impact">
+                    <h2>📊 Package Impact & Statistics</h2>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="impact-number">PyPI</span>
+                            <span class="impact-label">Published Package</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">MIT</span>
+                            <span class="impact-label">Open Source</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Multi</span>
+                            <span class="impact-label">Framework Support</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Type</span>
+                            <span class="impact-label">Safe Design</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pypi-stats">
+                        <h3>📈 Technical Highlights</h3>
+                        <div class="tech-grid">
+                            <div class="tech-detail">
+                                <h3>Package Quality</h3>
+                                <p>Comprehensive test suite with pytest, full type hints, and detailed documentation. Follows Python packaging best practices with proper dependency management.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Framework Integration</h3>
+                                <p>Tested with Django, FastAPI, Flask, and other popular frameworks. Provides integration examples and startup configuration patterns.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>AWS Integration</h3>
+                                <p>Seamless AWS Secrets Manager integration with proper IAM role handling, region support, and comprehensive error handling for production environments.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Developer Experience</h3>
+                                <p>Simple API design with sensible defaults, comprehensive logging, and clear error messages. Minimal setup required for immediate productivity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h2>🚀 Start Using env_factory</h2>
+                    <p>Simplify your configuration management with env_factory. Perfect for applications that need flexible environment variable handling across development and production:</p>
+                    
+                    <div class="support-actions">
+                        <a href="https://pypi.org/project/env-factory/" class="btn">📦 Install from PyPI</a>
+                        <a href="https://github.com/Deepak-coder80/env-factory" class="btn btn-outline">⭐ Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/env-factory/issues" class="btn btn-outline">🐛 Report Issues</a>
+                        <a href="https://github.com/Deepak-coder80/env-factory/blob/main/README.md" class="btn btn-outline">📚 Documentation</a>
+                    </div>
+                    
+                    <div class="contribution-note">
+                        <p><strong>Get started in minutes!</strong> Check out our <a href="https://github.com/Deepak-coder80/env-factory/tree/main/examples">quick start examples</a> for Django, FastAPI, and other popular frameworks!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Deepak M S. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../index.js"></script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECR Deploy Tool: A powerful, cross-platform CLI tool that automates AWS ECR repository creation and Docker image deployment. Built with Go for speed and reliability.">
+    <meta name="keywords" content="AWS ECR, Docker Deployment, CLI Tool, Go, DevOps, Automation, CI/CD">
+    <meta name="author" content="Deepak M S">
+    
+    <title>ECR Deploy Tool: AWS ECR Automation CLI | Deepak M S</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">Deepak M S</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Project Detail Page -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
+                <h1 class="project-title">ECR Deploy Tool 🚀</h1>
+                <p class="project-subtitle">A powerful, cross-platform CLI tool that automates AWS ECR repository creation and Docker image deployment. Built with Go for speed, reliability, and ease of use across development teams.</p>
+                
+                <div class="project-badges">
+                    <img src="https://img.shields.io/badge/Go-1.21+-blue.svg" alt="Go Version">
+                    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+                    <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-lightgrey.svg" alt="Platform Support">
+                    <img src="https://img.shields.io/github/last-commit/Deepak-coder80/ecr-deploy.svg" alt="Last Commit">
+                    <img src="https://img.shields.io/badge/AWS-ECR%20Ready-orange.svg" alt="AWS ECR">
+                </div>
+            </div>
+
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>🎯 Why ECR Deploy Tool?</h2>
+                    <p>Deploying Docker images to AWS ECR involves multiple manual steps and complexity. ECR Deploy Tool streamlines this process into a single command:</p>
+                    
+                    <div class="problem-solutions">
+                        <div class="solution-card">
+                            <h3>DevOps Automation</h3>
+                            <ul>
+                                <li>Automated ECR repository creation if it doesn't exist</li>
+                                <li>Seamless Docker authentication and deployment</li>
+                                <li>Cross-platform support for diverse development teams</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>CI/CD Integration</h3>
+                            <ul>
+                                <li>Perfect for GitHub Actions, Jenkins, and GitLab CI/CD</li>
+                                <li>Multiple AWS profile support for different environments</li>
+                                <li>Flexible tagging strategies for version management</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Developer Experience</h3>
+                            <ul>
+                                <li>Interactive mode with user-friendly prompts</li>
+                                <li>Pre-built binaries for instant deployment</li>
+                                <li>Comprehensive logging and error handling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-features">
+                    <h2>✨ Key Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <h3>Automated Repository Creation</h3>
+                            <p>Creates ECR repositories automatically if they don't exist</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🐳</span>
+                            <h3>Docker Integration</h3>
+                            <p>Handles authentication, building, and pushing seamlessly</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👤</span>
+                            <h3>AWS Profile Support</h3>
+                            <p>Use multiple AWS profiles for different environments</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌍</span>
+                            <h3>Cross-Platform</h3>
+                            <p>Works perfectly on Linux, Windows, and macOS</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏷️</span>
+                            <h3>Flexible Tagging</h3>
+                            <p>Custom tags or default to 'latest' with Git integration</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <h3>Fast Deployment</h3>
+                            <p>Optimized workflow for quick deployments</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="installation-section">
+                    <h2>🚀 Installation & Quick Start</h2>
+                    
+                    <div class="install-options">
+                        <div class="install-option">
+                            <h3>One-Line Installation</h3>
+                            <div class="code-block">
+                                <code># Linux/macOS
+curl -sSL https://raw.githubusercontent.com/Deepak-coder80/ecr-deploy/main/install.sh | bash
+
+# Windows (PowerShell as Administrator)
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Deepak-coder80/ecr-deploy/main/install.ps1" | Invoke-Expression</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Manual Installation - Linux</h3>
+                            <div class="code-block">
+                                <code># Ubuntu/Debian
+wget https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-linux-amd64.deb
+sudo dpkg -i ecr-deploy-1.0.0-linux-amd64.deb
+
+# Other Distributions
+wget https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-linux-amd64.tar.gz
+tar -xzf ecr-deploy-1.0.0-linux-amd64.tar.gz
+sudo cp usr/local/bin/ecr-deploy /usr/local/bin/</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>macOS Installation</h3>
+                            <div class="code-block">
+                                <code># Intel Macs
+wget https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-darwin-amd64.tar.gz
+tar -xzf ecr-deploy-1.0.0-darwin-amd64.tar.gz
+cd ecr-deploy-1.0.0-darwin-amd64 && ./install.sh
+
+# Apple Silicon Macs
+wget https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-darwin-arm64.tar.gz
+tar -xzf ecr-deploy-1.0.0-darwin-arm64.tar.gz
+cd ecr-deploy-1.0.0-darwin-arm64 && ./install.sh</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-examples">
+                    <h2>💡 Usage Examples</h2>
+                    
+                    <div class="example-card">
+                        <h3>Basic Deployment Commands</h3>
+                        <div class="code-block">
+                            <code># Simple deployment to ECR
+ecr-deploy --repo my-web-app
+
+# With specific AWS profile
+ecr-deploy --repo my-api --profile production
+
+# Custom region and tag
+ecr-deploy --repo my-service --region eu-west-1 --tag v2.1.0
+
+# From specific directory
+ecr-deploy --repo backend-service --path ./services/backend/
+
+# Interactive mode (prompts for repository name)
+ecr-deploy</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Environment-Specific Deployments</h3>
+                        <div class="code-block">
+                            <code># Development
+ecr-deploy --repo my-app --profile dev --region us-west-2 --tag dev-$(git rev-parse --short HEAD)
+
+# Staging
+ecr-deploy --repo my-app --profile staging --region us-east-1 --tag staging-v1.2.3
+
+# Production
+ecr-deploy --repo my-app --profile prod --region us-east-1 --tag v1.2.3</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Command Line Options</h3>
+                        <div class="code-block">
+                            <code>Usage:
+  ecr-deploy [flags]
+
+Flags:
+  -h, --help              help for ecr-deploy
+  -l, --list-profiles     List available AWS profiles
+  -p, --path string       Path to Dockerfile directory (default: current directory)
+      --profile string    AWS profile to use (default: default profile)
+  -r, --region string     AWS region (default: "us-east-1")
+  -n, --repo string       ECR repository name
+  -t, --tag string        Docker image tag (default: "latest")
+
+Commands:
+  examples    Show usage examples
+  version     Print version information</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workflow-integration">
+                    <h2>🔄 CI/CD Integration</h2>
+                    
+                    <div class="example-card">
+                        <h3>GitHub Actions</h3>
+                        <div class="code-block">
+                            <code>name: Deploy to ECR
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install ECR Deploy Tool
+        run: |
+          wget https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-linux-amd64.tar.gz
+          tar -xzf ecr-deploy-1.0.0-linux-amd64.tar.gz
+          sudo cp usr/local/bin/ecr-deploy /usr/local/bin/
+
+      - name: Deploy to ECR
+        run: |
+          IMAGE_URI=$(ecr-deploy --repo ${{ github.event.repository.name }} --tag ${{ github.sha }})
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>GitLab CI/CD</h3>
+                        <div class="code-block">
+                            <code>deploy_to_ecr:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - apk add --no-cache curl
+    - curl -sSL https://raw.githubusercontent.com/Deepak-coder80/ecr-deploy/main/install.sh | sh
+  script:
+    - ecr-deploy --repo $CI_PROJECT_NAME --tag $CI_COMMIT_SHA
+  only:
+    - main</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Jenkins Pipeline</h3>
+                        <div class="code-block">
+                            <code>pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        ECR_REPO = "${env.JOB_NAME}"
+    }
+
+    stages {
+        stage('Build and Deploy to ECR') {
+            steps {
+                script {
+                    // Install ECR Deploy Tool
+                    sh '''
+                        wget -q https://github.com/Deepak-coder80/ecr-deploy/releases/latest/download/ecr-deploy-1.0.0-linux-amd64.tar.gz
+                        tar -xzf ecr-deploy-1.0.0-linux-amd64.tar.gz
+                        sudo cp usr/local/bin/ecr-deploy /usr/local/bin/ || cp usr/local/bin/ecr-deploy ./
+                    '''
+
+                    // Deploy to ECR
+                    def imageUri = sh(
+                        script: "./ecr-deploy --repo ${ECR_REPO} --region ${AWS_REGION} --tag ${env.BUILD_NUMBER}",
+                        returnStdout: true
+                    ).trim()
+
+                    env.IMAGE_URI = imageUri.split('\n').last().split(': ')[1]
+                }
+            }
+        }
+    }
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div name="deployment-workflow">
+                    <h2>📊 Deployment Workflow</h2>
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>1. Repository Check</h3>
+                            <p>Verifies if ECR repository exists in the specified AWS region and creates it automatically if missing.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>2. Authentication</h3>
+                            <p>Handles Docker login to ECR using AWS credentials and the specified profile for secure access.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>3. Image Building</h3>
+                            <p>Builds Docker image with proper ECR URI tagging for seamless repository integration.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>4. Image Pushing</h3>
+                            <p>Pushes the built image to ECR with the specified tag and returns the complete image URI.</p>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Sample Output</h3>
+                        <div class="code-block">
+                            <code>🌟 Starting ECR deployment for repository: my-web-app
+📍 Region: us-east-1
+👤 AWS Profile: production
+📁 Dockerfile path: .
+🏷️  Tag: v1.2.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 Initializing AWS session (Region: us-east-1, Profile: production)
+✅ AWS Authentication successful! Account: 123456789012
+🔍 Checking if ECR repository 'my-web-app' exists...
+📦 Creating ECR repository 'my-web-app'...
+✅ Repository 'my-web-app' created successfully!
+🔑 Authenticating Docker with ECR...
+🏗️  Building Docker image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-web-app:v1.2.0
+📤 Pushing image to ECR: 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-web-app:v1.2.0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎉 Deployment completed successfully!
+⏱️  Total time: 45s
+📋 Image URI: 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-web-app:v1.2.0</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-details">
+                    <h2>🔧 Technical Implementation</h2>
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>Built with Go</h3>
+                            <p>Leverages Go's excellent performance and cross-compilation capabilities. Uses Cobra CLI framework for robust command-line interface and Viper for configuration management.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>AWS SDK Integration</h3>
+                            <p>Deep integration with AWS SDK for Go, providing native ECR operations, session management, and credential handling across multiple AWS profiles.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Docker Automation</h3>
+                            <p>Automated Docker workflow including authentication, image building with proper tagging, and pushing to ECR with comprehensive error handling.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Cross-Platform Distribution</h3>
+                            <p>Automated build system producing native binaries for Linux (amd64), Windows (amd64), macOS (Intel and Apple Silicon), with proper packaging for each platform.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aws-setup">
+                    <h2>☁️ AWS Requirements & Setup</h2>
+                    
+                    <div class="example-card">
+                        <h3>Required IAM Permissions</h3>
+                        <div class="code-block">
+                            <code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:CreateRepository",
+                "ecr:DescribeRepositories"
+            ],
+            "Resource": "*"
+        }
+    ]
+}</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>AWS Profile Configuration</h3>
+                        <div class="code-block">
+                            <code># Configure default profile
+aws configure
+
+# Configure additional profiles
+aws configure --profile production
+aws configure --profile staging
+
+# List available profiles
+ecr-deploy --list-profiles</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-impact">
+                    <h2>📊 Project Impact & Benefits</h2>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="impact-number">DevOps</span>
+                            <span class="impact-label">Automation Tool</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Cross</span>
+                            <span class="impact-label">Platform Support</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">CI/CD</span>
+                            <span class="impact-label">Ready Integration</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Production</span>
+                            <span class="impact-label">Battle Tested</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pypi-stats">
+                        <h3>📈 Tool Benefits</h3>
+                        <div class="tech-grid">
+                            <div class="tech-detail">
+                                <h3>Developer Productivity</h3>
+                                <p>Reduces Docker ECR deployment from multiple manual steps to a single command. Saves development teams hours of setup and configuration time.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>CI/CD Integration</h3>
+                                <p>Seamless integration with GitHub Actions, Jenkins, GitLab CI/CD, and other automation platforms. Pre-built examples for immediate adoption.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Multi-Environment Support</h3>
+                                <p>Supports multiple AWS profiles and regions, enabling teams to deploy to development, staging, and production environments with consistent workflows.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Enterprise Ready</h3>
+                                <p>Comprehensive error handling, logging, and robust AWS integration make it suitable for production environments and enterprise deployment workflows.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h2>🚀 Try ECR Deploy Tool</h2>
+                    <p>Streamline your Docker ECR deployments with this powerful automation tool. Perfect for development teams using AWS ECR:</p>
+                    
+                    <div class="support-actions">
+                        <a href="https://github.com/Deepak-coder80/ecr-deploy/releases" class="btn">📥 Download Latest Release</a>
+                        <a href="https://github.com/Deepak-coder80/ecr-deploy" class="btn btn-outline">⭐ Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/ecr-deploy/issues" class="btn btn-outline">🐛 Report Issues</a>
+                        <a href="https://github.com/Deepak-coder80/ecr-deploy/wiki" class="btn btn-outline">📚 Documentation</a>
+                    </div>
+                    
+                    <div class="contribution-note">
+                        <p><strong>Ready to deploy?</strong> Check out our <a href="https://github.com/Deepak-coder80/ecr-deploy/tree/main/examples">CI/CD integration examples</a> for GitHub Actions, Jenkins, and GitLab!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Deepak M S. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../index.js"></script>
+</body>
+</html>
