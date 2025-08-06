@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="sm_env_read: A Python package for retrieving secrets from AWS Secrets Manager with automatic fallback authentication and async support.">
+    <meta name="keywords" content="AWS Secrets Manager, Python Package, PyPI, Security, Environment Variables, Django, FastAPI">
+    <meta name="author" content="Deepak M S">
+    
+    <title>sm_env_read: AWS Secrets Manager Helper | Deepak M S</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">Deepak M S</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Project Detail Page -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
+                <h1 class="project-title">sm_env_read: AWS Secrets Manager Helper</h1>
+                <p class="project-subtitle">A Python package that provides a simple and robust way to retrieve secrets from AWS Secrets Manager with automatic fallback to role-based authentication.</p>
+                
+                <!-- <div class="project-badges">
+                    <img src="https://img.shields.io/pypi/v/sm_env_read.svg" alt="PyPI Version">
+                    <img src="https://img.shields.io/pypi/pyversions/sm_env_read.svg" alt="Python Versions">
+                    <img src="https://img.shields.io/pypi/wheel/sm_env_read.svg" alt="Wheel Support">
+                    <img src="https://img.shields.io/github/license/Deepak-coder80/sm_env_read.svg" alt="License">
+                    <img src="https://img.shields.io/github/last-commit/Deepak-coder80/sm_env_read.svg" alt="Last Commit">
+                </div> -->
+            </div>
+
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>🔐 Why sm_env_read?</h2>
+                    <p>Managing secrets securely in production applications is critical yet complex. sm_env_read solves common challenges developers face when integrating AWS Secrets Manager:</p>
+                    
+                    <div class="problem-solutions">
+                        <div class="solution-card">
+                            <h3>Authentication Complexity</h3>
+                            <ul>
+                                <li>Automatic fallback from direct access to role-based authentication</li>
+                                <li>Works seamlessly across different AWS environments</li>
+                                <li>Handles IAM permissions and STS role assumption transparently</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Framework Integration</h3>
+                            <ul>
+                                <li>Easy integration with Django, FastAPI, and other Python frameworks</li>
+                                <li>Async/await support for non-blocking operations</li>
+                                <li>Startup configuration patterns for web applications</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Production Reliability</h3>
+                            <ul>
+                                <li>Comprehensive error handling with meaningful messages</li>
+                                <li>Support for both JSON string and binary secret formats</li>
+                                <li>Robust retry logic and connection management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-features">
+                    <h2>✨ Key Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔑</span>
+                            <h3>Dual Authentication</h3>
+                            <p>Attempts direct access first, then falls back to STS role-based authentication</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <h3>Async Support</h3>
+                            <p>Built with async/await for non-blocking operations in modern applications</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <h3>Error Handling</h3>
+                            <p>Comprehensive error handling with meaningful error messages</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔧</span>
+                            <h3>Easy Integration</h3>
+                            <p>Simple function interface that works with existing AWS configurations</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📦</span>
+                            <h3>Flexible Formats</h3>
+                            <p>Supports both JSON string and binary secret formats</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌐</span>
+                            <h3>Framework Ready</h3>
+                            <p>Pre-built integration patterns for Django, FastAPI, and more</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="installation-section">
+                    <h2>📦 Installation</h2>
+                    
+                    <div class="install-options">
+                        <div class="install-option">
+                            <h3>Install from PyPI</h3>
+                            <div class="code-block">
+                                <code>pip install sm_env_read</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Install with Poetry</h3>
+                            <div class="code-block">
+                                <code>poetry add sm_env_read</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Development Installation</h3>
+                            <div class="code-block">
+                                <code># Clone repository
+git clone https://github.com/Deepak-coder80/sm_env_read.git
+cd sm_env_read
+
+# Install in development mode
+pip install -e .</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-examples">
+                    <h2>💡 Usage Examples</h2>
+                    
+                    <div class="example-card">
+                        <h3>Basic Usage</h3>
+                        <div class="code-block">
+                            <code>import asyncio
+from sm_env_read import get_env_secrets_from_sm
+
+async def main():
+    secrets = await get_env_secrets_from_sm(
+        account_id="123456789012",
+        region="us-east-1",
+        role_name="MySecretsRole",
+        secret_name="my-app/prod/secrets"
+    )
+    
+    # Access your secrets
+    db_password = secrets.get("database_password")
+    api_key = secrets.get("api_key")
+    
+    print(f"Retrieved {len(secrets)} secrets")
+
+# Run the async function
+asyncio.run(main())</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Django Integration</h3>
+                        <div class="code-block">
+                            <code># settings.py
+import asyncio
+from sm_env_read import get_env_secrets_from_sm
+
+async def load_secrets():
+    return await get_env_secrets_from_sm(
+        account_id="123456789012",
+        region="us-east-1",
+        role_name="DjangoSecretsRole",
+        secret_name="django/prod/secrets"
+    )
+
+# Load secrets synchronously in Django settings
+secrets = asyncio.run(load_secrets())
+
+# Use secrets in your Django settings
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': secrets.get('db_name'),
+        'USER': secrets.get('db_user'),
+        'PASSWORD': secrets.get('db_password'),
+        'HOST': secrets.get('db_host'),
+        'PORT': secrets.get('db_port', '5432'),
+    }
+}
+
+SECRET_KEY = secrets.get('django_secret_key')</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>FastAPI Integration</h3>
+                        <div class="code-block">
+                            <code>from fastapi import FastAPI
+from sm_env_read import get_env_secrets_from_sm
+import asyncio
+
+app = FastAPI()
+
+# Load secrets at startup
+@app.on_event("startup")
+async def startup_event():
+    app.state.secrets = await get_env_secrets_from_sm(
+        account_id="123456789012",
+        region="us-east-1",
+        role_name="FastAPISecretsRole",
+        secret_name="fastapi/prod/secrets"
+    )
+
+@app.get("/")
+async def root():
+    # Access secrets from app state
+    api_key = app.state.secrets.get("external_api_key")
+    return {"message": "Hello World", "api_configured": bool(api_key)}</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Error Handling</h3>
+                        <div class="code-block">
+                            <code>import asyncio
+from sm_env_read import get_env_secrets_from_sm
+from botocore.exceptions import ClientError
+
+async def safe_get_secrets():
+    try:
+        secrets = await get_env_secrets_from_sm(
+            account_id="123456789012",
+            region="us-east-1",
+            role_name="MySecretsRole",
+            secret_name="my-app/prod/secrets"
+        )
+        return secrets
+    except ClientError as e:
+        error_code = e.response['Error']['Code']
+        if error_code == 'SecretNotFound':
+            print("Secret not found")
+        elif error_code == 'AccessDenied':
+            print("Access denied - check IAM permissions")
+        else:
+            print(f"AWS error: {error_code}")
+        return {}
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return {}
+
+secrets = asyncio.run(safe_get_secrets())</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-details">
+                    <h2>🔧 Technical Implementation</h2>
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>Authentication Strategy</h3>
+                            <p>Uses a linear approach: attempts direct AWS credentials first, then falls back to STS role assumption. This ensures maximum compatibility across different deployment environments.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Async Architecture</h3>
+                            <p>Built with native async/await support using boto3's aiobotocore for non-blocking operations, perfect for modern web applications and high-concurrency scenarios.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Security Best Practices</h3>
+                            <p>Implements AWS IAM best practices with least-privilege access patterns, secure credential handling, and comprehensive error logging without exposing sensitive data.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Framework Agnostic</h3>
+                            <p>Designed to work seamlessly with Django, FastAPI, Flask, and other Python frameworks through simple integration patterns and startup configuration examples.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aws-setup">
+                    <h2>☁️ AWS Setup Requirements</h2>
+                    
+                    <div class="example-card">
+                        <h3>Required IAM Permissions (Executing Environment)</h3>
+                        <div class="code-block">
+                            <code>{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": "arn:aws:secretsmanager:REGION:ACCOUNT:secret:SECRET_NAME*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Resource": "arn:aws:iam::ACCOUNT:role/ROLE_NAME"
+        }
+    ]
+}</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Secret Format in AWS Secrets Manager</h3>
+                        <div class="code-block">
+                            <code>{
+    "database_password": "super_secret_password",
+    "api_key": "your_api_key_here",
+    "encryption_key": "base64_encoded_key",
+    "django_secret_key": "your_django_secret_key",
+    "redis_url": "redis://user:pass@host:port/db"
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-impact">
+                    <h2>📊 PyPI Statistics & Impact</h2>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="impact-number">PyPI</span>
+                            <span class="impact-label">Published Package</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Python</span>
+                            <span class="impact-label">3.7+ Support</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Apache</span>
+                            <span class="impact-label">2.0 License</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Active</span>
+                            <span class="impact-label">Maintenance</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pypi-stats">
+                        <h3>📈 Package Metrics</h3>
+                        <div class="tech-grid">
+                            <div class="tech-detail">
+                                <h3>Distribution</h3>
+                                <p>Available on PyPI with wheel distribution for fast installation. Supports Python 3.7+ with comprehensive dependency management and version constraints.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Dependencies</h3>
+                                <p>Minimal dependencies using only boto3 and botocore for AWS integration. Clean dependency tree ensures no conflicts with existing project requirements.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Documentation</h3>
+                                <p>Complete API documentation with usage examples, error handling patterns, and integration guides for popular Python frameworks.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Testing</h3>
+                                <p>Comprehensive test suite with pytest, covering authentication scenarios, error conditions, and integration patterns with mocked AWS services.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h2>🤝 Use This Package</h2>
+                    <p>sm_env_read simplifies AWS Secrets Manager integration for Python applications. Try it in your next project:</p>
+                    
+                    <div class="support-actions">
+                        <a href="https://pypi.org/project/sm_env_read/" class="btn">📦 Install from PyPI</a>
+                        <a href="https://github.com/Deepak-coder80/sm_env_read" class="btn btn-outline">⭐ Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/sm_env_read/issues" class="btn btn-outline">🐛 Report Issues</a>
+                        <a href="https://github.com/Deepak-coder80/sm_env_read/blob/main/README.md" class="btn btn-outline">📚 Read Docs</a>
+                    </div>
+                    
+                    <div class="contribution-note">
+                        <p><strong>Need help integrating?</strong> Check out our <a href="https://github.com/Deepak-coder80/sm_env_read/tree/main/examples">example implementations</a> for Django, FastAPI, and other popular frameworks!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Deepak M S. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../index.js"></script>
+</body>
+</html>

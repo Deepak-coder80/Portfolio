@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="pg-schema-migrate: A powerful CLI tool for migrating PostgreSQL database schemas (structure only) between different hosts with automatic backups and rollback capabilities.">
+    <meta name="keywords" content="PostgreSQL, Schema Migration, Database Migration, CLI Tool, Go, DevOps, Database Management">
+    <meta name="author" content="Deepak M S">
+    
+    <title>pg-schema-migrate: PostgreSQL Schema Migration CLI | Deepak M S</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">Deepak M S</a>
+            <ul class="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Project Detail Page -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
+                <h1 class="project-title">pg-schema-migrate: PostgreSQL Schema Migration CLI</h1>
+                <p class="project-subtitle">A powerful CLI tool for migrating PostgreSQL database schemas (structure only) between different hosts with automatic backups, rollback capabilities, and comprehensive safety features.</p>
+                
+                <div class="project-badges">
+                    <img src="https://img.shields.io/badge/Go-1.21+-blue.svg" alt="Go Version">
+                    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+                    <img src="https://img.shields.io/badge/PostgreSQL-9.6+-blue.svg" alt="PostgreSQL">
+                    <img src="https://img.shields.io/github/last-commit/Deepak-coder80/pg-schema-migrate.svg" alt="Last Commit">
+                    <img src="https://img.shields.io/badge/Database-Schema%20Only-green.svg" alt="Schema Only">
+                </div>
+            </div>
+
+            <div class="project-content">
+                <div class="project-overview">
+                    <h2>🎯 Why pg-schema-migrate?</h2>
+                    <p>Managing database schema migrations across environments is critical but risky. pg-schema-migrate provides a safe, reliable way to transfer PostgreSQL schema structures:</p>
+                    
+                    <div class="problem-solutions">
+                        <div class="solution-card">
+                            <h3>Schema-Only Safety</h3>
+                            <ul>
+                                <li>Transfers table structures, indexes, and constraints without touching data</li>
+                                <li>Perfect for setting up new environments with existing structure</li>
+                                <li>Eliminates risk of accidental data loss during schema migration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Two Migration Modes</h3>
+                            <ul>
+                                <li>Direct migration for immediate automated schema transfer</li>
+                                <li>Export mode for manual review and controlled application</li>
+                                <li>Automatic backup creation with rollback script generation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="solution-card">
+                            <h3>Production Safety</h3>
+                            <ul>
+                                <li>Dry-run mode for previewing changes before execution</li>
+                                <li>SSL support for secure connections to production databases</li>
+                                <li>Comprehensive error handling and rollback procedures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-features">
+                    <h2>✨ Key Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🏗️</span>
+                            <h3>Schema-Only Migration</h3>
+                            <p>Transfers structure without data - tables, indexes, constraints, functions, views</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔄</span>
+                            <h3>Two Migration Modes</h3>
+                            <p>Direct migration or export for manual application and review</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💾</span>
+                            <h3>Automatic Backups</h3>
+                            <p>Creates rollback scripts and backups for safe recovery</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🧪</span>
+                            <h3>Dry Run Mode</h3>
+                            <p>Preview changes before execution for safe testing</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <h3>SSL Support</h3>
+                            <p>Secure connections with various SSL modes for production</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👥</span>
+                            <h3>Role Migration</h3>
+                            <p>Optionally include database roles and permissions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="installation-section">
+                    <h2>🚀 Installation & Prerequisites</h2>
+                    
+                    <div class="install-options">
+                        <div class="install-option">
+                            <h3>Download Binary (Linux/macOS)</h3>
+                            <div class="code-block">
+                                <code># Download and install
+wget https://github.com/Deepak-coder80/pg-schema-migrate/releases/latest/download/pg-schema-migrate-linux
+chmod +x pg-schema-migrate-linux
+sudo mv pg-schema-migrate-linux /usr/local/bin/pg-schema-migrate</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Build from Source</h3>
+                            <div class="code-block">
+                                <code>git clone https://github.com/Deepak-coder80/pg-schema-migrate.git
+cd pg-schema-migrate
+go build -o pg-schema-migrate</code>
+                            </div>
+                        </div>
+                        
+                        <div class="install-option">
+                            <h3>Prerequisites</h3>
+                            <div class="code-block">
+                                <code># Install PostgreSQL client tools
+# Ubuntu/Debian
+sudo apt-get install postgresql-client
+
+# macOS
+brew install postgresql
+
+# Verify installation
+pg_dump --version
+psql --version</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-examples">
+                    <h2>💡 Usage Examples</h2>
+                    
+                    <div class="example-card">
+                        <h3>Basic Direct Migration</h3>
+                        <div class="code-block">
+                            <code>pg-schema-migrate \
+  --source-host prod-db.example.com \
+  --source-user myuser \
+  --source-db myapp_prod \
+  --dest-host staging-db.example.com \
+  --dest-user myuser \
+  --dest-db myapp_staging</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Export Mode (Manual Application)</h3>
+                        <div class="code-block">
+                            <code>pg-schema-migrate \
+  --mode export \
+  --source-host prod-db.example.com \
+  --source-user myuser \
+  --source-db myapp_prod \
+  --output-dir ./schema_export</code>
+                        </div>
+                    </div>
+                    
+                    <div class="example-card">
+                        <h3>Production to Staging with Roles</h3>
+                        <div class="code-block">
+                            <code>pg-schema-migrate \
+  --source-host prod.example.com \
+  --source-user app_user \
+  --source-db production_app \
+  --dest-host staging.example.com \
+  --dest-user app_user \
+  --dest-db staging_app \
+  --include-roles</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Cross-Cloud Migration</h3>
+                        <div class="code-block">
+                            <code>pg-schema-migrate \
+  --source-host aws-rds.amazonaws.com \
+  --source-port 5432 \
+  --source-user admin \
+  --source-db webapp \
+  --dest-host gcp-sql.googleapis.com \
+  --dest-port 5432 \
+  --dest-user admin \
+  --dest-db webapp_new \
+  --output-dir ./migration_$(date +%Y%m%d)</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Safe Testing with Dry Run</h3>
+                        <div class="code-block">
+                            <code>pg-schema-migrate \
+  --source-host localhost \
+  --source-db myapp_dev \
+  --dest-db myapp_test \
+  --dry-run</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="migration-modes">
+                    <h2>🔄 Migration Modes</h2>
+                    
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>Direct Mode (--mode direct)</h3>
+                            <p>Connects to both source and destination databases, creates automatic backup of destination, drops and recreates destination database, and applies schema directly with rollback script generation.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Export Mode (--mode export)</h3>
+                            <p>Connects only to source database, exports schema to SQL files, makes no changes to any database, and generates manual application instructions for controlled deployment.</p>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Generated File Structure</h3>
+                        <div class="code-block">
+                            <code>schema_migration/
+├── schema_mydb_20240806_143022.sql    # Exported schema
+├── rollback.sh                        # Automatic rollback script
+└── backup/
+    └── backup_mydb_20240806_143022.sql # Destination backup</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="command-reference">
+                    <h2>📚 Command Reference</h2>
+                    
+                    <div class="example-card">
+                        <h3>Source Database Options</h3>
+                        <div class="code-block">
+                            <code>--source-host, -s    Source database host (default: localhost)
+--source-port         Source database port (default: 5432)
+--source-user, -u     Source database username (default: postgres)
+--source-db, -d       Source database name (required)
+--source-ssl          SSL mode (disable, require, verify-ca, verify-full)</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Destination Database Options</h3>
+                        <div class="code-block">
+                            <code>--dest-host           Destination database host (default: localhost)
+--dest-port           Destination database port (default: 5432)
+--dest-user           Destination database username (default: postgres)
+--dest-db             Destination database name (prompted if not provided)
+--dest-ssl            SSL mode (default: require)</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Migration Options</h3>
+                        <div class="code-block">
+                            <code>--mode, -m            Migration mode: direct or export (default: direct)
+--output-dir, -o      Output directory for files (default: ./schema_migration)
+--dry-run             Show what would be done without executing
+--include-roles       Include database roles and permissions
+--no-backup           Skip creating rollback backup</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-details">
+                    <h2>🔧 Technical Implementation</h2>
+                    <div class="tech-grid">
+                        <div class="tech-detail">
+                            <h3>Built with Go</h3>
+                            <p>Leverages Go's excellent PostgreSQL integration and cross-platform compilation for reliable, fast CLI tool that works on Linux, macOS, and Windows.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>PostgreSQL Tools Integration</h3>
+                            <p>Uses industry-standard pg_dump and psql tools ensuring compatibility with all PostgreSQL versions and maintaining fidelity of schema structures.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Safety-First Design</h3>
+                            <p>Implements comprehensive backup creation, rollback script generation, and dry-run capabilities to ensure safe operations in production environments.</p>
+                        </div>
+                        <div class="tech-detail">
+                            <h3>Flexible Architecture</h3>
+                            <p>Supports both automated direct migration and manual export workflows, accommodating different operational requirements and security policies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-best-practices">
+                    <h2>🔒 Security & Best Practices</h2>
+                    
+                    <div class="example-card">
+                        <h3>Password Security</h3>
+                        <div class="code-block">
+                            <code># Security Features:
+✅ Passwords entered via secure hidden input prompts
+✅ Passwords not stored in command history
+✅ Environment variables cleared after use
+✅ SSL support for encrypted connections
+
+# Example secure connection:
+pg-schema-migrate \
+  --source-ssl verify-full \
+  --dest-ssl verify-full \
+  --dry-run</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Required Database Permissions</h3>
+                        <div class="code-block">
+                            <code># Source Database:
+- CONNECT privilege
+- USAGE on schemas
+- SELECT on system catalogs (for schema reading)
+
+# Destination Database:
+- CREATEDB privilege (for database recreation)
+- CONNECT privilege
+- Full privileges on destination database</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Pre-Migration Checklist</h3>
+                        <div class="code-block">
+                            <code>✅ Always test in staging first
+✅ Create manual backups of critical databases
+✅ Review exported schema files before applying
+✅ Coordinate with your team about downtime
+✅ Verify network connectivity and permissions
+✅ Use --dry-run to preview changes</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rollback-procedures">
+                    <h2>🔄 Rollback & Recovery</h2>
+                    
+                    <div class="example-card">
+                        <h3>Automatic Rollback</h3>
+                        <div class="code-block">
+                            <code># If migration fails or you need to rollback:
+cd schema_migration
+./rollback.sh
+
+# The tool automatically generates rollback scripts</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Manual Rollback Procedure</h3>
+                        <div class="code-block">
+                            <code># Drop current database
+psql -h dest-host -U user -d postgres -c "DROP DATABASE mydb;"
+
+# Recreate and restore
+psql -h dest-host -U user -d postgres -c "CREATE DATABASE mydb;"
+psql -h dest-host -U user -d mydb -f backup/backup_mydb_timestamp.sql</code>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Post-Migration Verification</h3>
+                        <div class="code-block">
+                            <code># Verify schema integrity:
+psql -h dest-host -d mydb -c "\dt"  # List tables
+psql -h dest-host -d mydb -c "\df"  # List functions
+psql -h dest-host -d mydb -c "\di"  # List indexes
+
+# Test application connectivity
+# Update connection strings in applications</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-impact">
+                    <h2>📊 Project Impact & Benefits</h2>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="impact-number">Schema</span>
+                            <span class="impact-label">Only Migration</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Automatic</span>
+                            <span class="impact-label">Backup & Rollback</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Production</span>
+                            <span class="impact-label">Safe Operations</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-number">Cross</span>
+                            <span class="impact-label">Platform Support</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pypi-stats">
+                        <h3>📈 Tool Benefits</h3>
+                        <div class="tech-grid">
+                            <div class="tech-detail">
+                                <h3>Safe Schema Management</h3>
+                                <p>Eliminates risk of data loss during schema migrations by focusing only on structure. Perfect for setting up new environments with existing database schemas.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Operational Flexibility</h3>
+                                <p>Two migration modes (direct and export) accommodate different operational requirements, from automated deployments to manual review processes.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Production Reliability</h3>
+                                <p>Comprehensive backup creation, rollback procedures, and dry-run capabilities ensure safe operations in production database environments.</p>
+                            </div>
+                            <div class="tech-detail">
+                                <h3>Cross-Environment Support</h3>
+                                <p>Supports migrations between different cloud providers, on-premise to cloud, and various PostgreSQL configurations with SSL security.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <h2>🚀 Start Using pg-schema-migrate</h2>
+                    <p>Safely migrate PostgreSQL database schemas between environments with confidence. Perfect for DevOps teams managing multiple database environments:</p>
+                    
+                    <div class="support-actions">
+                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate/releases" class="btn">📥 Download Latest Release</a>
+                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate" class="btn btn-outline">⭐ Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate/issues" class="btn btn-outline">🐛 Report Issues</a>
+                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate/wiki" class="btn btn-outline">📚 Documentation</a>
+                    </div>
+                    
+                    <div class="contribution-note">
+                        <p><strong>Ready to migrate schemas safely?</strong> Start with <a href="https://github.com/Deepak-coder80/pg-schema-migrate/tree/main/examples">dry-run mode</a> to preview changes before making any modifications!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Deepak M S. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../index.js"></script>
+</body>
+</html>
