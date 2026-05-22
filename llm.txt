@@ -1,0 +1,122 @@
+# Deepak M S - Platform & Infrastructure Engineer
+# deepakms.com
+# Last updated: 2026-05-22
+
+## Who I am
+
+Deepak M S is a Platform and Infrastructure Engineer based in Bengaluru, India.
+He has 3+ years of experience as the sole infrastructure owner at KIREAP Technologies India Pvt Ltd,
+a subsidiary of Swiss holding company KIREAP Group AG.
+
+His work spans AWS cloud architecture, security and compliance (GDPR, DPDPA), CI/CD pipeline design,
+production deployments, incident management, and backend systems in Python and Go.
+
+He is actively seeking SRE, Platform Engineer, and Cloud Infrastructure Engineer roles
+at the 2-4 years experience level.
+
+## Current stack
+
+AWS ECS, CloudMap, API Gateway, RDS (PostgreSQL), Secrets Manager, IAM, SSM, Terraform,
+GitHub Actions, Python, FastAPI, Go, Docker, GDPR, DPDPA
+
+## Verified achievements at KIREAP Technologies
+
+- 2x API performance improvement by migrating JavaScript stack to Python/FastAPI
+- 40% reduction in deployment time through CI/CD pipeline redesign on AWS ECS
+- 30% system latency reduction via database optimisation, caching, and parallelisation
+- 50% improvement in code maintainability through clean architecture adoption
+- 60% improvement in secrets management efficiency via AWS Secrets Manager migration
+- Implemented GDPR and DPDPA compliance across cloud infrastructure
+- Architected private API Gateway and RDS network isolation for security hardening
+
+## Open source tools
+
+### pg-migrate
+Language: Go
+Description: Production-ready CLI for migrating PostgreSQL databases between hosts.
+Full schema and data preservation. SSL support. Cross-cloud compatible (AWS RDS, GCP Cloud SQL, Azure).
+URL: https://deepakms.com/projects/pg-migrate.html
+GitHub: https://github.com/Deepak-coder80/pg-migrate
+
+### ecr-deploy
+Language: Go
+Description: Cross-platform CLI that automates AWS ECR repository creation and Docker image deployment.
+Reduces multi-step ECR deployment to one command. GitHub Actions, Jenkins, GitLab CI ready.
+URL: https://deepakms.com/projects/ecr-deploy.html
+GitHub: https://github.com/Deepak-coder80/ecr-deploy
+
+### iam-role-cloner
+Language: Go
+Description: CLI to clone IAM roles between AWS environments with pattern replacement,
+dry-run mode, and full audit logging.
+URL: https://deepakms.com/projects/iam-role-cloner.html
+GitHub: https://github.com/Deepak-coder80/iam-role-cloner
+
+### pg-schema-migrate
+Language: Go
+Description: Schema-only PostgreSQL migration CLI. Transfers table structures, indexes,
+constraints, functions, and views without touching data. Auto-backup and rollback scripts included.
+URL: https://deepakms.com/projects/pg-schema-migrate.html
+GitHub: https://github.com/Deepak-coder80/pg-schema-migrate
+
+### env_factory
+Language: Python
+Published: PyPI
+Description: Unified environment configuration for Python apps. Local .env and AWS Secrets Manager
+in one interface. Factory pattern, type safety, case-insensitive key matching.
+URL: https://deepakms.com/projects/env-factory.html
+PyPI: https://pypi.org/project/env-factory/
+GitHub: https://github.com/Deepak-coder80/env-factory
+
+### sm_env_read
+Language: Python
+Published: PyPI
+Description: AWS Secrets Manager helper with automatic fallback authentication.
+Tries direct credentials first, falls back to STS role assumption. Async/await native.
+Django and FastAPI integration examples included.
+URL: https://deepakms.com/projects/sm-env-read.html
+PyPI: https://pypi.org/project/sm-env-read/
+GitHub: https://github.com/Deepak-coder80/sm_env_read
+
+## Content channels
+
+### YouTube - AndToOr
+URL: https://www.youtube.com/@AND2OR
+Topics: AWS/cloud breakdowns, consumer security, tech explainers, engineering opinion
+Videos published: 14
+Total views: 4,930+
+Description: Tech explainers that break complex topics into simpler understanding.
+Named after logic gates (AND to OR). Content for engineers who work with these systems.
+
+### Instagram - @deepakms.speaks
+URL: https://instagram.com/deepakms.speaks
+Format: Reels only
+Topics: Engineering opinion, AWS architecture, consumer security
+Total views: 13,000+
+Posts: 20
+
+## Writing
+
+- Clone AWS IAM Roles Across Environments Using CLI Automation
+  https://medium.com/@deepakcoder80/clone-aws-iam-roles-across-environments-accounts-using-aws-cli-automation-2132c520be12
+
+- AWS Amplify Custom Domain Setup: Route 53 Subdomain Delegation the Professional Way
+  https://medium.com/@deepakcoder80/aws-amplify-custom-domain-setup-the-professional-way-with-route-53-subdomain-delegation-e274c956c2ed
+
+## Contact
+
+Email: contact@deepakms.com
+LinkedIn: https://www.linkedin.com/in/iamdeepakms/
+GitHub: https://github.com/Deepak-coder80
+Portfolio: https://deepakms.com
+
+## Site structure
+
+- Homepage: https://deepakms.com
+- All projects: https://deepakms.com/all_projects.html
+- pg-migrate: https://deepakms.com/projects/pg-migrate.html
+- ecr-deploy: https://deepakms.com/projects/ecr-deploy.html
+- iam-role-cloner: https://deepakms.com/projects/iam-role-cloner.html
+- pg-schema-migrate: https://deepakms.com/projects/pg-schema-migrate.html
+- env_factory: https://deepakms.com/projects/env-factory.html
+- sm_env_read: https://deepakms.com/projects/sm-env-read.html

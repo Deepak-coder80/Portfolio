@@ -1,279 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="pg-migrate: A production-ready CLI tool for migrating PostgreSQL databases between different hosts with full schema and data preservation.">
-    <meta name="keywords" content="PostgreSQL, Database Migration, CLI Tool, Go, DevOps, Database Management">
+    <meta name="description"
+        content="pg-migrate: Production-ready CLI for migrating PostgreSQL databases between hosts with full schema and data preservation.">
     <meta name="author" content="Deepak M S">
-    
-    <title>pg-migrate: PostgreSQL Migration CLI | Deepak M S</title>
-    
-    <!-- Fonts -->
+    <title>pg-migrate - Deepak M S</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://deepakms.com/projects/pg-migrate.html#app",
+      "name": "pg-migrate",
+      "url": "https://deepakms.com/projects/pg-migrate.html",
+      "downloadUrl": "https://github.com/Deepak-coder80/pg-migrate/releases",
+      "codeRepository": "https://github.com/Deepak-coder80/pg-migrate",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Linux, macOS, Windows",
+      "programmingLanguage": "Go",
+      "description": "Production-ready CLI tool for migrating PostgreSQL databases between different hosts with full schema and data preservation. Supports SSL, cloud databases (AWS RDS, GCP Cloud SQL, Azure), and cross-host migrations.",
+      "softwareVersion": "latest",
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "@id": "https://deepakms.com/#person",
+        "name": "Deepak M S"
+      },
+      "keywords": "PostgreSQL, database migration, CLI, Go, DevOps, AWS RDS, cross-cloud migration",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "url": "https://deepakms.com/projects/pg-migrate.html",
+      "name": "pg-migrate: PostgreSQL Migration CLI - Deepak M S",
+      "description": "pg-migrate is a production-ready Go CLI for migrating PostgreSQL databases between hosts. Full schema and data preservation, SSL support, cross-cloud ready.",
+      "author": { "@id": "https://deepakms.com/#person" },
+      "isPartOf": { "@id": "https://deepakms.com/#website" }
+    }
+  ]
+}
+</script>
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="../index.html" class="logo">Deepak M S</a>
-            <ul class="nav-menu">
-                <li><a href="../index.html#about" class="nav-link">About</a></li>
-                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
-                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
-                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
-                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
-        </nav>
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="wordmark">DMS<span class="wordmark-dot">.</span></a>
+            <nav class="primary-nav">
+                <a href="../index.html#work" class="nav-item">Work</a>
+                <a href="../index.html#about" class="nav-item">About</a>
+                <a href="../index.html#content" class="nav-item">Content</a>
+                <a href="../index.html#writing" class="nav-item">Writing</a>
+                <a href="../index.html#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <span class="availability-dot"></span>
+                <span class="availability-text">Open to roles</span>
+            </div>
+            <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="../index.html#work">Work</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#content">Content</a>
+            <a href="../index.html#writing">Writing</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
     </header>
 
-    <!-- Project Detail Page -->
-    <section class="project-detail">
-        <div class="container">
-            <div class="project-header">
-                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
-                <h1 class="project-title">pg-migrate: PostgreSQL Migration CLI</h1>
-                <p class="project-subtitle">A simple, reliable CLI tool for migrating PostgreSQL databases between different hosts with full schema and data preservation.</p>
-                
-                <div class="project-badges">
-                    <img src="https://img.shields.io/badge/Go-1.21+-blue.svg" alt="Go Version">
-                    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
-                    <img src="https://img.shields.io/badge/PostgreSQL-9.6+-blue.svg" alt="PostgreSQL">
+    <main style="padding-top: 64px;">
+        <div class="project-detail-wrap">
+
+            <div class="project-detail-header">
+                <a href="../all_projects.html" class="back-link mono">← All projects</a>
+                <div style="margin-top: 1.5rem;">
+                    <div class="project-detail-meta">
+                        <span class="project-detail-lang">Go</span>
+                        <div class="project-detail-badges">
+                            <img src="https://img.shields.io/badge/Go-1.21+-blue.svg" alt="Go Version">
+                            <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
+                            <img src="https://img.shields.io/badge/PostgreSQL-9.6+-blue.svg" alt="PostgreSQL">
+                        </div>
+                    </div>
+                    <h1 class="project-detail-title">pg-migrate</h1>
+                    <p class="project-detail-sub">Production-ready CLI for migrating PostgreSQL databases between hosts.
+                        Full schema and data preservation, SSL support, and cross-cloud compatibility. One command
+                        replaces a manual multi-step process.</p>
+                    <div class="project-detail-links">
+                        <a href="https://github.com/Deepak-coder80/pg-migrate" target="_blank" rel="noopener"
+                            class="pd-link-primary">GitHub →</a>
+                        <a href="https://github.com/Deepak-coder80/pg-migrate/releases" target="_blank" rel="noopener"
+                            class="pd-link-secondary">Releases</a>
+                        <a href="https://github.com/Deepak-coder80/pg-migrate/issues" target="_blank" rel="noopener"
+                            class="pd-link-secondary">Issues</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-content">
-                <div class="project-overview">
-                    <h2>🚀 Why pg-migrate?</h2>
-                    <p>Solving real-world database migration challenges that developers and DevOps engineers face daily:</p>
-                    
-                    <div class="problem-solutions">
-                        <div class="solution-card">
-                            <h3>Development to Production Migrations</h3>
+            <div class="project-detail-body">
+
+                <!-- Why -->
+                <div>
+                    <h2 class="detail-section-title">Why this exists</h2>
+                    <p class="detail-prose">Database migrations between hosts are painful. SSL configs differ. Cloud
+                        providers behave differently. pg_dump flags aren't obvious. This tool wraps all of that into a
+                        single interactive CLI that handles dev-to-prod, cloud-to-cloud, and cloning scenarios.</p>
+                    <div class="why-grid">
+                        <div class="why-card">
+                            <h4>Dev to production</h4>
                             <ul>
-                                <li>Migrate local development databases to staging/production servers</li>
-                                <li>Handle complex cloud provider migrations (AWS RDS, Google Cloud SQL, Azure)</li>
-                                <li>Support different environments with varying SSL requirements</li>
+                                <li>Local to AWS RDS in one command</li>
+                                <li>Handles varying SSL requirements per environment</li>
+                                <li>Schema-first approach prevents partial migrations</li>
                             </ul>
                         </div>
-                        
-                        <div class="solution-card">
-                            <h3>Database Cloning & Backup Restoration</h3>
+                        <div class="why-card">
+                            <h4>Cross-cloud migration</h4>
                             <ul>
-                                <li>Create exact copies of production databases for testing</li>
-                                <li>Migrate databases between different cloud providers</li>
-                                <li>Handle disaster recovery scenarios requiring cross-region migrations</li>
+                                <li>AWS RDS to GCP Cloud SQL</li>
+                                <li>Azure Database to self-hosted</li>
+                                <li>Any PostgreSQL 9.6+ instance</li>
                             </ul>
                         </div>
-                        
-                        <div class="solution-card">
-                            <h3>Environment Synchronization</h3>
+                        <div class="why-card">
+                            <h4>Environment sync</h4>
                             <ul>
-                                <li>Keep development, staging, and production databases in sync</li>
-                                <li>Share database snapshots with team members</li>
-                                <li>Migrate databases for CI/CD pipeline testing</li>
+                                <li>Clone prod to staging for testing</li>
+                                <li>Share exact database state with team</li>
+                                <li>Disaster recovery cross-region</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="key-features">
-                    <h2>✨ Key Features</h2>
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <span class="feature-icon">🔄</span>
-                            <h3>Cross-host migrations</h3>
-                            <p>Source and destination can be on completely different servers</p>
+                <!-- Features -->
+                <div>
+                    <h2 class="detail-section-title">Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">⟳</div>
+                            <h4>Cross-host migration</h4>
+                            <p>Source and destination can be on completely different servers or cloud providers.</p>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🔒</span>
-                            <h3>SSL support</h3>
-                            <p>Works with cloud databases requiring encrypted connections</p>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">⬡</div>
+                            <h4>SSL support</h4>
+                            <p>Works with cloud databases requiring encrypted connections - require, verify-ca,
+                                verify-full.</p>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🛡️</span>
-                            <h3>Safe migrations</h3>
-                            <p>Schema-first approach using industry-standard pg_dump/pg_restore</p>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">◎</div>
+                            <h4>Safe by default</h4>
+                            <p>Schema-first approach using pg_dump/pg_restore. No partial state.</p>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🎯</span>
-                            <h3>Interactive prompts</h3>
-                            <p>Guides you through the migration process step by step</p>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">△</div>
+                            <h4>Interactive prompts</h4>
+                            <p>Guides you through each step. Hidden password input. No credentials in shell history.</p>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🔐</span>
-                            <h3>Hidden passwords</h3>
-                            <p>Secure password input without exposure in terminal</p>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">◈</div>
+                            <h4>Complete preservation</h4>
+                            <p>Migrates schema, data, indexes, constraints, triggers, and sequences.</p>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">📦</span>
-                            <h3>Complete preservation</h3>
-                            <p>Migrates schema, data, indexes, constraints, and triggers</p>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">○</div>
+                            <h4>Cross-platform</h4>
+                            <p>Pre-built binaries for Linux, macOS (Intel + Apple Silicon), and Windows.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="installation-section">
-                    <h2>🛠 Installation</h2>
-                    
-                    <div class="install-options">
-                        <div class="install-option">
-                            <h3>Download Pre-built Binary</h3>
-                            <div class="code-block">
-                                <code># Linux/macOS
-curl -L https://github.com/Deepak-coder80/pg-migrate/releases/latest/download/pg-migrate-linux-amd64.tar.gz | tar xz
-sudo mv pg-migrate /usr/local/bin/</code>
-                            </div>
+                <!-- Install -->
+                <div>
+                    <h2 class="detail-section-title">Installation</h2>
+                    <div class="code-section">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Linux / macOS</div>
+                            <div class="code-block-body"><code>curl -L https://github.com/Deepak-coder80/pg-migrate/releases/latest/download/pg-migrate-linux-amd64.tar.gz | tar xz
+sudo mv pg-migrate /usr/local/bin/</code></div>
                         </div>
-                        
-                        <div class="install-option">
-                            <h3>Build from Source</h3>
-                            <div class="code-block">
-                                <code># Clone repository
-git clone https://github.com/Deepak-coder80/pg-migrate.git
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Build from source</div>
+                            <div class="code-block-body"><code>git clone https://github.com/Deepak-coder80/pg-migrate.git
 cd pg-migrate
-
-# Build and install
-make install</code>
-                            </div>
+make install</code></div>
                         </div>
-                        
-                        <div class="install-option">
-                            <h3>Docker</h3>
-                            <div class="code-block">
-                                <code>docker pull Deepak-coder80/pg-migrate:latest
-
-# Create alias for easy use
-alias pg-migrate='docker run --rm -it Deepak-coder80/pg-migrate:latest'</code>
-                            </div>
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Docker</div>
+                            <div class="code-block-body"><code>docker pull Deepak-coder80/pg-migrate:latest
+alias pg-migrate='docker run --rm -it Deepak-coder80/pg-migrate:latest'</code></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="usage-examples">
-                    <h2>💡 Real-World Examples</h2>
-                    
-                    <div class="example-card">
-                        <h3>Development to Cloud Migration</h3>
-                        <div class="code-block">
-                            <code># Migrate local dev database to AWS RDS
-pg-migrate \
+                <!-- Examples -->
+                <div>
+                    <h2 class="detail-section-title">Usage examples</h2>
+                    <div class="code-section">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Local to AWS RDS</div>
+                            <div class="code-block-body"><code>pg-migrate \
   --source-db myapp_dev \
   --source-host localhost \
   --source-user postgres \
   --dest-host myapp.abc123.us-east-1.rds.amazonaws.com \
   --dest-user postgres \
-  --dest-ssl require</code>
+  --dest-ssl require</code></div>
                         </div>
-                    </div>
-                    
-                    <div class="example-card">
-                        <h3>Cross-Cloud Migration</h3>
-                        <div class="code-block">
-                            <code># Migrate from AWS RDS to Google Cloud SQL
-pg-migrate \
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">AWS RDS to GCP Cloud SQL</div>
+                            <div class="code-block-body"><code>pg-migrate \
   --source-db production \
   --source-host aws-prod.abc123.us-east-1.rds.amazonaws.com \
   --source-user dbadmin \
   --source-ssl require \
   --dest-host gcp-prod.abc123.us-central1.sql.goog \
   --dest-user postgres \
-  --dest-ssl verify-ca</code>
+  --dest-ssl verify-ca</code></div>
                         </div>
-                    </div>
-                    
-                    <div class="example-card">
-                        <h3>Database Cloning</h3>
-                        <div class="code-block">
-                            <code># Clone production to staging environment
-pg-migrate \
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Clone production to staging</div>
+                            <div class="code-block-body"><code>pg-migrate \
   --source-db myapp_prod \
   --source-host prod.example.com \
   --source-user readonly_user \
   --dest-host staging.example.com \
   --dest-db myapp_staging \
-  --dest-user postgres</code>
+  --dest-user postgres</code></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="technical-details">
-                    <h2>🔧 Technical Implementation</h2>
-                    <div class="tech-grid">
-                        <div class="tech-detail">
-                            <h3>Built with Go</h3>
-                            <p>Leverages Go's excellent concurrency and cross-platform compilation for reliable, fast CLI tool that works on Linux, macOS, and Windows.</p>
+                <!-- Implementation -->
+                <div>
+                    <h2 class="detail-section-title">How it works</h2>
+                    <div class="tech-detail-grid">
+                        <div class="tech-detail-card">
+                            <h4>Built with Go</h4>
+                            <p>Cross-platform compilation, fast startup. Uses Cobra for the CLI interface and
+                                industry-standard pg_dump/pg_restore under the hood.</p>
                         </div>
-                        <div class="tech-detail">
-                            <h3>PostgreSQL Integration</h3>
-                            <p>Uses industry-standard pg_dump and pg_restore tools ensuring compatibility with all PostgreSQL versions and extensions.</p>
+                        <div class="tech-detail-card">
+                            <h4>PostgreSQL integration</h4>
+                            <p>Wraps pg_dump and pg_restore - compatible with all PostgreSQL 9.6+ versions including
+                                RDS, Cloud SQL, and Azure Database.</p>
                         </div>
-                        <div class="tech-detail">
-                            <h3>Security First</h3>
-                            <p>Implements secure password handling, SSL/TLS support, and connection validation to ensure safe database migrations.</p>
+                        <div class="tech-detail-card">
+                            <h4>SSL handling</h4>
+                            <p>Supports all PostgreSQL SSL modes - disable, require, verify-ca, verify-full - with
+                                automatic configuration per host.</p>
                         </div>
-                        <div class="tech-detail">
-                            <h3>Cloud Ready</h3>
-                            <p>Tested with AWS RDS, Google Cloud SQL, Azure Database, and other cloud PostgreSQL services with full SSL support.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-impact">
-                    <h2>📊 Project Impact</h2>
-                    <div class="impact-stats">
-                        <div class="impact-stat">
-                            <span class="impact-number">Production</span>
-                            <span class="impact-label">Ready Tool</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Open</span>
-                            <span class="impact-label">Source Project</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Cross</span>
-                            <span class="impact-label">Platform Support</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Active</span>
-                            <span class="impact-label">Development</span>
+                        <div class="tech-detail-card">
+                            <h4>Secure by default</h4>
+                            <p>Passwords entered via hidden terminal input. No credentials stored in config files or
+                                passed as CLI flags.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="cta-section">
-                    <h2>🤝 Support This Project</h2>
-                    <p>If pg-migrate has helped you solve database migration challenges, consider supporting the project:</p>
-                    
-                    <div class="support-actions">
-                        <a href="https://github.com/Deepak-coder80/pg-migrate" class="btn">⭐ Star on GitHub</a>
-                        <a href="https://github.com/Deepak-coder80/pg-migrate/issues" class="btn btn-outline">🐛 Report Issues</a>
-                        <a href="https://github.com/Deepak-coder80/pg-migrate/discussions" class="btn btn-outline">💬 Join Discussion</a>
-                        <a href="https://github.com/Deepak-coder80/pg-migrate/fork" class="btn btn-outline">🍴 Fork & Contribute</a>
-                    </div>
-                    
-                    <div class="contribution-note">
-                        <p><strong>Want to contribute?</strong> Check out our <a href="https://github.com/Deepak-coder80/pg-migrate/blob/main/CONTRIBUTING.md">contribution guidelines</a> and help make pg-migrate even better!</p>
+                <!-- CTA -->
+                <div class="detail-cta">
+                    <h3>Use pg-migrate</h3>
+                    <p>Solves the database migration problem you've been scripting around for years. MIT licensed, no
+                        dependencies beyond PostgreSQL client tools.</p>
+                    <div class="detail-cta-links">
+                        <a href="https://github.com/Deepak-coder80/pg-migrate" target="_blank" rel="noopener"
+                            class="pd-link-primary">Star on GitHub →</a>
+                        <a href="https://github.com/Deepak-coder80/pg-migrate/issues" target="_blank" rel="noopener"
+                            class="pd-link-secondary">Report an issue</a>
+                        <a href="https://github.com/Deepak-coder80/pg-migrate/discussions" target="_blank"
+                            rel="noopener" class="pd-link-secondary">Join discussion</a>
                     </div>
                 </div>
+
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Deepak M S. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="wordmark">DMS<span class="wordmark-dot">.</span></span>
+            <span class="footer-copy mono">© 2026 Deepak M S · Bengaluru, India</span>
+            <a href="../all_projects.html" class="footer-built mono">← All projects</a>
         </div>
     </footer>
-
-    <!-- JavaScript -->
     <script src="../index.js"></script>
 </body>
+
 </html>

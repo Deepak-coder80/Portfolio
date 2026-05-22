@@ -3,156 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete portfolio of Deepak M S - All software engineering projects including CLI tools, Python packages, and infrastructure solutions.">
-    <meta name="keywords" content="Software Projects, Python Developer, Go CLI Tools, Backend Development, Open Source">
+    <meta name="description" content="All open source projects by Deepak M S - CLI tools, Python packages, and infrastructure automation for AWS and PostgreSQL.">
     <meta name="author" content="Deepak M S">
-    
-    <title>All Projects | Deepak M S</title>
-    
-    <!-- Fonts -->
+    <title>All Projects - Deepak M S</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="index.html" class="logo">Deepak M S</a>
-            <ul class="nav-menu">
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
-                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
-                <li><a href="index.html#blog" class="nav-link">Blog</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
-        </nav>
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="wordmark">DMS<span class="wordmark-dot">.</span></a>
+            <nav class="primary-nav">
+                <a href="index.html#work" class="nav-item">Work</a>
+                <a href="index.html#about" class="nav-item">About</a>
+                <a href="index.html#content" class="nav-item">Content</a>
+                <a href="index.html#writing" class="nav-item">Writing</a>
+                <a href="index.html#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <span class="availability-dot"></span>
+                <span class="availability-text">Open to roles</span>
+            </div>
+            <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="index.html#work">Work</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#content">Content</a>
+            <a href="index.html#writing">Writing</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
     </header>
 
-    <!-- All Projects Page -->
-    <section class="all-projects-page">
-        <div class="container">
-            <div class="page-header">
-                <a href="index.html" class="back-btn">← Back to Portfolio</a>
-                <h1 class="page-title">All Projects</h1>
-                <p class="page-subtitle">A comprehensive showcase of my technical projects and contributions</p>
+    <main style="padding-top: 64px;">
+        <div class="section-inner">
+            <div class="page-hero">
+                <a href="index.html" class="back-link mono">← Back</a>
+                <div class="page-hero-text">
+                    <span class="section-index mono">03 -</span>
+                    <h1 class="page-title">Open source tools</h1>
+                    <p class="page-lead">CLI tools and Python packages built for real infrastructure problems. All MIT licensed, all production-tested.</p>
+                </div>
+                <div class="page-hero-stats">
+                    <div class="phstat"><span class="phstat-num">6</span><span class="phstat-label mono">Tools shipped</span></div>
+                    <div class="phstat"><span class="phstat-num">2</span><span class="phstat-label mono">PyPI packages</span></div>
+                    <div class="phstat"><span class="phstat-num">4</span><span class="phstat-label mono">Go CLIs</span></div>
+                </div>
             </div>
-            
-            <div class="projects-grid-full">
-                <!-- Featured Projects -->
-                <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>pg-migrate: PostgreSQL Migration CLI</h3>
-                    <p>A production-ready CLI tool for migrating PostgreSQL databases between different hosts with full schema and data preservation. Supports SSL, cloud databases, and cross-host migrations.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">CLI</span>
-                       
-                    </div>
-                    <div class="project-links">
-                        <a href="projects/pg-migrate.html" class="project-link">View Details →</a>
-                        <a href="https://github.com/Deepak-coder80/pg-migrate" class="project-link">GitHub →</a>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>env_factory: Environment Configuration</h3>
-                    <p>Python package for structured environment configuration management. Provides secure, scalable environment variable handling across multiple deployment environments.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">PyPI</span>
-                        <span class="tech-tag">Pytest</span>
-                        <span class="tech-tag">Setuptools</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="projects/env-factory.html" class="project-link">View Details →</a>
-                        <a href="https://pypi.org/project/env-factory/" class="project-link">PyPI →</a>
-                    </div>
-                </div>
+            <div class="filter-row">
+                <span class="filter-label mono">Filter -</span>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="go">Go</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="aws">AWS</button>
+                <button class="filter-btn" data-filter="postgresql">PostgreSQL</button>
+            </div>
 
-                <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>sm_env_read: Secrets Management</h3>
-                    <p>Secure secrets management tool for Python applications. Enables structured and secure access to environment secrets with comprehensive testing and documentation.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Security</span>
-                        <span class="tech-tag">PyPI</span>
-                        <span class="tech-tag">Documentation</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="projects/sm-env-read.html" class="project-link">View Details →</a>
-                        <a href="https://pypi.org/project/sm-env-read/" class="project-link">PyPI →</a>
-                    </div>
-                </div>
+            <div class="project-list" id="project-list">
 
-                <!-- Additional Projects -->
-                 <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>ECR Deploy Tool: AWS ECR Automation CLI</h3>
-                    <p>A powerful, cross-platform CLI tool that automates AWS ECR repository creation and Docker image deployment. Built with Go for speed, reliability, and seamless CI/CD integration.
+                <a href="projects/pg-migrate.html" class="project-row" data-tags="go postgresql cli">
+                    <div class="project-row-left">
+                        <span class="project-lang">Go</span>
+                        <div class="project-body">
+                            <h3 class="project-name">pg-migrate</h3>
+                            <p class="project-desc">Production-ready CLI for migrating PostgreSQL databases between hosts. Full schema and data preservation, SSL support, cross-cloud ready. Works with AWS RDS, GCP Cloud SQL, Azure.</p>
+                        </div>
+                    </div>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">CLI</span>
+                            <span class="project-tag">PostgreSQL</span>
+                            <span class="project-tag">DevOps</span>
+                        </div>
+                        <a href="https://github.com/Deepak-coder80/pg-migrate" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">GitHub →</a>
+                        <span class="project-arrow">→</span>
+                    </div>
+                </a>
 
-                    <div class="project-tech">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">ECR</span>
-                        <span class="tech-tag">Docker and DevOps</span>
+                <a href="projects/ecr-deploy.html" class="project-row" data-tags="go aws docker">
+                    <div class="project-row-left">
+                        <span class="project-lang">Go</span>
+                        <div class="project-body">
+                            <h3 class="project-name">ecr-deploy</h3>
+                            <p class="project-desc">Cross-platform CLI that automates AWS ECR repository creation and Docker image deployment. Built for CI/CD pipelines - GitHub Actions, Jenkins, and GitLab CI ready with pre-built examples.</p>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="projects/ecr-deploy.html" class="project-link">View Details →</a>
-                        <a href="https://github.com/Deepak-coder80/ecr-deploy" class="project-link">GitHub →</a>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">AWS ECR</span>
+                            <span class="project-tag">Docker</span>
+                            <span class="project-tag">CI/CD</span>
+                        </div>
+                        <a href="https://github.com/Deepak-coder80/ecr-deploy" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">GitHub →</a>
+                        <span class="project-arrow">→</span>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>IAM Role Cloner: AWS IAM Management CLI</h3>
-                    <p>A powerful CLI tool to clone IAM roles between AWS environments with pattern replacement, dry-run mode, and comprehensive logging for safe IAM management across accounts.
-                    <div class="project-tech">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">IAM</span>
-                        <span class="tech-tag">Docker and DevOps</span>
+                </a>
+
+                <a href="projects/iam-role-cloner.html" class="project-row" data-tags="go aws security">
+                    <div class="project-row-left">
+                        <span class="project-lang">Go</span>
+                        <div class="project-body">
+                            <h3 class="project-name">iam-role-cloner</h3>
+                            <p class="project-desc">Clone IAM roles across AWS environments with automated pattern replacement, dry-run mode, and audit logging. Eliminates hours of manual IAM work when setting up new environments.</p>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="projects/iam-role-cloner.html" class="project-link">View Details →</a>
-                        <a href="https://github.com/Deepak-coder80/iam-role-cloner" class="project-link">GitHub →</a>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">AWS IAM</span>
+                            <span class="project-tag">Security</span>
+                            <span class="project-tag">Automation</span>
+                        </div>
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">GitHub →</a>
+                        <span class="project-arrow">→</span>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-badge">Featured</div>
-                    <h3>pg-schema-migrate: PostgreSQL Schema Migration</h3>
-                    <p>A powerful CLI tool for migrating PostgreSQL database schemas (structure only) between different hosts with automatic backups, rollback capabilities, and comprehensive safety features.
-                        <div class="project-tech">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">CLI</span>
-                       
+                </a>
+
+                <a href="projects/pg-schema-migrate.html" class="project-row" data-tags="go postgresql cli">
+                    <div class="project-row-left">
+                        <span class="project-lang">Go</span>
+                        <div class="project-body">
+                            <h3 class="project-name">pg-schema-migrate</h3>
+                            <p class="project-desc">Schema-only PostgreSQL migration - transfers table structures, indexes, and constraints without touching data. Auto-backup creation, rollback scripts, dry-run mode. Two modes: direct or export for review.</p>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="projects/pg-schema-migrate.html" class="project-link">View Details →</a>
-                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate" class="project-link">GitHub →</a>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">CLI</span>
+                            <span class="project-tag">PostgreSQL</span>
+                            <span class="project-tag">Safety</span>
+                        </div>
+                        <a href="https://github.com/Deepak-coder80/pg-schema-migrate" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">GitHub →</a>
+                        <span class="project-arrow">→</span>
                     </div>
-                </div>
-                
+                </a>
+
+                <a href="projects/env-factory.html" class="project-row" data-tags="python aws config">
+                    <div class="project-row-left">
+                        <span class="project-lang">Python</span>
+                        <div class="project-body">
+                            <h3 class="project-name">env_factory</h3>
+                            <p class="project-desc">Unified environment configuration for Python apps. Local .env and AWS Secrets Manager in one interface. Factory pattern, type safety, case-insensitive key matching. Published on PyPI.</p>
+                        </div>
+                    </div>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">PyPI</span>
+                            <span class="project-tag">AWS</span>
+                            <span class="project-tag">Config</span>
+                        </div>
+                        <a href="https://pypi.org/project/env-factory/" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">PyPI →</a>
+                        <span class="project-arrow">→</span>
+                    </div>
+                </a>
+
+                <a href="projects/sm-env-read.html" class="project-row" data-tags="python aws security">
+                    <div class="project-row-left">
+                        <span class="project-lang">Python</span>
+                        <div class="project-body">
+                            <h3 class="project-name">sm_env_read</h3>
+                            <p class="project-desc">AWS Secrets Manager helper with automatic fallback auth - tries direct credentials first, falls back to STS role assumption. Async/await support. Django and FastAPI integration examples. Published on PyPI.</p>
+                        </div>
+                    </div>
+                    <div class="project-row-right">
+                        <div class="project-tag-group">
+                            <span class="project-tag">PyPI</span>
+                            <span class="project-tag">AWS</span>
+                            <span class="project-tag">Async</span>
+                        </div>
+                        <a href="https://pypi.org/project/sm-env-read/" target="_blank" rel="noopener" class="project-ext-link mono" onclick="event.stopPropagation()">PyPI →</a>
+                        <span class="project-arrow">→</span>
+                    </div>
+                </a>
+
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Deepak M S. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="wordmark">DMS<span class="wordmark-dot">.</span></span>
+            <span class="footer-copy mono">© 2026 Deepak M S · Bengaluru, India</span>
+            <span class="footer-built mono">Built with HTML, CSS, JS</span>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script src="index.js"></script>
+    <script>
+        // Filter logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const rows = document.querySelectorAll('.project-row');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                rows.forEach(row => {
+                    const tags = row.dataset.tags || '';
+                    row.style.display = (filter === 'all' || tags.includes(filter)) ? '' : 'none';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

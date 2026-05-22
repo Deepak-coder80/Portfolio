@@ -3,460 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IAM Role Cloner: A powerful CLI tool to clone IAM roles between AWS environments with pattern replacement, dry-run mode, and comprehensive logging.">
-    <meta name="keywords" content="AWS IAM, Role Cloning, CLI Tool, Go, DevOps, AWS Security, Infrastructure Automation">
+    <title>iam-role-cloner: AWS IAM Role Cloning CLI - Deepak M S</title>
+    <meta name="description" content="Go CLI to clone AWS IAM roles between environments with pattern replacement, dry-run mode, and audit logging. Safe IAM management across AWS accounts.">
+    <meta name="keywords" content="AWS IAM, role cloning, CLI, Go, DevOps, security, infrastructure automation, dry-run">
     <meta name="author" content="Deepak M S">
-    
-    <title>IAM Role Cloner: AWS IAM Management CLI | Deepak M S</title>
-    
-    <!-- Fonts -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://deepakms.com/projects/iam-role-cloner.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepakms.com/projects/iam-role-cloner.html">
+    <meta property="og:title" content="iam-role-cloner: AWS IAM Role Cloning CLI - Deepak M S">
+    <meta property="og:description" content="Go CLI to clone AWS IAM roles between environments with pattern replacement, dry-run mode, and audit logging. Safe IAM management across AWS accounts.">
+    <meta property="og:image" content="https://deepakms.com/og-image.jpg">
+    <meta property="og:site_name" content="Deepak M S">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="iam-role-cloner: AWS IAM Role Cloning CLI - Deepak M S">
+    <meta name="twitter:description" content="Go CLI to clone AWS IAM roles between environments with pattern replacement, dry-run mode, and audit logging. Safe IAM management across AWS accounts.">
+    <meta name="twitter:image" content="https://deepakms.com/og-image.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://deepakms.com/projects/iam-role-cloner.html#app",
+          "name": "iam-role-cloner",
+          "url": "https://deepakms.com/projects/iam-role-cloner.html",
+          "downloadUrl": "https://github.com/Deepak-coder80/iam-role-cloner/releases",
+          "codeRepository": "https://github.com/Deepak-coder80/iam-role-cloner",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Linux, macOS, Windows",
+          "programmingLanguage": "Go",
+          "description": "CLI tool to clone AWS IAM roles between environments with pattern replacement, dry-run mode, and audit logging. Migrates trust policies, managed policies, inline policies, and tags across AWS accounts.",
+          "license": "https://opensource.org/licenses/MIT",
+          "author": { "@type": "Person", "@id": "https://deepakms.com/#person", "name": "Deepak M S" },
+          "keywords": "AWS IAM, role cloning, CLI, Go, DevOps, security, infrastructure automation",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://deepakms.com/projects/iam-role-cloner.html",
+          "name": "iam-role-cloner: AWS IAM Role Cloning CLI - Deepak M S",
+          "description": "Clone IAM roles between AWS environments with pattern replacement, dry-run mode, and audit logging. Safe IAM management at scale.",
+          "author": { "@id": "https://deepakms.com/#person" },
+          "isPartOf": { "@id": "https://deepakms.com/#website" }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <a href="../index.html" class="logo">Deepak M S</a>
-            <ul class="nav-menu">
-                <li><a href="../index.html#about" class="nav-link">About</a></li>
-                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
-                <li><a href="../index.html#projects" class="nav-link">Projects</a></li>
-                <li><a href="../index.html#blog" class="nav-link">Blog</a></li>
-                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
-        </nav>
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="wordmark">DMS<span class="wordmark-dot">.</span></a>
+            <nav class="primary-nav">
+                <a href="../index.html#work" class="nav-item">Work</a>
+                <a href="../index.html#about" class="nav-item">About</a>
+                <a href="../index.html#content" class="nav-item">Content</a>
+                <a href="../index.html#writing" class="nav-item">Writing</a>
+                <a href="../index.html#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <span class="availability-dot"></span>
+                <span class="availability-text">Open to roles</span>
+            </div>
+            <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="../index.html#work">Work</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#content">Content</a>
+            <a href="../index.html#writing">Writing</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
     </header>
 
-    <!-- Project Detail Page -->
-    <section class="project-detail">
-        <div class="container">
-            <div class="project-header">
-                <a href="../all_projects.html" class="back-btn">← Back to Projects</a>
-                <h1 class="project-title">IAM Role Cloner 🚀</h1>
-                <p class="project-subtitle">A powerful CLI tool to clone IAM roles between AWS environments with pattern replacement, dry-run mode, and comprehensive logging for safe and efficient IAM management.</p>
-                
-                <div class="project-badges">
-                    <img src="https://img.shields.io/badge/go-1.21+-blue.svg" alt="Go Version">
-                    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
-                    <img src="https://img.shields.io/github/v/release/Deepak-coder80/iam-role-cloner.svg" alt="Release">
-                    <img src="https://img.shields.io/github/last-commit/Deepak-coder80/iam-role-cloner.svg" alt="Last Commit">
-                    <img src="https://img.shields.io/badge/AWS-IAM%20Ready-orange.svg" alt="AWS IAM">
+    <main style="padding-top: 64px;">
+        <div class="project-detail-wrap">
+
+            <div class="project-detail-header">
+                <a href="../all_projects.html" class="back-link mono">← All projects</a>
+                <div style="margin-top: 1.5rem;">
+                    <div class="project-detail-meta">
+                        <span class="project-detail-lang">Go</span>
+                        <div class="project-detail-badges">
+                            <img src="https://img.shields.io/badge/go-1.21+-blue.svg" alt="Go Version">
+                            <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT">
+                            <img src="https://img.shields.io/badge/AWS-IAM%20Ready-orange.svg" alt="AWS IAM">
+                        </div>
+                    </div>
+                    <h1 class="project-detail-title">iam-role-cloner</h1>
+                    <p class="project-detail-sub">Clone IAM roles between AWS environments with automated pattern replacement, dry-run validation, and full audit logging. Reduces hours of manual IAM configuration to minutes - safely.</p>
+                    <div class="project-detail-links">
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner" target="_blank" rel="noopener" class="pd-link-primary">GitHub →</a>
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/releases" target="_blank" rel="noopener" class="pd-link-secondary">Releases</a>
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/issues" target="_blank" rel="noopener" class="pd-link-secondary">Issues</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-content">
-                <div class="project-overview">
-                    <h2>🎯 Why IAM Role Cloner?</h2>
-                    <p>Managing IAM roles across multiple AWS environments (dev, staging, production) is complex and error-prone. IAM Role Cloner automates this process safely:</p>
-                    
-                    <div class="problem-solutions">
-                        <div class="solution-card">
-                            <h3>Environment Migration</h3>
+            <div class="project-detail-body">
+
+                <div>
+                    <h2 class="detail-section-title">Why this exists</h2>
+                    <p class="detail-prose">Setting up a new AWS environment means recreating every IAM role with environment-specific names and policy content. Doing it manually means hours of copying, editing, and validating - with human error risk on every policy document. This tool makes it a single command with a dry-run you can review first.</p>
+                    <div class="why-grid">
+                        <div class="why-card">
+                            <h4>Environment migration</h4>
                             <ul>
-                                <li>Clone IAM roles between different AWS accounts and profiles</li>
-                                <li>Automated pattern replacement for environment-specific naming</li>
-                                <li>Batch processing for multiple roles with progress tracking</li>
+                                <li>Clone all dev roles to production in batch</li>
+                                <li>Automatic pattern replacement across names, policies, tags</li>
+                                <li>Progress tracking for large role sets</li>
                             </ul>
                         </div>
-                        
-                        <div class="solution-card">
-                            <h3>Safety & Reliability</h3>
+                        <div class="why-card">
+                            <h4>Safety first</h4>
                             <ul>
-                                <li>Dry-run mode for safe testing before making changes</li>
-                                <li>Comprehensive logging with detailed audit trails</li>
-                                <li>Error handling with rollback guidance and validation</li>
+                                <li>Dry-run mode shows exactly what will change</li>
+                                <li>Full audit log of every operation</li>
+                                <li>Validates policies before creating roles</li>
                             </ul>
                         </div>
-                        
-                        <div class="solution-card">
-                            <h3>DevOps Integration</h3>
+                        <div class="why-card">
+                            <h4>Automation ready</h4>
                             <ul>
-                                <li>Interactive mode for manual operations</li>
-                                <li>Full command-line automation for CI/CD pipelines</li>
-                                <li>Role discovery with automatic pattern-based filtering</li>
+                                <li>Interactive mode for manual runs</li>
+                                <li>Full CLI flags for CI/CD pipelines</li>
+                                <li>Pattern-based role discovery and filtering</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="key-features">
-                    <h2>✨ Key Features</h2>
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <span class="feature-icon">🔄</span>
-                            <h3>Role Cloning</h3>
-                            <p>Clone IAM roles between different AWS accounts and profiles</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🔧</span>
-                            <h3>Pattern Replacement</h3>
-                            <p>Automatic replacement in role names, policy content, and tags</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🧪</span>
-                            <h3>Dry-Run Mode</h3>
-                            <p>Safe testing before making actual changes to AWS resources</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">📝</span>
-                            <h3>Comprehensive Logging</h3>
-                            <p>Colored output and detailed file logging for audit trails</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🔍</span>
-                            <h3>Role Discovery</h3>
-                            <p>Automatic pattern-based filtering and role discovery</p>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-icon">🎯</span>
-                            <h3>Interactive Mode</h3>
-                            <p>User-friendly prompts or full command-line automation</p>
-                        </div>
+                <div>
+                    <h2 class="detail-section-title">Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card"><div class="feature-card-icon">⟳</div><h4>Role cloning</h4><p>Clones trust policies, managed policies, inline policies, and tags - all with pattern replacement.</p></div>
+                        <div class="feature-card"><div class="feature-card-icon">◎</div><h4>Pattern replacement</h4><p>dev_ → prod_ in role names, policy content, and tag values simultaneously.</p></div>
+                        <div class="feature-card"><div class="feature-card-icon">△</div><h4>Dry-run mode</h4><p>Preview every change before it hits AWS. Review transformed policy documents in full.</p></div>
+                        <div class="feature-card"><div class="feature-card-icon">⬡</div><h4>Audit logging</h4><p>Coloured terminal output plus file-based logs for compliance and incident review.</p></div>
+                        <div class="feature-card"><div class="feature-card-icon">◈</div><h4>Role discovery</h4><p>Filter source roles by pattern - clone all roles matching "dev-" without listing each one.</p></div>
+                        <div class="feature-card"><div class="feature-card-icon">○</div><h4>Batch processing</h4><p>Process multiple roles in one run with per-role progress tracking and error isolation.</p></div>
                     </div>
                 </div>
 
-                <div class="installation-section">
-                    <h2>🚀 Installation & Quick Start</h2>
-                    
-                    <div class="install-options">
-                        <div class="install-option">
-                            <h3>Download Pre-built Binaries</h3>
-                            <div class="code-block">
-                                <code># Linux (AMD64)
-curl -L -o iam-role-cloner https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-linux-amd64
-chmod +x iam-role-cloner
-
-# macOS (AMD64)
-curl -L -o iam-role-cloner https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-darwin-amd64
-chmod +x iam-role-cloner
-
-# Windows (AMD64)
-curl -L -o iam-role-cloner.exe https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-windows-amd64.exe</code>
-                            </div>
+                <div>
+                    <h2 class="detail-section-title">Installation</h2>
+                    <div class="code-section">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Linux</div>
+                            <div class="code-block-body"><code>curl -L -o iam-role-cloner https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-linux-amd64
+chmod +x iam-role-cloner</code></div>
                         </div>
-                        
-                        <div class="install-option">
-                            <h3>Build from Source</h3>
-                            <div class="code-block">
-                                <code>git clone https://github.com/Deepak-coder80/iam-role-cloner.git
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">macOS</div>
+                            <div class="code-block-body"><code>curl -L -o iam-role-cloner https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-darwin-amd64
+chmod +x iam-role-cloner</code></div>
+                        </div>
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Build from source</div>
+                            <div class="code-block-body"><code>git clone https://github.com/Deepak-coder80/iam-role-cloner.git
 cd iam-role-cloner
-go build -o iam-role-cloner .</code>
-                            </div>
-                        </div>
-                        
-                        <div class="install-option">
-                            <h3>Prerequisites</h3>
-                            <div class="code-block">
-                                <code># AWS CLI configured with appropriate profiles
-aws configure --profile dev
-aws configure --profile prod
-
-# Verify configuration
-aws sts get-caller-identity --profile dev</code>
-                            </div>
+go build -o iam-role-cloner .</code></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="usage-examples">
-                    <h2>💡 Usage Examples</h2>
-                    
-                    <div class="example-card">
-                        <h3>Interactive Mode (Recommended)</h3>
-                        <div class="code-block">
-                            <code># Launch interactive wizard
-./iam-role-cloner clone
-
-# Dry-run with verbose output
-./iam-role-cloner clone --dry-run --verbose</code>
+                <div>
+                    <h2 class="detail-section-title">Usage</h2>
+                    <div class="code-section">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Interactive mode (recommended first run)</div>
+                            <div class="code-block-body"><code>./iam-role-cloner clone
+./iam-role-cloner clone --dry-run --verbose</code></div>
                         </div>
-                    </div>
-                    
-                    <div class="example-card">
-                        <h3>Command Line Automation</h3>
-                        <div class="code-block">
-                            <code># Clone with all parameters specified
-./iam-role-cloner clone \
-  --source-profile dev \
-  --dest-profile prod \
-  --source-pattern "dev_" \
-  --dest-pattern "prod_" \
-  --dry-run
-
-# List roles in a profile
-./iam-role-cloner list --profile dev --pattern "app"
-
-# Show version information
-./iam-role-cloner version --detailed</code>
-                        </div>
-                    </div>
-                    
-                    <div class="example-card">
-                        <h3>Environment Migration Examples</h3>
-                        <div class="code-block">
-                            <code># Development to Production
-./iam-role-cloner clone \
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Automated clone - dev to prod</div>
+                            <div class="code-block-body"><code>./iam-role-cloner clone \
   --source-profile development \
   --dest-profile production \
   --source-pattern "dev-" \
-  --dest-pattern "prod-"
-
-# Staging to Live
-./iam-role-cloner clone \
-  --source-profile staging \
-  --dest-profile live \
-  --source-pattern "staging-" \
-  --dest-pattern "live-"</code>
+  --dest-pattern "prod-"</code></div>
                         </div>
-                    </div>
-
-                    <div class="example-card">
-                        <h3>Role Discovery and Inspection</h3>
-                        <div class="code-block">
-                            <code># List all roles
-./iam-role-cloner list --profile dev
-
-# List roles with pattern filter
-./iam-role-cloner list --profile prod --pattern "app" --sort
-
-# Detailed role information
-./iam-role-cloner list --profile staging --details</code>
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">What gets cloned</div>
+                            <div class="code-block-body"><code>Trust policies (assume role) - with pattern replacement
+Managed policies (AWS + customer managed)
+Inline policies - with pattern replacement in content
+Tags - with pattern replacement and environment metadata
+Role description - with clone audit metadata appended</code></div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="pattern-replacement">
-                    <h2>🔧 Pattern Replacement Examples</h2>
-                    
-                    <div class="example-card">
-                        <h3>Common Pattern Transformations</h3>
-                        <div class="code-block">
-                            <code># Pattern Examples:
-# dev_ → prod_     : dev_app_role → prod_app_role
-# staging- → live- : staging-api-role → live-api-role
-# test. → prod.    : test.service.role → prod.service.role
-
-# Example transformation workflow:
-Source Role: "dev_payment_processor_role"
-Pattern: dev_ → prod_
-Result: "prod_payment_processor_role"</code>
-                        </div>
-                    </div>
-
-                    <div class="example-card">
-                        <h3>What Gets Cloned</h3>
-                        <div class="code-block">
-                            <code>✅ Trust Policies (assume role policies) with pattern replacement
-✅ Managed Policies (AWS and customer managed)
-✅ Inline Policies with pattern replacement in content
-✅ Tags with pattern replacement and environment updates
-✅ Role Description with clone metadata</code>
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Required IAM permissions</div>
+                            <div class="code-block-body"><code>{
+  "Action": [
+    "iam:GetRole", "iam:CreateRole", "iam:ListRoles",
+    "iam:ListAttachedRolePolicies", "iam:ListRolePolicies",
+    "iam:GetRolePolicy", "iam:AttachRolePolicy",
+    "iam:PutRolePolicy", "iam:TagRole", "iam:ListRoleTags"
+  ]
+}</code></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="workflow-integration">
-                    <h2>🔄 DevOps Workflow Integration</h2>
-                    
-                    <div class="example-card">
-                        <h3>Batch Role Processing</h3>
-                        <div class="code-block">
-                            <code># The tool automatically:
-1. Pattern Discovery - Finds all roles matching source pattern
-2. Role Selection - Choose specific roles or select 'all'
-3. Batch Processing - Clones multiple roles with progress tracking
-4. Validation - Verifies each clone operation
-5. Logging - Records all operations for audit</code>
-                        </div>
-                    </div>
-
-                    <div class="example-card">
-                        <h3>CI/CD Pipeline Integration</h3>
-                        <div class="code-block">
-                            <code># Example CI/CD usage
-- name: Clone IAM Roles to Production
-  run: |
-    # Download and setup
-    curl -L -o iam-role-cloner https://github.com/Deepak-coder80/iam-role-cloner/releases/latest/download/iam-role-cloner-linux-amd64
-    chmod +x iam-role-cloner
-    
-    # Clone roles with automation
-    ./iam-role-cloner clone \
-      --source-profile staging \
-      --dest-profile production \
-      --source-pattern "staging-" \
-      --dest-pattern "prod-" \
-      --verbose</code>
-                        </div>
+                <div>
+                    <h2 class="detail-section-title">How it works</h2>
+                    <div class="tech-detail-grid">
+                        <div class="tech-detail-card"><h4>Built with Go + AWS SDK v2</h4><p>Native IAM API calls - GetRole, CreateRole, policy management, and tag operations with proper pagination for large role sets.</p></div>
+                        <div class="tech-detail-card"><h4>Pattern processing engine</h4><p>Replaces the source pattern across role names, policy document content, trust relationships, and tag values - while maintaining JSON validity.</p></div>
+                        <div class="tech-detail-card"><h4>Dry-run architecture</h4><p>Every operation is computed and logged before execution. You see the full transformed policy document before a single API call is made.</p></div>
+                        <div class="tech-detail-card"><h4>Error isolation</h4><p>Failures on individual roles don't halt the batch. Each role result is logged independently so you know exactly what succeeded and what to retry.</p></div>
                     </div>
                 </div>
 
-                <div class="technical-details">
-                    <h2>🔧 Technical Implementation</h2>
-                    <div class="tech-grid">
-                        <div class="tech-detail">
-                            <h3>Built with Go</h3>
-                            <p>Leverages Go's excellent AWS SDK v2 integration and Cobra CLI framework for robust command-line interface with comprehensive error handling.</p>
-                        </div>
-                        <div class="tech-detail">
-                            <h3>AWS IAM Integration</h3>
-                            <p>Deep integration with AWS IAM APIs including GetRole, CreateRole, policy management, and tag operations with proper permission validation.</p>
-                        </div>
-                        <div class="tech-detail">
-                            <h3>Pattern Processing</h3>
-                            <p>Sophisticated pattern replacement engine that handles role names, policy documents, trust relationships, and tag values while maintaining policy integrity.</p>
-                        </div>
-                        <div class="tech-detail">
-                            <h3>Safety Features</h3>
-                            <p>Comprehensive dry-run mode, rollback guidance, detailed logging, and validation checks ensure safe operations in production environments.</p>
-                        </div>
+                <div class="detail-cta">
+                    <h3>Use iam-role-cloner</h3>
+                    <p>Stop recreating IAM roles by hand when setting up new AWS environments. One command, dry-run first, full audit log.</p>
+                    <div class="detail-cta-links">
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/releases" target="_blank" rel="noopener" class="pd-link-primary">Download release →</a>
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner" target="_blank" rel="noopener" class="pd-link-secondary">Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/issues" target="_blank" rel="noopener" class="pd-link-secondary">Report an issue</a>
                     </div>
                 </div>
 
-                <div class="aws-setup">
-                    <h2>☁️ AWS Requirements & Security</h2>
-                    
-                    <div class="example-card">
-                        <h3>Required IAM Permissions</h3>
-                        <div class="code-block">
-                            <code>{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "iam:GetRole",
-                "iam:CreateRole",
-                "iam:ListRoles",
-                "iam:ListAttachedRolePolicies",
-                "iam:ListRolePolicies",
-                "iam:GetRolePolicy",
-                "iam:AttachRolePolicy",
-                "iam:PutRolePolicy",
-                "iam:TagRole",
-                "iam:ListRoleTags"
-            ],
-            "Resource": "*"
-        }
-    ]
-}</code>
-                        </div>
-                    </div>
-
-                    <div class="example-card">
-                        <h3>Security Best Practices</h3>
-                        <div class="code-block">
-                            <code># Security Considerations:
-✅ Dry-run first - Always test with --dry-run before actual cloning
-✅ Least privilege - Ensure minimal required permissions
-✅ Cross-account - Requires appropriate trust relationships
-✅ Pattern validation - Review replacements in dry-run output
-✅ Logging - All operations logged for audit trails
-
-# Example dry-run validation:
-./iam-role-cloner clone --dry-run --verbose --log-file audit.log</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="troubleshooting">
-                    <h2>🐛 Troubleshooting & Debug</h2>
-                    
-                    <div class="example-card">
-                        <h3>Common Issues & Solutions</h3>
-                        <div class="code-block">
-                            <code># MalformedPolicyDocument errors:
-./iam-role-cloner clone --dry-run --verbose
-
-# AWS credential errors:
-aws sts get-caller-identity --profile <profile-name>
-
-# Role already exists:
-# Tool checks for existing roles and prompts for confirmation
-
-# Debug mode with detailed logging:
-./iam-role-cloner clone --verbose --dry-run --log-file debug.log</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-impact">
-                    <h2>📊 Project Impact & Benefits</h2>
-                    <div class="impact-stats">
-                        <div class="impact-stat">
-                            <span class="impact-number">AWS</span>
-                            <span class="impact-label">IAM Automation</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Multi</span>
-                            <span class="impact-label">Environment Support</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Safe</span>
-                            <span class="impact-label">Dry-Run Mode</span>
-                        </div>
-                        <div class="impact-stat">
-                            <span class="impact-number">Production</span>
-                            <span class="impact-label">Ready Tool</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pypi-stats">
-                        <h3>📈 Tool Benefits</h3>
-                        <div class="tech-grid">
-                            <div class="tech-detail">
-                                <h3>DevOps Efficiency</h3>
-                                <p>Eliminates manual IAM role creation across environments. Reduces hours of manual work to minutes with automated pattern replacement and validation.</p>
-                            </div>
-                            <div class="tech-detail">
-                                <h3>Security & Compliance</h3>
-                                <p>Ensures consistent IAM configurations across environments with comprehensive audit logging and dry-run validation for compliance requirements.</p>
-                            </div>
-                            <div class="tech-detail">
-                                <h3>Error Prevention</h3>
-                                <p>Eliminates human errors in IAM role configuration with automated pattern replacement, validation checks, and comprehensive error handling.</p>
-                            </div>
-                            <div class="tech-detail">
-                                <h3>Enterprise Scale</h3>
-                                <p>Handles batch processing of multiple roles with progress tracking, making it suitable for large-scale enterprise AWS environments.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cta-section">
-                    <h2>🚀 Start Using IAM Role Cloner</h2>
-                    <p>Streamline your AWS IAM management with safe, automated role cloning between environments. Perfect for DevOps teams managing multiple AWS accounts:</p>
-                    
-                    <div class="support-actions">
-                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/releases" class="btn">📥 Download Latest Release</a>
-                        <a href="https://github.com/Deepak-coder80/iam-role-cloner" class="btn btn-outline">⭐ Star on GitHub</a>
-                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/issues" class="btn btn-outline">🐛 Report Issues</a>
-                        <a href="https://github.com/Deepak-coder80/iam-role-cloner/wiki" class="btn btn-outline">📚 Documentation</a>
-                    </div>
-                    
-                    <div class="contribution-note">
-                        <p><strong>Ready to automate IAM?</strong> Check out our <a href="https://github.com/Deepak-coder80/iam-role-cloner/tree/main/examples">usage examples</a> and start with dry-run mode for safe testing!</p>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Deepak M S. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="wordmark">DMS<span class="wordmark-dot">.</span></span>
+            <span class="footer-copy mono">© 2026 Deepak M S · Bengaluru, India</span>
+            <a href="../all_projects.html" class="footer-built mono">← All projects</a>
         </div>
     </footer>
-
-    <!-- JavaScript -->
     <script src="../index.js"></script>
 </body>
 </html>
