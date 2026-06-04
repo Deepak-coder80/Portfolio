@@ -1,4 +1,4 @@
-# Deepak M S - Platform & Infrastructure Engineer
+# Deepak M S — Platform & Infrastructure Engineer
 # deepakms.com
 # Last updated: 2026-05-22
 
@@ -78,9 +78,20 @@ URL: https://deepakms.com/projects/sm-env-read.html
 PyPI: https://pypi.org/project/sm-env-read/
 GitHub: https://github.com/Deepak-coder80/sm_env_read
 
+
+### dockersec
+Language: Go
+Version: v0.5.0
+Description: Offline CLI security scanner for Dockerfiles and docker-compose files.
+Detects 28 vulnerabilities and misconfigurations including root containers, hardcoded secrets,
+unpinned base images, and missing resource limits. GitHub Actions ready, fully offline,
+ships as a single static binary.
+URL: https://deepakms.com/projects/dockersec.html
+GitHub: https://github.com/Deepak-coder80/dockersec
+
 ## Content channels
 
-### YouTube - AndToOr
+### YouTube — AndToOr
 URL: https://www.youtube.com/@AND2OR
 Topics: AWS/cloud breakdowns, consumer security, tech explainers, engineering opinion
 Videos published: 14
@@ -88,7 +99,7 @@ Total views: 4,930+
 Description: Tech explainers that break complex topics into simpler understanding.
 Named after logic gates (AND to OR). Content for engineers who work with these systems.
 
-### Instagram - @deepakms.speaks
+### Instagram — @deepakms.speaks
 URL: https://instagram.com/deepakms.speaks
 Format: Reels only
 Topics: Engineering opinion, AWS architecture, consumer security
@@ -120,3 +131,4 @@ Portfolio: https://deepakms.com
 - pg-schema-migrate: https://deepakms.com/projects/pg-schema-migrate.html
 - env_factory: https://deepakms.com/projects/env-factory.html
 - sm_env_read: https://deepakms.com/projects/sm-env-read.html
+- dockersec: https://deepakms.com/projects/dockersec.html

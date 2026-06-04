@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dockersec: Docker Security Scanner — Deepak M S</title>
+    <meta name="description" content="dockersec is an offline CLI security scanner for Dockerfiles and docker-compose files. 28 built-in rules, GitHub Actions ready, ships as a single Go binary.">
+    <meta name="keywords" content="Docker, security scanner, CLI, Go, DevSecOps, Dockerfile, docker-compose, GitHub Actions, container security">
+    <meta name="author" content="Deepak M S">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://deepakms.com/projects/dockersec.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deepakms.com/projects/dockersec.html">
+    <meta property="og:title" content="dockersec: Docker Security Scanner — Deepak M S">
+    <meta property="og:description" content="Offline CLI that scans Dockerfiles and docker-compose files for security vulnerabilities. 28 rules, GitHub Actions ready, single Go binary.">
+    <meta property="og:image" content="https://deepakms.com/og-image.jpg">
+    <meta property="og:image:alt" content="dockersec — Docker Security Scanner by Deepak M S">
+    <meta property="og:site_name" content="Deepak M S">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="dockersec: Docker Security Scanner — Deepak M S">
+    <meta name="twitter:description" content="Offline CLI that scans Dockerfiles and docker-compose files for security vulnerabilities. 28 rules, GitHub Actions ready.">
+    <meta name="twitter:image" content="https://deepakms.com/og-image.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://deepakms.com/projects/dockersec.html#app",
+          "name": "dockersec",
+          "url": "https://deepakms.com/projects/dockersec.html",
+          "downloadUrl": "https://github.com/Deepak-coder80/dockersec/releases/latest",
+          "codeRepository": "https://github.com/Deepak-coder80/dockersec",
+          "applicationCategory": "SecurityApplication",
+          "operatingSystem": "Linux, macOS, Windows",
+          "programmingLanguage": "Go",
+          "softwareVersion": "0.5.0",
+          "description": "Offline CLI security scanner for Dockerfiles and docker-compose files. Detects 28 known vulnerabilities and misconfigurations including root containers, hardcoded secrets, unpinned base images, and missing resource limits. GitHub Actions ready.",
+          "license": "https://opensource.org/licenses/MIT",
+          "author": {
+            "@type": "Person",
+            "@id": "https://deepakms.com/#person",
+            "name": "Deepak M S"
+          },
+          "keywords": "Docker, security scanner, CLI, Go, DevSecOps, Dockerfile, docker-compose, container security, GitHub Actions",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://deepakms.com/projects/dockersec.html",
+          "name": "dockersec: Docker Security Scanner — Deepak M S",
+          "description": "dockersec is an offline Go CLI that scans Dockerfiles and docker-compose files for 28 security vulnerabilities. Single binary, GitHub Actions ready.",
+          "author": { "@id": "https://deepakms.com/#person" },
+          "isPartOf": { "@id": "https://deepakms.com/#website" }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="wordmark">DMS<span class="wordmark-dot">.</span></a>
+            <nav class="primary-nav">
+                <a href="../index.html#work" class="nav-item">Work</a>
+                <a href="../index.html#about" class="nav-item">About</a>
+                <a href="../index.html#content" class="nav-item">Content</a>
+                <a href="../index.html#writing" class="nav-item">Writing</a>
+                <a href="../index.html#contact" class="nav-item">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <span class="availability-dot"></span>
+                <span class="availability-text">Open to roles</span>
+            </div>
+            <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="../index.html#work">Work</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#content">Content</a>
+            <a href="../index.html#writing">Writing</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </header>
+
+    <main style="padding-top: 64px;">
+        <div class="project-detail-wrap">
+
+            <div class="project-detail-header">
+                <a href="../all_projects.html" class="back-link mono">← All projects</a>
+                <div style="margin-top: 1.5rem;">
+                    <div class="project-detail-meta">
+                        <span class="project-detail-lang">Go</span>
+                        <div class="project-detail-badges">
+                            <img src="https://img.shields.io/badge/Go-1.21+-blue.svg" alt="Go Version">
+                            <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
+                            <img src="https://img.shields.io/badge/Release-v0.5.0-blue.svg" alt="v0.5.0">
+                            <img src="https://img.shields.io/badge/Offline-No%20API%20calls-brightgreen.svg" alt="Offline">
+                        </div>
+                    </div>
+                    <h1 class="project-detail-title">dockersec</h1>
+                    <p class="project-detail-sub">An offline CLI security scanner for Docker. Analyzes Dockerfiles and docker-compose files for 28 known vulnerabilities and misconfigurations — root containers, hardcoded secrets, unpinned images, missing resource limits — before anything ships to production.</p>
+                    <div class="project-detail-links">
+                        <a href="https://github.com/Deepak-coder80/dockersec" target="_blank" rel="noopener" class="pd-link-primary">GitHub →</a>
+                        <a href="https://github.com/Deepak-coder80/dockersec/releases/latest" target="_blank" rel="noopener" class="pd-link-secondary">Download v0.5.0</a>
+                        <a href="https://github.com/Deepak-coder80/dockersec/issues" target="_blank" rel="noopener" class="pd-link-secondary">Issues</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-detail-body">
+
+                <!-- Why -->
+                <div>
+                    <h2 class="detail-section-title">Why this exists</h2>
+                    <p class="detail-prose">Most developers write Dockerfiles by copying examples from the internet. Those examples are rarely production-safe. The mistakes are invisible until something breaks in production — or worse, until an attacker exploits them. dockersec catches them at the source, in your editor or your CI pipeline, before the code ships.</p>
+                    <div class="why-grid">
+                        <div class="why-card">
+                            <h4>Common mistakes it catches</h4>
+                            <ul>
+                                <li>Container running as root — full host access if breached</li>
+                                <li>API keys and passwords hardcoded in ENV instructions</li>
+                                <li>latest image tags — silent updates, broken reproducibility</li>
+                                <li>curl piped to bash — remote code execution risk</li>
+                                <li>No resource limits — one bad service kills the host</li>
+                            </ul>
+                        </div>
+                        <div class="why-card">
+                            <h4>How it fits your workflow</h4>
+                            <ul>
+                                <li>Run locally before committing</li>
+                                <li>Block PRs on HIGH or CRITICAL findings in CI</li>
+                                <li>Add custom rules without writing Go code</li>
+                                <li>Works offline — no accounts, no data leaves the machine</li>
+                            </ul>
+                        </div>
+                        <div class="why-card">
+                            <h4>Built for real projects</h4>
+                            <ul>
+                                <li>28 rules covering Dockerfile and docker-compose</li>
+                                <li>Every finding includes the exact line and a fix</li>
+                                <li>Ships as a single static binary — nothing to install</li>
+                                <li>GitHub Actions integration in one workflow step</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div>
+                    <h2 class="detail-section-title">Features</h2>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-card-icon">◈</div>
+                            <h4>28 built-in rules</h4>
+                            <p>20 Dockerfile rules + 8 docker-compose rules. CRITICAL, HIGH, MEDIUM, and LOW severities.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">⬡</div>
+                            <h4>Two output formats</h4>
+                            <p>Full text with descriptions and fix instructions. Compact table for CI pipelines.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">◎</div>
+                            <h4>YAML rule engine</h4>
+                            <p>Add custom rules without writing Go. Drop a .yml file in the rules directory, it loads automatically.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">△</div>
+                            <h4>CI gate</h4>
+                            <p>--fail-on HIGH exits with code 1 if any HIGH or CRITICAL finding exists. Blocks the merge.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">◻</div>
+                            <h4>Fully offline</h4>
+                            <p>Zero API calls during scanning. Works in air-gapped environments and local dev.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card-icon">○</div>
+                            <h4>Single binary</h4>
+                            <p>Compiled with goreleaser for Linux, macOS (Intel + Apple Silicon), and Windows. No runtime dependencies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Install + usage -->
+                <div>
+                    <h2 class="detail-section-title">Installation & usage</h2>
+                    <div class="code-section">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Install — Linux</div>
+                            <div class="code-block-body"><code>cd /tmp
+curl -sSL https://github.com/Deepak-coder80/dockersec/releases/latest/download/dockersec_linux_amd64.tar.gz \
+  | tar -xz && sudo mv dockersec /usr/local/bin/
+
+dockersec version
+# dockersec 0.5.0</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Scan a project</div>
+                            <div class="code-block-body"><code>dockersec scan .</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Text output (default) — with fix instructions</div>
+                            <div class="code-block-body"><code>══════════════════════════════════════════════════════
+  Dockerfile
+══════════════════════════════════════════════════════
+──────────────────────────────────────────────────────
+  Severity:  CRITICAL
+  Rule:      DF004
+  Line:      2
+  Issue:
+
+    Possible secret in ENV instruction: AWS_SECRET_KEY.
+    ENV values are baked permanently into the image layer.
+    Anyone who pulls your image can run docker inspect or
+    docker history and read every ENV value in plain text.
+
+  Fix:
+
+    Never put secrets in ENV or ARG. Use runtime secret
+    injection instead: --env-file, Docker secrets, or
+    your CI/CD pipeline secret manager.
+
+──────────────────────────────────────────────────────
+  Severity:  HIGH
+  Rule:      DF001
+  Line:      1
+  Issue:
+
+    No USER instruction found. Container will run as root.
+    Root inside a container maps to root on the host kernel.
+
+  Fix:
+
+    RUN addgroup --system appgroup && adduser --system appuser
+    USER appuser
+
+──────────────────────────────────────────────────────
+  Summary: 1 CRITICAL  3 HIGH  4 MEDIUM  5 LOW</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Table output — compact, for CI logs</div>
+                            <div class="code-block-body"><code>dockersec scan . --format table
+
++--------+----------+------+-------------------------------+-----------------------------+
+| RULE   | SEVERITY | LINE | DESCRIPTION                   | FIX                         |
++--------+----------+------+-------------------------------+-----------------------------+
+| DF004  | CRITICAL | 2    | Secret in ENV: AWS_SECRET_KEY | Use runtime injection        |
+| DF001  | HIGH     | 1    | No USER — runs as root        | Add USER nonroot before CMD |
+| DF002  | HIGH     | 1    | Base image: node:latest       | Pin: node:20.11-alpine3.19  |
++--------+----------+------+-------------------------------+-----------------------------+
+  Summary: 1 CRITICAL  1 HIGH  2 MEDIUM  3 LOW</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">CI gate — block merges on critical findings</div>
+                            <div class="code-block-body"><code>dockersec scan . --fail-on HIGH
+# exits code 1 if any HIGH or CRITICAL finding exists
+# GitHub Actions treats this as a failed check, blocks the merge</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">GitHub Actions integration</div>
+                            <div class="code-block-body"><code>name: Docker Security Scan
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dockersec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dockersec
+        run: |
+          cd /tmp
+          curl -sSL https://github.com/Deepak-coder80/dockersec/releases/latest/download/dockersec_linux_amd64.tar.gz \
+            | tar -xz && sudo mv dockersec /usr/local/bin/
+
+      - name: Scan
+        run: dockersec scan . --fail-on HIGH</code></div>
+                        </div>
+
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Custom rules — no Go required</div>
+                            <div class="code-block-body"><code># rules/dockerfile/no_netcat.yml
+id: CUSTOM001
+type: dockerfile
+severity: HIGH
+description: |
+  netcat (nc) found in a RUN instruction. Commonly used by
+  attackers to create backdoors and exfiltrate data.
+  No place in a production image.
+fix: |
+  Remove netcat. Use docker exec for shell access at runtime.
+match:
+  instruction: RUN
+  contains: "nc"
+
+# Drop in rules/dockerfile/ — dockersec picks it up automatically. No rebuild.</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rule coverage -->
+                <div>
+                    <h2 class="detail-section-title">Rule coverage</h2>
+                    <div class="rules-grid">
+                        <div class="rules-block">
+                            <div class="rules-block-header">
+                                <span class="rules-block-title mono">Dockerfile rules — 20</span>
+                            </div>
+                            <div class="rules-table">
+                                <div class="rule-row"><span class="rule-id mono">DF001</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">Container runs as root</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF002</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">Base image uses latest tag</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF003</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">ADD used instead of COPY</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF004</span><span class="rule-sev sev-critical">CRITICAL</span><span class="rule-desc">Secret hardcoded in ENV</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF005</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">No HEALTHCHECK defined</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF006</span><span class="rule-sev sev-critical">CRITICAL</span><span class="rule-desc">curl or wget piped to bash</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF007</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">apt-get without --no-install-recommends</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF008</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">Multiple RUN layers</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF009</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">Privileged port exposed</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF010</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">Image not pinned by digest</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF011</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">No multi-stage build</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF012</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">COPY without --chown</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF013</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">apt cache not cleaned after install</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF014</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">No SHELL instruction</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF015</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">npm install without --production</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF016</span><span class="rule-sev sev-low">LOW</span><span class="rule-desc">pip install without --no-cache-dir</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF017</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">apt-get update and install in separate RUN</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF018</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">sudo used inside RUN</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF019</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">chmod 777 used</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DF020</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">wget without checksum verification</span></div>
+                            </div>
+                        </div>
+                        <div class="rules-block">
+                            <div class="rules-block-header">
+                                <span class="rules-block-title mono">docker-compose rules — 8</span>
+                            </div>
+                            <div class="rules-table">
+                                <div class="rule-row"><span class="rule-id mono">DC001</span><span class="rule-sev sev-critical">CRITICAL</span><span class="rule-desc">privileged: true</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC002</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">Docker socket mounted</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC003</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">network_mode: host</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC004</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">No resource limits</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC005</span><span class="rule-sev sev-critical">CRITICAL</span><span class="rule-desc">Hardcoded secret in environment block</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC006</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">Image uses latest tag</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC007</span><span class="rule-sev sev-high">HIGH</span><span class="rule-desc">Port 22 (SSH) exposed to host</span></div>
+                                <div class="rule-row"><span class="rule-id mono">DC008</span><span class="rule-sev sev-medium">MEDIUM</span><span class="rule-desc">restart: always without resource limits</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Architecture -->
+                <div>
+                    <h2 class="detail-section-title">How it works</h2>
+                    <div class="tech-detail-grid">
+                        <div class="tech-detail-card">
+                            <h4>Parser layer</h4>
+                            <p>Uses moby/buildkit — the official Docker Dockerfile parser — to build an AST. Handles all edge cases the way Docker itself would. docker-compose files parsed via YAML with typed structs.</p>
+                        </div>
+                        <div class="tech-detail-card">
+                            <h4>Rule engine</h4>
+                            <p>Rules self-register via Go init(). Built-in rules are compiled in; YAML rules load from disk at runtime. Both run through the same execution pipeline — same output format, same severity levels.</p>
+                        </div>
+                        <div class="tech-detail-card">
+                            <h4>YAML rule engine</h4>
+                            <p>Plugin-style architecture. Match on instruction type and string content. No rebuild required. Drop a .yml file in the rules directory — it's active on the next scan.</p>
+                        </div>
+                        <div class="tech-detail-card">
+                            <h4>Distribution</h4>
+                            <p>goreleaser cross-compiles for Linux (amd64, arm64), macOS (Intel + Apple Silicon), and Windows in one command. GitHub Actions runs the release pipeline on every version tag.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <div class="code-block-wrap">
+                            <div class="code-block-label">Project structure</div>
+                            <div class="code-block-body"><code>dockersec/
+├── cmd/                    CLI commands (Cobra)
+│   ├── root.go
+│   ├── scan.go             Main scan logic
+│   └── version.go
+├── internal/
+│   ├── models/             Shared data types (Finding, Severity)
+│   ├── parser/
+│   │   ├── dockerfile.go   Dockerfile AST parser (moby/buildkit)
+│   │   └── compose.go      docker-compose YAML parser
+│   ├── rules/
+│   │   ├── engine.go       Rule registration and execution
+│   │   ├── dockerfile/     20 built-in Dockerfile rules
+│   │   ├── compose/        8 built-in compose rules
+│   │   └── yaml/           YAML rule loader and matcher
+│   └── report/
+│       └── cli.go          Terminal output (text + table)
+├── rules/
+│   ├── dockerfile/         Built-in YAML rules
+│   └── compose/            Built-in YAML rules
+└── .github/workflows/
+    ├── ci.yml              Build and test on every push
+    └── release.yml         goreleaser on every tag push</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Build journey -->
+                <div>
+                    <h2 class="detail-section-title">Build history</h2>
+                    <div class="changelog">
+                        <div class="changelog-row">
+                            <span class="changelog-ver mono">v0.1.0</span>
+                            <span class="changelog-desc">CLI skeleton, Dockerfile parser, first 3 rules</span>
+                        </div>
+                        <div class="changelog-row">
+                            <span class="changelog-ver mono">v0.2.0</span>
+                            <span class="changelog-desc">All 18 Dockerfile rules, table output, severity sorting</span>
+                        </div>
+                        <div class="changelog-row">
+                            <span class="changelog-ver mono">v0.3.0</span>
+                            <span class="changelog-desc">docker-compose parser and 7 compose rules</span>
+                        </div>
+                        <div class="changelog-row">
+                            <span class="changelog-ver mono">v0.4.0</span>
+                            <span class="changelog-desc">YAML rule engine, custom rule support without Go</span>
+                        </div>
+                        <div class="changelog-row">
+                            <span class="changelog-ver mono">v0.5.0</span>
+                            <span class="changelog-desc">goreleaser, GitHub Actions CI/CD, --fail-on flag</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="detail-cta">
+                    <h3>Use dockersec</h3>
+                    <p>Add Docker security scanning to your workflow in under two minutes. Single binary, no accounts, works offline.</p>
+                    <div class="detail-cta-links">
+                        <a href="https://github.com/Deepak-coder80/dockersec/releases/latest" target="_blank" rel="noopener" class="pd-link-primary">Download v0.5.0 →</a>
+                        <a href="https://github.com/Deepak-coder80/dockersec" target="_blank" rel="noopener" class="pd-link-secondary">Star on GitHub</a>
+                        <a href="https://github.com/Deepak-coder80/dockersec/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="pd-link-secondary">Contribute</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="wordmark">DMS<span class="wordmark-dot">.</span></span>
+            <span class="footer-copy mono">© 2026 Deepak M S · Bengaluru, India</span>
+            <a href="../all_projects.html" class="footer-built mono">← All projects</a>
+        </div>
+    </footer>
+    <script src="../index.js"></script>
+</body>
+</html>
