@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPC Architect   AWS Subnetting Visualizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<style>
+:root{
+  --bg:#0F1720;--bg-panel:#141F2B;--bg-raised:#182531;--grid-line:#1C2A38;
+  --border:#263747;--border-soft:#1E2C3A;--text:#E8EEF3;--text-dim:#8CA0B3;
+  --text-faint:#5A6E80;--public:#E8A33D;--private:#4FB4B0;--database:#9B87D4;
+  --reserved:#5C6B7A;--danger:#E2596B;--warning:#E8B054;--success:#5FBF8F;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:linear-gradient(var(--grid-line) 1px,transparent 1px) 0 0/32px 32px,
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px) 0 0/32px 32px,var(--bg);
+  color:var(--text);font-family:var(--sans);min-height:100vh;
+}
+#root{min-height:100vh;}
+::selection{background:var(--public);color:#0F1720;}
+.app{display:flex;flex-direction:column;min-height:100vh;}
+
+/* TOPBAR */
+.topbar{
+  display:flex;align-items:center;gap:12px;padding:12px 24px;
+  border-bottom:1px solid var(--border-soft);flex-wrap:wrap;
+}
+.topbar h1{font-size:16px;font-weight:700;margin:0;letter-spacing:-0.01em;white-space:nowrap;}
+.topbar h1 .dim{color:var(--text-faint);font-weight:500;}
+.topbar-actions{display:flex;align-items:center;gap:7px;margin-left:auto;flex-wrap:wrap;}
+select{
+  background:var(--bg);border:1px solid var(--border);color:var(--text);
+  font-family:var(--sans);font-size:12px;padding:5px 9px;border-radius:6px;outline:none;cursor:pointer;
+}
+select:focus{border-color:var(--public);}
+.toolbar-btn{
+  padding:5px 11px;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg);color:var(--text-dim);font-family:var(--sans);
+  font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;
+}
+.toolbar-btn:hover{border-color:var(--text-faint);color:var(--text);}
+.toolbar-btn.active{border-color:var(--private);color:var(--private);background:rgba(79,180,176,0.08);}
+.toolbar-btn.danger:hover{border-color:var(--danger);color:var(--danger);background:rgba(226,89,107,0.07);}
+.toolbar-btn:disabled{opacity:0.35;cursor:default;pointer-events:none;}
+
+.layout{display:flex;flex:1;min-height:0;}
+
+/* WIZARD */
+.wizard{
+  width:355px;flex-shrink:0;border-right:1px solid var(--border-soft);
+  padding:18px 18px 40px 18px;overflow-y:auto;
+}
+.steps-tabs{
+  display:flex;gap:3px;margin-bottom:16px;background:var(--bg-panel);
+  padding:4px;border-radius:8px;border:1px solid var(--border-soft);
+}
+.steps-tabs button{
+  flex:1;padding:6px 3px;font-size:10px;font-weight:600;background:transparent;
+  border:none;border-radius:6px;color:var(--text-faint);cursor:pointer;
+  font-family:var(--sans);transition:background .15s,color .15s;
+}
+.steps-tabs button.active{background:var(--bg-raised);color:var(--text);}
+.steps-tabs button:hover:not(.active){color:var(--text-dim);}
+.panel-card{
+  background:var(--bg-panel);border:1px solid var(--border-soft);
+  border-radius:10px;padding:16px;margin-bottom:12px;
+}
+.panel-card h3{margin:0 0 4px 0;font-size:13px;font-weight:600;}
+.panel-card .hint{margin:0 0 12px 0;font-size:11.5px;color:var(--text-faint);line-height:1.5;}
+label.field-label{
+  display:block;font-size:10.5px;font-weight:600;color:var(--text-dim);
+  margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em;
+}
+input[type=text]{
+  width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);
+  font-family:var(--mono);font-size:13px;padding:8px 10px;border-radius:6px;outline:none;
+}
+input[type=text]:focus{border-color:var(--public);}
+.field-block{margin-bottom:12px;}
+.field-block:last-child{margin-bottom:0;}
+.inline-note{font-size:10.5px;color:var(--text-faint);margin-top:5px;line-height:1.5;}
+.seg-toggle{display:flex;gap:7px;}
+.seg-toggle button{
+  flex:1;padding:8px 4px;border-radius:6px;border:1px solid var(--border);
+  background:var(--bg);color:var(--text-dim);font-family:var(--sans);
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;
+}
+.seg-toggle button.active{border-color:var(--public);color:var(--public);background:rgba(232,163,61,0.08);}
+.tier-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-soft);}
+.tier-row:last-child{border-bottom:none;}
+.tier-swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.tier-name-label{flex:1;font-size:12.5px;font-weight:500;}
+.toggle-switch{
+  position:relative;width:32px;height:18px;flex-shrink:0;background:var(--border);
+  border-radius:999px;cursor:pointer;transition:background .15s;border:none;padding:0;
+}
+.toggle-switch.on{background:var(--success);}
+.toggle-switch .knob{
+  position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+  background:#0F1720;transition:left .15s;
+}
+.toggle-switch.on .knob{left:16px;background:#0B1218;}
+.remove-btn{background:none;border:none;color:var(--text-faint);cursor:pointer;font-size:14px;line-height:1;padding:2px 4px;flex-shrink:0;}
+.remove-btn:hover{color:var(--danger);}
+.add-tier-row{display:flex;gap:7px;margin-top:10px;}
+.add-tier-row input{flex:1;}
+.btn-secondary{
+  padding:8px 13px;border-radius:6px;border:1px solid var(--border);background:var(--bg);
+  color:var(--text-dim);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);white-space:nowrap;
+}
+.btn-secondary:hover{color:var(--text);border-color:var(--text-faint);}
+.nat-option{border:1px solid var(--border);border-radius:8px;padding:9px 11px;margin-bottom:7px;cursor:pointer;transition:border-color .15s,background .15s;}
+.nat-option.active{border-color:var(--private);background:rgba(79,180,176,0.08);}
+.nat-option .opt-title{font-size:12.5px;font-weight:600;margin-bottom:2px;}
+.nat-option .opt-desc{font-size:11px;color:var(--text-faint);line-height:1.5;}
+
+/* PRESET */
+.preset-hint-text{font-size:11px;color:var(--text-faint);margin-top:8px;line-height:1.6;padding:8px 10px;background:var(--bg-raised);border-radius:6px;}
+
+/* CHEAT SHEET */
+.cheat-toggle-btn{
+  display:flex;justify-content:space-between;align-items:center;width:100%;
+  background:none;border:none;color:var(--text-dim);font-family:var(--sans);
+  font-size:12px;font-weight:600;cursor:pointer;padding:0;
+}
+.chevron{color:var(--text-faint);font-size:10px;transition:transform .2s;display:inline-block;}
+.cheat-toggle-btn.open .chevron{transform:rotate(90deg);}
+.cheat-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:10px;}
+.cheat-table th{text-align:left;color:var(--text-faint);font-weight:600;padding:4px 6px;border-bottom:1px solid var(--border-soft);font-size:10px;text-transform:uppercase;letter-spacing:0.04em;}
+.cheat-table td{padding:4px 6px;border-bottom:1px solid var(--border-soft);font-family:var(--mono);}
+.cheat-table tr:last-child td{border-bottom:none;}
+.cheat-table td.cheat-note{font-family:var(--sans);color:var(--text-faint);font-size:10px;}
+.cheat-table tr.hl td{background:rgba(232,163,61,0.07);}
+
+/* ENDPOINTS */
+.endpoint-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border-soft);}
+.endpoint-row:last-child{border-bottom:none;}
+.endpoint-info{flex:1;}
+.endpoint-name{font-size:12.5px;font-weight:600;}
+.endpoint-desc{font-size:10.5px;color:var(--text-faint);margin-top:2px;line-height:1.4;}
+.free-badge{font-size:9.5px;background:rgba(95,191,143,0.12);border:1px solid rgba(95,191,143,0.3);color:var(--success);padding:1px 5px;border-radius:3px;font-weight:700;margin-left:5px;}
+
+/* QUIZ */
+.quiz-progress{display:flex;align-items:center;gap:9px;margin-bottom:13px;}
+.quiz-progress-text{font-size:11px;color:var(--text-faint);white-space:nowrap;}
+.quiz-prog-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.quiz-prog-fill{height:100%;background:var(--public);border-radius:2px;transition:width .3s;}
+.quiz-q{font-size:13.5px;font-weight:600;line-height:1.5;margin:0 0 12px 0;color:var(--text);}
+.quiz-options{display:flex;flex-direction:column;gap:6px;}
+.quiz-opt{
+  display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:7px;
+  border:1px solid var(--border);background:var(--bg);color:var(--text-dim);
+  font-family:var(--sans);font-size:12px;cursor:pointer;text-align:left;
+  transition:border-color .15s,background .15s;width:100%;
+}
+.quiz-opt:hover:not(:disabled){border-color:var(--text-faint);color:var(--text);}
+.quiz-opt.correct{border-color:var(--success);background:rgba(95,191,143,0.1);color:var(--success);}
+.quiz-opt.wrong{border-color:var(--danger);background:rgba(226,89,107,0.08);color:var(--danger);}
+.quiz-opt-letter{
+  width:18px;height:18px;border-radius:4px;background:var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9.5px;font-weight:700;flex-shrink:0;color:var(--text-faint);
+}
+.quiz-opt.correct .quiz-opt-letter{background:var(--success);color:#0B1218;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--danger);color:#fff;}
+.quiz-explain{margin-top:10px;font-size:11.5px;color:var(--text-dim);line-height:1.6;background:var(--bg-raised);padding:10px 12px;border-radius:7px;}
+.quiz-score{font-size:48px;font-weight:700;font-family:var(--mono);text-align:center;margin:14px 0 4px 0;color:var(--public);}
+.quiz-score-label{text-align:center;font-size:11.5px;color:var(--text-faint);margin-bottom:14px;}
+
+/* CANVAS */
+.canvas{flex:1;min-width:0;overflow-y:auto;padding:18px 26px 60px 26px;}
+.banner{border-radius:8px;padding:10px 13px;font-size:12.5px;line-height:1.5;margin-bottom:9px;border:1px solid;display:flex;gap:9px;}
+.banner.error{border-color:rgba(226,89,107,0.4);background:rgba(226,89,107,0.08);color:#F2A9B2;}
+.banner.warning{border-color:rgba(232,176,84,0.35);background:rgba(232,176,84,0.07);color:#EFC98A;}
+.banner .icon{flex-shrink:0;font-weight:700;}
+.stats-strip{display:flex;gap:9px;margin:16px 0 14px 0;flex-wrap:wrap;}
+.stat-box{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:8px;padding:11px 14px;min-width:100px;}
+.stat-box .stat-label{font-size:10px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+.stat-box .stat-value{font-size:17px;font-weight:700;font-family:var(--mono);}
+.stat-box .stat-sub{font-size:10px;color:var(--text-faint);margin-top:3px;line-height:1.4;}
+.stat-box.cost-stat .stat-value{color:var(--warning);}
+.section-title{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin:22px 0 11px 0;}
+
+/* IP LOOKUP */
+.iplookup-wrap{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;padding:15px;margin-bottom:18px;}
+.iplookup-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:9px;}
+.iplookup-hdr h4{margin:0;font-size:11.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);}
+.iplookup-hdr span{font-size:10.5px;color:var(--text-faint);}
+.iplookup-row{display:flex;gap:7px;}
+.iplookup-row input{flex:1;}
+.iplookup-clear{background:none;border:1px solid var(--border);border-radius:6px;color:var(--text-faint);cursor:pointer;padding:0 10px;font-size:13px;transition:all .15s;}
+.iplookup-clear:hover{color:var(--text);border-color:var(--text-faint);}
+.iplookup-result{margin-top:11px;background:var(--bg-raised);border-radius:8px;padding:11px;}
+.iplookup-hit{font-size:12.5px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.iplookup-miss{color:var(--danger);font-size:12.5px;font-weight:600;}
+.reserved-badge{display:inline-block;background:rgba(226,89,107,0.15);border:1px solid rgba(226,89,107,0.3);color:var(--danger);font-size:9.5px;padding:1px 6px;border-radius:3px;font-weight:700;}
+.usable-badge{display:inline-block;background:rgba(95,191,143,0.12);border:1px solid rgba(95,191,143,0.3);color:var(--success);font-size:9.5px;padding:1px 6px;border-radius:3px;font-weight:700;}
+.iplookup-math{font-family:var(--mono);font-size:10.5px;color:var(--text-faint);line-height:2;margin-top:5px;}
+.iplookup-math .hl{color:var(--text);}
+
+/* COMMON MISTAKES */
+.mistakes-wrap{margin-bottom:16px;}
+.mistake-item{border-radius:8px;padding:9px 12px;font-size:12px;line-height:1.5;margin-bottom:7px;border:1px solid;display:flex;gap:9px;}
+.mistake-item:last-child{margin-bottom:0;}
+.mistake-item.warning{border-color:rgba(232,176,84,0.35);background:rgba(232,176,84,0.07);color:#EFC98A;}
+.mistake-item.error{border-color:rgba(226,89,107,0.4);background:rgba(226,89,107,0.08);color:#F2A9B2;}
+.mistake-item.info{border-color:rgba(79,180,176,0.3);background:rgba(79,180,176,0.06);color:var(--private);}
+.mi-icon{flex-shrink:0;font-weight:700;font-size:12px;}
+.mi-title{font-weight:700;font-size:12px;margin-bottom:2px;}
+.mi-detail{font-size:11px;opacity:0.85;line-height:1.5;}
+
+/* ADDRESS BAR */
+.addr-bar-wrap{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;padding:15px;}
+.addr-bar{display:flex;width:100%;height:44px;border-radius:6px;overflow:hidden;border:1px solid var(--border);}
+.addr-seg{height:100%;cursor:pointer;position:relative;transition:filter .15s;border-right:1px solid rgba(15,23,32,0.5);}
+.addr-seg:hover{filter:brightness(1.25);}
+.addr-seg.selected{outline:2px solid #fff;outline-offset:-2px;z-index:2;}
+.addr-bar-range{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--mono);font-size:10.5px;color:var(--text-faint);}
+.legend{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-dim);}
+.legend-swatch{width:9px;height:9px;border-radius:2px;}
+
+/* SUBNET GRID */
+.subnet-grid{display:grid;gap:9px;margin-top:2px;}
+.az-header{font-family:var(--mono);font-size:11.5px;font-weight:700;color:var(--text-dim);text-align:center;padding:5px 0;}
+.tier-label-cell{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding-right:6px;}
+.subnet-card{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:8px;padding:11px 12px;cursor:pointer;transition:border-color .15s;}
+.subnet-card:hover{border-color:var(--text-faint);}
+.subnet-card.selected{border-color:#fff;}
+.subnet-card .cidr{font-family:var(--mono);font-size:13px;font-weight:700;}
+.subnet-card .meta{font-size:10.5px;color:var(--text-faint);margin-top:4px;font-family:var(--mono);}
+.subnet-card .ipv6tag{font-size:9.5px;color:var(--database);font-family:var(--mono);margin-top:3px;opacity:0.8;}
+
+/* DIAGRAM */
+.diagram-wrap{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;padding:15px;overflow-x:auto;}
+
+/* COMPARE */
+.compare-banner{background:rgba(79,180,176,0.06);border:1px solid rgba(79,180,176,0.22);border-radius:8px;padding:9px 13px;font-size:12px;color:var(--private);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.compare-pane{background:var(--bg-panel);border:1px solid var(--border-soft);border-radius:10px;padding:15px;}
+.compare-pane.is-current{border-color:var(--public);}
+.compare-pane-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-faint);margin-bottom:3px;}
+.compare-pane.is-current .compare-pane-label{color:var(--public);}
+.compare-pane-meta{font-size:10.5px;color:var(--text-dim);font-family:var(--mono);margin-bottom:10px;line-height:1.7;}
+
+/* INSPECTOR DRAWER */
+.drawer-overlay{position:fixed;inset:0;background:rgba(6,10,14,0.55);z-index:10;}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:92vw;background:var(--bg-panel);border-left:1px solid var(--border);z-index:11;overflow-y:auto;padding:20px;}
+.drawer-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-faint);font-size:18px;cursor:pointer;line-height:1;}
+.drawer-close:hover{color:var(--text);}
+.drawer h2{font-family:var(--mono);font-size:19px;margin:2px 0 2px 0;}
+.drawer .drawer-sub{font-size:12px;color:var(--text-dim);margin-bottom:16px;}
+.drawer-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;}
+.drawer-stat{background:var(--bg-raised);border-radius:7px;padding:9px 11px;}
+.drawer-stat .l{font-size:10px;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;}
+.drawer-stat .v{font-family:var(--mono);font-size:13.5px;font-weight:700;}
+.drawer h4{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-dim);margin:18px 0 7px 0;}
+.route-table{width:100%;border-collapse:collapse;font-size:12px;}
+.route-table th{text-align:left;color:var(--text-faint);font-weight:600;padding:5px 7px;border-bottom:1px solid var(--border-soft);font-size:10.5px;text-transform:uppercase;}
+.route-table td{padding:6px 7px;border-bottom:1px solid var(--border-soft);font-family:var(--mono);font-size:11.5px;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:7px;}
+.compare-card{background:var(--bg-raised);border-radius:8px;padding:11px;}
+.compare-card .ct{font-size:12px;font-weight:700;margin-bottom:5px;}
+.compare-card ul{margin:0 0 8px 0;padding-left:14px;font-size:11px;color:var(--text-dim);line-height:1.65;}
+.drawer p.note{font-size:12px;color:var(--text-dim);line-height:1.6;background:var(--bg-raised);padding:9px 11px;border-radius:7px;}
+
+/* SG/NACL EXAMPLES */
+.ex-direction{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-faint);margin:8px 0 3px 0;}
+.ex-rule{font-family:var(--mono);font-size:10px;color:var(--text-dim);padding:2px 0 2px 8px;line-height:1.7;position:relative;}
+.ex-rule::before{content:'›';position:absolute;left:0;color:var(--text-faint);}
+
+/* CONSOLE MAP */
+.cmap-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-soft);font-size:11.5px;}
+.cmap-item:last-child{border-bottom:none;}
+.cmap-name{color:var(--text-dim);}
+.cmap-path{font-family:var(--mono);font-size:10px;color:var(--text-faint);}
+.cmap-link{color:var(--private);font-size:9.5px;text-decoration:none;border:1px solid rgba(79,180,176,0.3);padding:1px 6px;border-radius:3px;margin-left:6px;opacity:0.8;}
+.cmap-link:hover{opacity:1;}
+
+/* IPv6 IN DRAWER */
+.ipv6-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-soft);font-size:11.5px;}
+.ipv6-row:last-child{border-bottom:none;}
+.ipv6-row .l{color:var(--text-faint);font-size:10px;}
+.ipv6-row .v{font-family:var(--mono);font-size:10px;color:var(--database);}
+
+/* BITWISE */
+.bitwise-block{margin-top:4px;}
+.bitwise-label{font-size:11px;color:var(--text-dim);margin-bottom:5px;font-weight:600;}
+.bitwise-why{font-size:11.5px;color:var(--text-dim);line-height:1.6;background:var(--bg-raised);padding:9px 11px;border-radius:7px;margin:0 0 11px 0;}
+.bit-row{display:flex;align-items:center;font-family:var(--mono);font-size:12.5px;margin-bottom:2px;overflow-x:auto;}
+.bit-octet{display:flex;flex-shrink:0;}
+.bit{width:10px;text-align:center;display:inline-block;flex-shrink:0;}
+.bit.network{color:var(--text);}
+.bit.borrowed{color:#0B1218;background:var(--public);border-radius:2px;font-weight:700;}
+.bit.host{color:var(--text-faint);}
+.bit.blank{color:var(--text-faint);opacity:0.25;}
+.bit-dot{color:var(--text-faint);margin:0 2px;font-weight:700;flex-shrink:0;}
+.bitwise-legend{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:10.5px;color:var(--text-dim);}
+.bitwise-legend .sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle;}
+.bitwise-legend .sw.network{background:var(--text);}
+.bitwise-legend .sw.borrowed{background:var(--public);}
+.bitwise-legend .sw.host{background:var(--text-faint);}
+::-webkit-scrollbar{width:9px;height:9px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:6px;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const {useState, useMemo, useRef, useEffect, useCallback} = React;
+
+/* ============================================================
+   CIDR MATH (unchanged from v1)
+   ============================================================ */
+function isValidOctet(s){ return /^\d{1,3}$/.test(s) && Number(s)>=0 && Number(s)<=255; }
+function isValidIp(ip){ const p=ip.split('.'); return p.length===4 && p.every(isValidOctet); }
+function ipToInt(ip){ const p=ip.split('.').map(Number); return ((p[0]<<24)|(p[1]<<16)|(p[2]<<8)|p[3])>>>0; }
+function intToIp(n){ return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.'); }
+function parseCidr(input){
+  if(!input) return null;
+  const m=input.trim().match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/(\d{1,2})$/);
+  if(!m) return null;
+  const ip=m[1], mask=Number(m[2]);
+  if(!isValidIp(ip)||mask<0||mask>32) return null;
+  const ipInt=ipToInt(ip);
+  const networkInt=mask===0?0:(ipInt&(0xFFFFFFFF<<(32-mask)))>>>0;
+  return {ip,mask,networkInt,total:Math.pow(2,32-mask)};
+}
+function rangesOverlap(a,b){
+  const aE=a.networkInt+a.total-1, bE=b.networkInt+b.total-1;
+  return a.networkInt<=bE && b.networkInt<=aE;
+}
+function fmtInt(n){ return n.toLocaleString('en-US'); }
+
+/* ============================================================
+   IPv6 HELPERS  (illustrative, uses doc prefix 2001:db8)
+   ============================================================ */
+function makeIpv6Prefix(vpc){
+  if(!vpc) return null;
+  const o=vpc.ip.split('.').map(Number);
+  const g1=((o[0]<<8)|o[1]).toString(16).padStart(4,'0');
+  const g2a=o[2].toString(16).padStart(2,'0');
+  return `2001:db8:${g1}:${g2a}__::/56`;
+}
+function makeIpv6SubnetCidr(pfx,idx){
+  if(!pfx) return null;
+  const sub=idx.toString(16).padStart(2,'0');
+  return pfx.replace('__::/56',`${sub}::/64`);
+}
+
+/* ============================================================
+   IP LOOKUP
+   ============================================================ */
+function lookupIp(ipStr,subnets){
+  if(!isValidIp(ipStr)) return {valid:false};
+  const ipInt=ipToInt(ipStr);
+  for(const s of subnets){
+    const netEnd=s.networkInt+s.total-1;
+    if(ipInt>=s.networkInt && ipInt<=netEnd){
+      const offset=ipInt-s.networkInt;
+      const reserved=[];
+      if(offset===0) reserved.push('Network address');
+      else if(offset===1) reserved.push('VPC router');
+      else if(offset===2) reserved.push('DNS server');
+      else if(offset===3) reserved.push('AWS reserved');
+      else if(ipInt===netEnd) reserved.push('Broadcast address');
+      return {valid:true,found:true,subnet:s,offset,reserved};
+    }
+  }
+  return {valid:true,found:false};
+}
+
+/* ============================================================
+   COST CALC
+   ============================================================ */
+function calcCost(plan,natStrategy,region,endpointS3,endpointDdb){
+  const rInfo=NAT_RATES[region]||NAT_RATES['ap-south-1'];
+  const et=plan.enabledTiers||[];
+  const hasPublic=et.some(t=>t.id==='public');
+  const hasPrivate=et.some(t=>t.id==='private');
+  if(!hasPublic||!hasPrivate||plan.subnets.length===0)
+    return {natCount:0,monthly:0,rate:rInfo.rate,dataRate:rInfo.dataRate,regionLabel:rInfo.label};
+  const azCount=Math.max(...plan.subnets.map(s=>s.az))+1;
+  const natCount=natStrategy==='per-az'?azCount:1;
+  const monthly=natCount*rInfo.rate*730;
+  return {natCount,monthly,rate:rInfo.rate,dataRate:rInfo.dataRate,regionLabel:rInfo.label};
+}
+
+/* ============================================================
+   COMMON MISTAKES
+   ============================================================ */
+function findMistakes(vpc,plan,azCount,natStrategy,endpointS3){
+  if(!vpc||!plan||plan.subnets.length===0) return [];
+  const out=[];
+  const et=plan.enabledTiers||[];
+  const hasPublic=et.some(t=>t.id==='public');
+  const hasPrivate=et.some(t=>t.id==='private');
+  const hasDatabase=et.some(t=>t.id==='database');
+  if(natStrategy==='single'&&azCount>1&&hasPublic&&hasPrivate)
+    out.push({level:'warning',title:'Single NAT Gateway   all AZs depend on AZ-a',
+      detail:`If AZ-a goes down, all ${azCount} private subnets lose outbound internet. Use per-AZ NAT in production.`});
+  if(hasPrivate&&!hasDatabase)
+    out.push({level:'info',title:'No isolated database tier',
+      detail:'A dedicated database tier with no NAT route prevents accidental internet exposure and simplifies compliance audits.'});
+  if(vpc.mask>=24)
+    out.push({level:'error',title:'VPC too small for production',
+      detail:`A /${vpc.mask} VPC has ${fmtInt(vpc.total)} IPs total. After subnetting, hosts are extremely limited. You cannot resize a VPC CIDR after creation.`});
+  else if(vpc.mask>=22)
+    out.push({level:'info',title:'VPC may be tight for long-term growth',
+      detail:`A /${vpc.mask} gives ${fmtInt(vpc.total)} IPs. VPC CIDRs cannot be expanded   only secondary CIDRs can be added later. Consider /20 or /16.`});
+  if(hasPrivate&&!endpointS3)
+    out.push({level:'info',title:'S3 traffic goes through your NAT Gateway',
+      detail:'Without an S3 Gateway Endpoint, every byte to S3 from private subnets costs ~$0.045/GB in NAT data processing. S3 Gateway Endpoints are free   enable them in Advanced.'});
+  if(hasPublic&&!hasPrivate&&!hasDatabase)
+    out.push({level:'warning',title:'Everything in the public tier',
+      detail:'All resources directly reachable from the internet. Add a private tier for app servers and a database tier for data stores.'});
+  return out;
+}
+
+/* ============================================================
+   SUBNET PLAN (unchanged from v1)
+   ============================================================ */
+function computeSubnetPlan(vpc,azCount,tiers,natStrategy){
+  const errors=[],warnings=[];
+  if(!vpc){errors.push('Enter a valid VPC CIDR block, for example 10.0.0.0/16.');return{errors,warnings,subnets:[]};}
+  if(vpc.mask<16||vpc.mask>28){errors.push('AWS requires a VPC CIDR block between /16 and /28.');}
+  const enabledTiers=tiers.filter(t=>t.enabled);
+  if(enabledTiers.length===0){errors.push('Enable at least one subnet tier to generate a layout.');}
+  if(errors.length>0) return{errors,warnings,subnets:[]};
+  const totalSubnets=enabledTiers.length*azCount;
+  let bits=0;
+  while(Math.pow(2,bits)<totalSubnets) bits++;
+  const newMask=vpc.mask+bits;
+  if(newMask>28){
+    errors.push(enabledTiers.length+' tiers \u00d7'+azCount+' AZs = '+totalSubnets+
+      ' subnets, needs /'+newMask+' per subnet. AWS minimum is /28. Use a larger VPC CIDR, fewer AZs, or fewer tiers.');
+    return{errors,warnings,subnets:[],newMask};
+  }
+  const subnetSize=Math.pow(2,32-newMask);
+  const subnets=[];
+  let idx=0;
+  enabledTiers.forEach(tier=>{
+    for(let az=0;az<azCount;az++){
+      const subnetIndex=idx;
+      const netInt=vpc.networkInt+subnetIndex*subnetSize;
+      idx++;
+      subnets.push({
+        id:tier.id+'-az'+az,
+        tierId:tier.id,tierName:tier.name,color:tier.color,
+        az,azLabel:String.fromCharCode(97+az),
+        cidr:intToIp(netInt)+'/'+newMask,
+        networkInt:netInt,mask:newMask,total:subnetSize,
+        usable:Math.max(0,subnetSize-5),
+        subnetIndex,borrowedBits:bits,vpcMask:vpc.mask,totalSubnets,
+      });
+    }
+  });
+  const hasPublic=enabledTiers.some(t=>t.id==='public');
+  const hasPrivate=enabledTiers.some(t=>t.id==='private');
+  if(natStrategy==='single'&&azCount>1&&hasPublic&&hasPrivate)
+    warnings.push('Single NAT Gateway keeps cost down but every private subnet outside its AZ depends on one gateway   single point of failure plus cross-AZ data transfer charges.');
+  if(!hasPublic&&hasPrivate)
+    warnings.push('Private tier enabled without a Public tier   no Internet Gateway path to build a NAT Gateway from.');
+  return{errors,warnings,subnets,newMask,totalSubnets,subnetSize,enabledTiers};
+}
+
+/* ============================================================
+   STATIC DATA
+   ============================================================ */
+const DEFAULT_TIERS=[
+  {id:'public',  name:'Public',  color:'var(--public)',  enabled:true, custom:false},
+  {id:'private', name:'Private', color:'var(--private)', enabled:true, custom:false},
+  {id:'database',name:'Database',color:'var(--database)',enabled:true, custom:false},
+  {id:'reserved',name:'Reserved',color:'var(--reserved)',enabled:false,custom:false},
+];
+const CUSTOM_COLORS=['#E0708A','#6FA8DC','#8FBF6F','#D9C25E','#C97BD8','#D98E5C'];
+
+const PRESETS=[
+  {label:'Simple web app',hint:'2 AZs, public + private. Good starting point for a single-service deployment.',cidr:'10.0.0.0/20',azCount:2,tiers:['public','private']},
+  {label:'3-tier app (recommended)',hint:'2 AZs, public + private + isolated database. The standard production pattern for most web apps.',cidr:'10.0.0.0/16',azCount:2,tiers:['public','private','database']},
+  {label:'High availability (3 AZ)',hint:'3 AZs across all tiers. Survives a full AZ outage with no degradation. Highest NAT cost.',cidr:'10.0.0.0/16',azCount:3,tiers:['public','private','database']},
+  {label:'Isolated data platform',hint:'No public internet access. Private compute + isolated database + reserved capacity. Common for analytics and compliance workloads.',cidr:'172.16.0.0/16',azCount:2,tiers:['private','database','reserved']},
+  {label:'Minimal / dev environment',hint:'Single public tier, 2 AZs. No NAT Gateway needed   cheapest design for ephemeral dev workloads.',cidr:'10.0.0.0/24',azCount:2,tiers:['public']},
+];
+
+const CIDR_TABLE=[
+  {mask:16,total:65536, usable:65531,example:'Entire VPC   large org'},
+  {mask:17,total:32768, usable:32763,example:'Entire VPC   medium org'},
+  {mask:18,total:16384, usable:16379,example:'Entire VPC   startup'},
+  {mask:19,total:8192,  usable:8187, example:'Entire VPC   small startup'},
+  {mask:20,total:4096,  usable:4091, example:'VPC or large tier'},
+  {mask:21,total:2048,  usable:2043, example:'Large tier subnet'},
+  {mask:22,total:1024,  usable:1019, example:'Standard tier subnet'},
+  {mask:23,total:512,   usable:507,  example:'Medium subnet'},
+  {mask:24,total:256,   usable:251,  example:'Common subnet size'},
+  {mask:25,total:128,   usable:123,  example:'~100 hosts'},
+  {mask:26,total:64,    usable:59,   example:'~60 hosts'},
+  {mask:27,total:32,    usable:27,   example:'~25 hosts'},
+  {mask:28,total:16,    usable:11,   example:'AWS minimum (11 hosts)'},
+];
+
+const NAT_RATES={
+  'ap-south-1':    {label:'Asia Pacific (Mumbai)',     rate:0.045,dataRate:0.045},
+  'ap-southeast-1':{label:'Asia Pacific (Singapore)', rate:0.046,dataRate:0.046},
+  'ap-northeast-1':{label:'Asia Pacific (Tokyo)',     rate:0.046,dataRate:0.046},
+  'us-east-1':     {label:'US East (N. Virginia)',    rate:0.045,dataRate:0.045},
+  'us-west-2':     {label:'US West (Oregon)',         rate:0.045,dataRate:0.045},
+  'eu-central-1':  {label:'Europe (Frankfurt)',       rate:0.048,dataRate:0.048},
+  'eu-west-1':     {label:'Europe (Ireland)',         rate:0.048,dataRate:0.048},
+  'ca-central-1':  {label:'Canada (Central)',         rate:0.048,dataRate:0.048},
+};
+
+const QUIZ_QUESTIONS=[
+  {q:'What is the smallest subnet size AWS will create?',
+   options:['/28   16 IPs, 11 usable','/30   4 IPs','/32   1 IP','/24   256 IPs'],
+   correct:0,explain:'/28 gives 16 total IPs with 11 usable after the 5 AWS-reserved addresses. AWS rejects anything smaller.'},
+  {q:'How many IP addresses does AWS reserve in every subnet?',
+   options:['5','3','2','4'],correct:0,
+   explain:'AWS reserves: .0 (network address), .1 (VPC router), .2 (DNS), .3 (future use), and the last address (broadcast). Always subtract 5 from the total.'},
+  {q:'Your app needs 40 hosts per subnet. What mask do you pick?',
+   options:['/26   59 usable','/27   27 usable','/25   123 usable','/28   11 usable'],correct:0,
+   explain:'/27 only gives 27 usable   not enough. /26 gives 64 − 5 = 59 usable, which covers 40 hosts with room to grow.'},
+  {q:'What makes a subnet "public" in AWS?',
+   options:['Route table has 0.0.0.0/0 → Internet Gateway','Instances have public IPs','No security group rules','A Public=true tag'],correct:0,
+   explain:'Public is a routing property. A subnet is public when its route table sends internet-bound traffic to an Internet Gateway. The tag does nothing.'},
+  {q:'Why use an S3 Gateway Endpoint?',
+   options:['S3 traffic bypasses NAT   $0 instead of $0.045/GB','It encrypts S3 traffic','It makes S3 faster','It restricts S3 to your VPC'],correct:0,
+   explain:'Gateway Endpoints route S3 and DynamoDB traffic over the AWS internal network. The endpoint is free; you avoid NAT data processing charges entirely.'},
+  {q:'Security Groups work at which layer?',
+   options:['Instance / ENI level','Subnet level','VPC level','AZ level'],correct:0,
+   explain:'Security Groups attach to Elastic Network Interfaces (ENIs), not subnets. NACLs work at the subnet level   that is the key difference.'},
+  {q:'Which is stateless   Security Group or NACL?',
+   options:['NACL','Security Group','Both','Neither'],correct:0,
+   explain:'NACLs are stateless. Return traffic needs its own explicit allow rule. Security Groups are stateful   if inbound is allowed, the return is automatically permitted.'},
+  {q:'Per-AZ NAT vs single NAT   what is the real tradeoff?',
+   options:['Availability vs monthly cost (~$33/mo per gateway)',
+            'Speed vs security','IPv4 vs IPv6 support','Public vs private routing'],correct:0,
+   explain:'Single NAT saves money but creates a single point of failure. If that AZ goes down, all private subnets lose outbound internet. Per-AZ NAT keeps each AZ self-contained.'},
+];
+
+const TIER_NOTES={
+  public:'Route table sends 0.0.0.0/0 to the Internet Gateway. Resources here can hold a public IP.',
+  private:'Route table sends 0.0.0.0/0 to a NAT Gateway for outbound-only internet access. No inbound path from the internet.',
+  database:'Isolated tier. Route table has only the local VPC route   no path to the internet in either direction.',
+  reserved:'Held aside for future use (extra AZs, new services) without re-carving the VPC CIDR later.',
+};
+
+const SG_EXAMPLES={
+  public:{
+    inbound:['TCP 443 from 0.0.0.0/0 (HTTPS)','TCP 80 from 0.0.0.0/0 (HTTP, redirect to 443)'],
+    outbound:['All traffic to 0.0.0.0/0'],
+  },
+  private:{
+    inbound:['TCP 8080 from public-sg (app traffic)','TCP 443 from public-sg'],
+    outbound:['TCP 443 to 0.0.0.0/0 (via NAT   updates, APIs)','TCP 5432 to database-sg'],
+  },
+  database:{
+    inbound:['TCP 5432 from private-sg (PostgreSQL)','TCP 3306 from private-sg (MySQL)'],
+    outbound:['(No internet route   effectively deny all outbound)'],
+  },
+  custom:{
+    inbound:['Define rules based on your service port and source'],
+    outbound:['Define rules based on your destination'],
+  },
+};
+
+const NACL_EXAMPLES={
+  public:{
+    inbound:['100 Allow TCP 443 from 0.0.0.0/0','110 Allow TCP 80 from 0.0.0.0/0','900 Allow TCP 1024-65535 from 0.0.0.0/0 (ephemeral return)'],
+    outbound:['100 Allow TCP 443 to 0.0.0.0/0','110 Allow TCP 80 to 0.0.0.0/0','900 Allow TCP 1024-65535 to 0.0.0.0/0 (stateless   need return rules)'],
+  },
+  private:{
+    inbound:['100 Allow TCP 8080 from VPC CIDR','900 Allow TCP 1024-65535 from 0.0.0.0/0 (NAT return traffic)'],
+    outbound:['100 Allow TCP 443 to 0.0.0.0/0','200 Allow TCP 5432 to database subnet CIDR'],
+  },
+  database:{
+    inbound:['100 Allow TCP 5432 from private subnet CIDR','200 Allow TCP 3306 from private subnet CIDR'],
+    outbound:['100 Allow TCP 1024-65535 to private subnet CIDR (ephemeral return)'],
+  },
+  custom:{
+    inbound:['Define rules in number order   lower number = evaluated first'],
+    outbound:['Stateless   always add explicit return traffic rules'],
+  },
+};
+
+const CONSOLE_MAP={
+  public:[
+    {item:'This subnet',     path:'VPC → Subnets',           url:'https://console.aws.amazon.com/vpc/home#subnets:'},
+    {item:'Internet Gateway',path:'VPC → Internet Gateways', url:'https://console.aws.amazon.com/vpc/home#igws:'},
+    {item:'Route table',     path:'VPC → Route Tables',      url:'https://console.aws.amazon.com/vpc/home#routetables:'},
+    {item:'Security Groups', path:'EC2 → Security Groups',   url:'https://console.aws.amazon.com/ec2/home#SecurityGroups:'},
+    {item:'Network ACL',     path:'VPC → Network ACLs',      url:'https://console.aws.amazon.com/vpc/home#acls:'},
+  ],
+  private:[
+    {item:'This subnet',    path:'VPC → Subnets',         url:'https://console.aws.amazon.com/vpc/home#subnets:'},
+    {item:'NAT Gateway',   path:'VPC → NAT Gateways',    url:'https://console.aws.amazon.com/vpc/home#natgateways:'},
+    {item:'Route table',   path:'VPC → Route Tables',    url:'https://console.aws.amazon.com/vpc/home#routetables:'},
+    {item:'VPC Endpoints', path:'VPC → Endpoints',       url:'https://console.aws.amazon.com/vpc/home#Endpoints:'},
+    {item:'Security Groups',path:'EC2 → Security Groups',url:'https://console.aws.amazon.com/ec2/home#SecurityGroups:'},
+    {item:'Network ACL',   path:'VPC → Network ACLs',    url:'https://console.aws.amazon.com/vpc/home#acls:'},
+  ],
+  database:[
+    {item:'This subnet',       path:'VPC → Subnets',         url:'https://console.aws.amazon.com/vpc/home#subnets:'},
+    {item:'Route table',       path:'VPC → Route Tables',    url:'https://console.aws.amazon.com/vpc/home#routetables:'},
+    {item:'Security Groups (DB)',path:'EC2 → Security Groups',url:'https://console.aws.amazon.com/ec2/home#SecurityGroups:'},
+    {item:'RDS Subnet Group',  path:'RDS → Subnet Groups',   url:'https://console.aws.amazon.com/rds/home#db-subnet-groups-list:'},
+    {item:'Network ACL',       path:'VPC → Network ACLs',    url:'https://console.aws.amazon.com/vpc/home#acls:'},
+  ],
+  custom:[
+    {item:'This subnet',    path:'VPC → Subnets',         url:'https://console.aws.amazon.com/vpc/home#subnets:'},
+    {item:'Route table',   path:'VPC → Route Tables',    url:'https://console.aws.amazon.com/vpc/home#routetables:'},
+    {item:'Security Groups',path:'EC2 → Security Groups',url:'https://console.aws.amazon.com/ec2/home#SecurityGroups:'},
+    {item:'Network ACL',   path:'VPC → Network ACLs',    url:'https://console.aws.amazon.com/vpc/home#acls:'},
+  ],
+};
+
+/* ============================================================
+   ATOMS
+   ============================================================ */
+function Toggle({on,onClick}){
+  return <button className={"toggle-switch"+(on?" on":"")} onClick={onClick}><span className="knob"/></button>;
+}
+
+/* ============================================================
+   STEP   VPC BASICS  (preset dropdown + CIDR + cheat sheet)
+   ============================================================ */
+function StepBasics({vpcInput,setVpcInput,vpc,onApplyPreset}){
+  const [cheatOpen,setCheatOpen]=useState(false);
+  const [presetLabel,setPresetLabel]=useState('');
+  const preset=PRESETS.find(p=>p.label===presetLabel)||null;
+
+  const handlePreset=e=>{
+    const lbl=e.target.value;
+    setPresetLabel(lbl);
+    const p=PRESETS.find(x=>x.label===lbl);
+    if(p) onApplyPreset(p);
+  };
+
+  return (
+    <>
+      <div className="panel-card">
+        <h3>Start from a preset</h3>
+        <p className="hint">Pick a starting point and tweak from there. Faster than a blank CIDR field.</p>
+        <select value={presetLabel} onChange={handlePreset} style={{width:'100%',padding:'8px 10px',fontSize:'12.5px',fontFamily:'var(--mono)'}}>
+          <option value="">  choose a scenario  </option>
+          {PRESETS.map(p=><option key={p.label} value={p.label}>{p.label}</option>)}
+        </select>
+        {preset&&<div className="preset-hint-text">{preset.hint}</div>}
+      </div>
+
+      <div className="panel-card">
+        <h3>VPC CIDR block</h3>
+        <p className="hint">The address range for your whole VPC. AWS allows /16 (65,536 IPs) down to /28 (16 IPs).</p>
+        <div className="field-block">
+          <label className="field-label">CIDR notation</label>
+          <input type="text" value={vpcInput} onChange={e=>setVpcInput(e.target.value)} placeholder="10.0.0.0/16"/>
+          {!vpc&&vpcInput.trim()!==''&&
+            <div className="inline-note" style={{color:'var(--danger)'}}>Not a valid CIDR   try 10.0.0.0/16</div>}
+          {vpc&&
+            <div className="inline-note">{fmtInt(vpc.total)} total IPs · {intToIp(vpc.networkInt)} – {intToIp(vpc.networkInt+vpc.total-1)}</div>}
+        </div>
+
+        <div style={{borderTop:'1px solid var(--border-soft)',paddingTop:11,marginTop:4}}>
+          <button className={'cheat-toggle-btn'+(cheatOpen?' open':'')} onClick={()=>setCheatOpen(v=>!v)}>
+            CIDR / host cheat sheet <span className="chevron">▶</span>
+          </button>
+          {cheatOpen&&(
+            <table className="cheat-table">
+              <thead>
+                <tr><th>Mask</th><th>Total IPs</th><th>Usable</th><th>Common use</th></tr>
+              </thead>
+              <tbody>
+                {CIDR_TABLE.map(row=>(
+                  <tr key={row.mask} className={vpc&&vpc.mask===row.mask?'hl':''}>
+                    <td>/{row.mask}</td>
+                    <td>{fmtInt(row.total)}</td>
+                    <td>{fmtInt(row.usable)}</td>
+                    <td className="cheat-note">{row.example}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   STEP   AZ
+   ============================================================ */
+function StepAZ({azCount,setAzCount}){
+  return (
+    <div className="panel-card">
+      <h3>Availability Zones</h3>
+      <p className="hint">Spreading each tier across AZs is how a VPC survives one data center going down.</p>
+      <div className="field-block">
+        <label className="field-label">Number of AZs</label>
+        <div className="seg-toggle">
+          {[2,3].map(n=>(
+            <button key={n} className={azCount===n?'active':''} onClick={()=>setAzCount(n)}>{n} AZs</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   STEP   TIERS
+   ============================================================ */
+function StepTiers({tiers,setTiers}){
+  const [newName,setNewName]=useState('');
+  const toggle=id=>setTiers(tiers.map(t=>t.id===id?{...t,enabled:!t.enabled}:t));
+  const remove=id=>setTiers(tiers.filter(t=>t.id!==id));
+  const addTier=()=>{
+    const name=newName.trim();
+    if(!name) return;
+    const id='custom-'+Date.now();
+    const color=CUSTOM_COLORS[tiers.filter(t=>t.custom).length%CUSTOM_COLORS.length];
+    setTiers([...tiers,{id,name,color,enabled:true,custom:true}]);
+    setNewName('');
+  };
+  return (
+    <div className="panel-card">
+      <h3>Subnet tiers</h3>
+      <p className="hint">Each enabled tier gets one subnet per AZ. Every tier is sized equally in this layout.</p>
+      {tiers.map(t=>(
+        <div className="tier-row" key={t.id}>
+          <span className="tier-swatch" style={{background:t.color}}/>
+          <span className="tier-name-label">{t.name}</span>
+          <Toggle on={t.enabled} onClick={()=>toggle(t.id)}/>
+          {t.custom&&<button className="remove-btn" onClick={()=>remove(t.id)}>×</button>}
+        </div>
+      ))}
+      <div className="add-tier-row">
+        <input type="text" value={newName} onChange={e=>setNewName(e.target.value)}
+          placeholder="Custom tier name" onKeyDown={e=>e.key==='Enter'&&addTier()}/>
+        <button className="btn-secondary" onClick={addTier}>Add</button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   STEP   ADVANCED  (NAT + endpoints + peering)
+   ============================================================ */
+function StepAdvanced({natStrategy,setNatStrategy,peeringEnabled,setPeeringEnabled,
+  peerInput,setPeerInput,peerParsed,peerError,endpointS3,setEndpointS3,endpointDdb,setEndpointDdb}){
+  return (
+    <>
+      <div className="panel-card">
+        <h3>NAT Gateway strategy</h3>
+        <p className="hint">How private-tier subnets reach the internet for outbound traffic (updates, API calls).</p>
+        <div className={"nat-option"+(natStrategy==='per-az'?' active':'')} onClick={()=>setNatStrategy('per-az')}>
+          <div className="opt-title">One NAT Gateway per AZ</div>
+          <div className="opt-desc">Highly available. Each AZ self-contained. Costs one gateway per AZ.</div>
+        </div>
+        <div className={"nat-option"+(natStrategy==='single'?' active':'')} onClick={()=>setNatStrategy('single')}>
+          <div className="opt-title">Single shared NAT Gateway</div>
+          <div className="opt-desc">Cheapest option. All private subnets route through one AZ   single point of failure.</div>
+        </div>
+      </div>
+
+      <div className="panel-card">
+        <h3>VPC Gateway Endpoints</h3>
+        <p className="hint">Route S3 and DynamoDB traffic inside AWS, bypassing NAT Gateway entirely. Gateway Endpoints are free.</p>
+        <div className="endpoint-row">
+          <div className="endpoint-info">
+            <div className="endpoint-name">Amazon S3<span className="free-badge">FREE</span></div>
+            <div className="endpoint-desc">Adds pl-xxxxxxxx (S3) → vpce to private + database route tables. Saves $0.045/GB vs NAT.</div>
+          </div>
+          <Toggle on={endpointS3} onClick={()=>setEndpointS3(v=>!v)}/>
+        </div>
+        <div className="endpoint-row">
+          <div className="endpoint-info">
+            <div className="endpoint-name">DynamoDB<span className="free-badge">FREE</span></div>
+            <div className="endpoint-desc">Adds pl-yyyyyyyy (DynamoDB) → vpce to private + database route tables.</div>
+          </div>
+          <Toggle on={endpointDdb} onClick={()=>setEndpointDdb(v=>!v)}/>
+        </div>
+      </div>
+
+      <div className="panel-card">
+        <h3 style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+          VPC Peering
+          <Toggle on={peeringEnabled} onClick={()=>setPeeringEnabled(!peeringEnabled)}/>
+        </h3>
+        <p className="hint">Connect this VPC to another one privately. Peered CIDR ranges must not overlap.</p>
+        {peeringEnabled&&(
+          <div className="field-block">
+            <label className="field-label">Peer VPC CIDR</label>
+            <input type="text" value={peerInput} onChange={e=>setPeerInput(e.target.value)} placeholder="172.16.0.0/16"/>
+            {peerError&&<div className="inline-note" style={{color:'var(--danger)'}}>{peerError}</div>}
+            {peerParsed&&!peerError&&<div className="inline-note">{fmtInt(peerParsed.total)} IPs in peer VPC</div>}
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   STEP   QUIZ
+   ============================================================ */
+function StepQuiz(){
+  const [idx,setIdx]=useState(0);
+  const [score,setScore]=useState(0);
+  const [chosen,setChosen]=useState(null);
+  const [done,setDone]=useState(false);
+  const total=QUIZ_QUESTIONS.length;
+  const q=QUIZ_QUESTIONS[idx];
+
+  const pick=i=>{
+    if(chosen!==null) return;
+    setChosen(i);
+    if(i===q.correct) setScore(s=>s+1);
+  };
+  const next=()=>{
+    if(idx+1>=total){setDone(true);}
+    else{setIdx(i=>i+1);setChosen(null);}
+  };
+  const restart=()=>{setIdx(0);setScore(0);setChosen(null);setDone(false);};
+
+  if(done){
+    const pct=Math.round(score/total*100);
+    return (
+      <div className="panel-card">
+        <h3>Quiz complete</h3>
+        <div className="quiz-score">{score}/{total}</div>
+        <div className="quiz-score-label">
+          {pct}%   {pct>=80?'Solid. You know your way around a VPC.':pct>=60?'Getting there. Review the explanations.':'Keep building. Use the tool and try again.'}
+        </div>
+        <button className="btn-secondary" style={{width:'100%'}} onClick={restart}>Try again</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="panel-card">
+      <h3>Quiz</h3>
+      <div className="quiz-progress">
+        <span className="quiz-progress-text">{idx+1}/{total}</span>
+        <div className="quiz-prog-bar"><div className="quiz-prog-fill" style={{width:((idx+1)/total*100)+'%'}}/></div>
+        <span className="quiz-progress-text">{score} pts</span>
+      </div>
+      <p className="quiz-q">{q.q}</p>
+      <div className="quiz-options">
+        {q.options.map((opt,i)=>{
+          let cls='quiz-opt';
+          if(chosen!==null){
+            if(i===q.correct) cls+=' correct';
+            else if(i===chosen) cls+=' wrong';
+          }
+          return (
+            <button key={i} className={cls} onClick={()=>pick(i)}
+              disabled={chosen!==null&&i!==q.correct&&i!==chosen}>
+              <span className="quiz-opt-letter" style={{display:'flex',alignItems:'center',justifyContent:'center'}}>{String.fromCharCode(65+i)}</span>
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      {chosen!==null&&(
+        <>
+          <div className="quiz-explain">
+            {chosen===q.correct?'✓ Correct. ':'✗ '+q.options[q.correct]+' is correct. '}
+            {q.explain}
+          </div>
+          <button className="btn-secondary" style={{width:'100%',marginTop:9}} onClick={next}>
+            {idx+1>=total?'See result':'Next →'}
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   ADDRESS BAR
+   ============================================================ */
+function AddressBar({vpc,subnets,selectedId,onSelect}){
+  let lastTier=null;
+  return (
+    <div className="addr-bar-wrap">
+      <div className="addr-bar">
+        {subnets.map(s=>{
+          const w=(s.total/vpc.total)*100;
+          const ml=lastTier!==null&&lastTier!==s.tierId?2:0;
+          lastTier=s.tierId;
+          return (
+            <div key={s.id}
+              className={"addr-seg"+(selectedId===s.id?' selected':'')}
+              style={{width:w+'%',background:s.color,marginLeft:ml}}
+              title={s.cidr+'   '+s.tierName+' (AZ-'+s.azLabel+')'}
+              onClick={()=>onSelect(s.id)}/>
+          );
+        })}
+      </div>
+      <div className="addr-bar-range">
+        <span>{intToIp(vpc.networkInt)}</span>
+        <span>{intToIp(vpc.networkInt+vpc.total-1)}</span>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SUBNET GRID  (with IPv6 tags)
+   ============================================================ */
+function SubnetGrid({enabledTiers,subnets,azCount,selectedId,onSelect,ipv6Enabled,ipv6Prefix}){
+  const cols='140px repeat('+azCount+', 1fr)';
+  return (
+    <div className="subnet-grid" style={{gridTemplateColumns:cols}}>
+      <div/>
+      {Array.from({length:azCount}).map((_,j)=>(
+        <div className="az-header" key={j}>AZ-{String.fromCharCode(97+j)}</div>
+      ))}
+      {enabledTiers.map(tier=>(
+        <React.Fragment key={tier.id}>
+          <div className="tier-label-cell">
+            <span className="tier-swatch" style={{background:tier.color}}/>
+            {tier.name}
+          </div>
+          {Array.from({length:azCount}).map((_,j)=>{
+            const s=subnets.find(x=>x.tierId===tier.id&&x.az===j);
+            if(!s) return <div key={j}/>;
+            const ipv6sub=ipv6Enabled&&ipv6Prefix?makeIpv6SubnetCidr(ipv6Prefix,s.subnetIndex):null;
+            return (
+              <div key={j} className={"subnet-card"+(selectedId===s.id?' selected':'')} onClick={()=>onSelect(s.id)}>
+                <div className="cidr" style={{color:s.color}}>{s.cidr}</div>
+                <div className="meta">/{s.mask} · {fmtInt(s.usable)} usable</div>
+                {ipv6sub&&<div className="ipv6tag">{ipv6sub}</div>}
+              </div>
+            );
+          })}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+/* ============================================================
+   NETWORK DIAGRAM  (with endpoint badges)
+   ============================================================ */
+function NetworkDiagram({enabledTiers,subnets,azCount,natStrategy,peeringEnabled,peerParsed,
+  peerError,vpc,selectedId,onSelect,endpointS3,endpointDdb}){
+  const colW=210,leftPad=50,rowH=100,topPad=116;
+  const peerExtra=peeringEnabled&&peerParsed&&!peerError?190:0;
+  const width=leftPad*2+colW*azCount+peerExtra;
+  const height=topPad+enabledTiers.length*rowH+40;
+  const colX=j=>leftPad+j*colW;
+  const pubIdx=enabledTiers.findIndex(t=>t.id==='public');
+  const privIdx=enabledTiers.findIndex(t=>t.id==='private');
+  const hasIgw=pubIdx>=0;
+  const hasNat=pubIdx>=0&&privIdx>=0;
+  const box=(ti,az)=>({x:colX(az)+14,y:topPad+ti*rowH,w:colW-28,h:66});
+  const igwCx=width/2-peerExtra/2;
+  const lines=[];
+  if(hasIgw) for(let az=0;az<azCount;az++){const b=box(pubIdx,az);lines.push({x1:igwCx,y1:66,x2:b.x+b.w/2,y2:b.y,c:'var(--public)'});}
+  if(hasNat) for(let az=0;az<azCount;az++){
+    const pub=box(pubIdx,az),priv=box(privIdx,az);
+    const sx=natStrategy==='per-az'?pub.x+pub.w/2:box(pubIdx,0).x+box(pubIdx,0).w/2;
+    const sy=natStrategy==='per-az'?pub.y+pub.h:box(pubIdx,0).y+box(pubIdx,0).h;
+    lines.push({x1:sx,y1:sy,x2:priv.x+priv.w/2,y2:priv.y,c:'var(--private)'});
+  }
+  const peerBoxX=leftPad*2+colW*azCount+8;
+  const showEP=endpointS3||endpointDdb;
+  return (
+    <svg width={width} height={height} style={{display:'block',minWidth:width}}>
+      {hasIgw&&<React.Fragment>
+        <rect x={igwCx-65} y={26} width={130} height={40} rx={7} fill="var(--bg-raised)" stroke="var(--public)" strokeWidth="1.3"/>
+        <text x={igwCx} y={51} textAnchor="middle" fill="var(--public)" fontSize="12" fontWeight="700" fontFamily="var(--sans)">Internet Gateway</text>
+      </React.Fragment>}
+      {lines.map((l,i)=><line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.c} strokeWidth="1.4" strokeDasharray="4 4" opacity="0.65"/>)}
+      {enabledTiers.map((tier,ti)=>
+        Array.from({length:azCount}).map((_,az)=>{
+          const s=subnets.find(x=>x.tierId===tier.id&&x.az===az);
+          if(!s) return null;
+          const b=box(ti,az);
+          const sel=selectedId===s.id;
+          const showNat=tier.id==='public'&&privIdx>=0&&(natStrategy==='per-az'||az===0);
+          const isEPTier=tier.id==='private'||tier.id==='database';
+          return (
+            <g key={s.id} onClick={()=>onSelect(s.id)} style={{cursor:'pointer'}}>
+              <rect x={b.x} y={b.y} width={b.w} height={b.h} rx={7} fill="var(--bg-raised)"
+                stroke={sel?'#fff':tier.color} strokeWidth={sel?2:1.2} opacity="0.97"/>
+              <rect x={b.x+7} y={b.y+7} width={22} height={12} rx={3} fill="none" stroke="var(--text-faint)" strokeWidth="1"/>
+              <text x={b.x+18} y={b.y+16} textAnchor="middle" fontSize="7.5" fill="var(--text-faint)" fontFamily="var(--mono)">RT</text>
+              <text x={b.x+b.w/2} y={b.y+36} textAnchor="middle" fill={tier.color} fontSize="11" fontWeight="700" fontFamily="var(--sans)">{tier.name}</text>
+              <text x={b.x+b.w/2} y={b.y+52} textAnchor="middle" fill="var(--text-dim)" fontSize="10" fontFamily="var(--mono)">{s.cidr}</text>
+              {showNat&&<g>
+                <rect x={b.x+b.w-44} y={b.y+6} width={38} height={14} rx={3} fill="rgba(79,180,176,0.15)" stroke="var(--private)" strokeWidth="1"/>
+                <text x={b.x+b.w-25} y={b.y+16} textAnchor="middle" fontSize="7.5" fill="var(--private)" fontFamily="var(--mono)" fontWeight="700">NAT</text>
+              </g>}
+              {isEPTier&&showEP&&<g>
+                <rect x={b.x+b.w-68} y={b.y+b.h-18} width={62} height={13} rx={3} fill="rgba(95,191,143,0.12)" stroke="var(--success)" strokeWidth="0.8"/>
+                <text x={b.x+b.w-37} y={b.y+b.h-8} textAnchor="middle" fontSize="7" fill="var(--success)" fontFamily="var(--mono)" fontWeight="700">
+                  {endpointS3&&endpointDdb?'S3 EP + DDB EP':endpointS3?'S3 EP':'DDB EP'}
+                </text>
+              </g>}
+            </g>
+          );
+        })
+      )}
+      {enabledTiers.map((tier,ti)=>(tier.id!=='public'&&tier.id!=='private')&&(
+        <text key={'n'+tier.id} x={leftPad} y={topPad+ti*rowH-8} fontSize="9.5" fill="var(--text-faint)" fontFamily="var(--sans)">
+          Isolated   local VPC route only
+        </text>
+      ))}
+      {peeringEnabled&&peerParsed&&!peerError&&<React.Fragment>
+        <line x1={leftPad+colW*azCount} y1={46} x2={peerBoxX} y2={46} stroke="var(--database)" strokeWidth="1.4" strokeDasharray="4 4" opacity="0.7"/>
+        <rect x={peerBoxX} y={20} width={175} height={50} rx={7} fill="var(--bg-raised)" stroke="var(--database)" strokeWidth="1.3"/>
+        <text x={peerBoxX+87} y={40} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--database)" fontFamily="var(--sans)">Peer VPC</text>
+        <text x={peerBoxX+87} y={56} textAnchor="middle" fontSize="10" fill="var(--text-dim)" fontFamily="var(--mono)">{peerParsed.ip}/{peerParsed.mask}</text>
+      </React.Fragment>}
+    </svg>
+  );
+}
+
+/* ============================================================
+   IP LOOKUP PANEL
+   ============================================================ */
+function IpLookupPanel({subnets}){
+  const [ip,setIp]=useState('');
+  const result=useMemo(()=>ip.trim()?lookupIp(ip.trim(),subnets):null,[ip,subnets]);
+  const binStr=useMemo(()=>{
+    if(!result||!result.valid||!isValidIp(ip.trim())) return '';
+    return ipToInt(ip.trim()).toString(2).padStart(32,'0').replace(/(.{8})/g,'$1 ').trim();
+  },[result,ip]);
+
+  return (
+    <div className="iplookup-wrap">
+      <div className="iplookup-hdr">
+        <h4>IP-to-subnet lookup</h4>
+        <span>Type any IP   see which subnet it belongs to</span>
+      </div>
+      <div className="iplookup-row">
+        <input type="text" value={ip} onChange={e=>setIp(e.target.value)} placeholder="e.g. 10.0.1.45"/>
+        {ip&&<button className="iplookup-clear" onClick={()=>setIp('')}>✕</button>}
+      </div>
+      {result&&(
+        <div className="iplookup-result">
+          {result.valid&&result.found?(
+            <>
+              <div className="iplookup-hit">
+                <span style={{color:result.subnet.color}}>●</span>
+                <span style={{color:result.subnet.color,fontFamily:'var(--mono)'}}>{result.subnet.cidr}</span>
+                  {result.subnet.tierName} · AZ-{result.subnet.azLabel}
+                {result.reserved.length>0
+                  ?<span className="reserved-badge">{result.reserved[0]}</span>
+                  :<span className="usable-badge">usable</span>}
+              </div>
+              <div className="iplookup-math">
+                <div><span className="hl">IP binary: </span>{binStr}</div>
+                <div><span className="hl">Subnet:    </span>{intToIp(result.subnet.networkInt)} (this IP is offset +{result.offset})</div>
+                <div><span className="hl">Range:     </span>{intToIp(result.subnet.networkInt)} – {intToIp(result.subnet.networkInt+result.subnet.total-1)}</div>
+                <div><span className="hl">Mask:      </span>/{result.subnet.mask} · {result.subnet.usable} usable hosts after 5 reserved</div>
+              </div>
+            </>
+          ):result.valid?(
+            <div className="iplookup-miss">{ip.trim()} is not inside any subnet in this design. Check the VPC CIDR or the IP.</div>
+          ):(
+            <div className="iplookup-miss">Not a valid IPv4 address.</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   COMMON MISTAKES
+   ============================================================ */
+function CommonMistakes({mistakes}){
+  if(!mistakes.length) return null;
+  const icon={warning:'!',error:'✕',info:'ℹ'};
+  return (
+    <div className="mistakes-wrap">
+      <div className="section-title" style={{marginTop:0}}>Common mistakes   check before you ship</div>
+      {mistakes.map((m,i)=>(
+        <div key={i} className={'mistake-item '+m.level}>
+          <span className="mi-icon">{icon[m.level]}</span>
+          <div>
+            <div className="mi-title">{m.title}</div>
+            <div className="mi-detail">{m.detail}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ============================================================
+   COMPARE PANE + VIEW
+   ============================================================ */
+function ComparePane({label,config,isCurrent}){
+  const vpc=useMemo(()=>parseCidr(config.vpcInput),[config.vpcInput]);
+  const plan=useMemo(()=>computeSubnetPlan(vpc,config.azCount,config.tiers,config.natStrategy),[vpc,config.azCount,config.tiers,config.natStrategy]);
+  const cost=useMemo(()=>calcCost(plan,config.natStrategy,'ap-south-1',false,false),[plan,config.natStrategy]);
+  const tierNames=(plan.enabledTiers||[]).map(t=>t.name).join(', ')||' ';
+  return (
+    <div className={'compare-pane'+(isCurrent?' is-current':'')}>
+      <div className="compare-pane-label">{label}</div>
+      <div className="compare-pane-meta">
+        {vpc?config.vpcInput:'Invalid'} · {config.azCount} AZ{config.azCount>1?'s':''}<br/>
+        {config.natStrategy==='per-az'?'Per-AZ NAT':'Single NAT'}<br/>
+        {tierNames}
+      </div>
+      {plan.subnets.length>0&&vpc&&(
+        <>
+          <div className="stats-strip" style={{margin:'9px 0'}}>
+            <div className="stat-box" style={{minWidth:80}}>
+              <div className="stat-label">Subnet</div>
+              <div className="stat-value" style={{fontSize:15}}>/{plan.newMask}</div>
+            </div>
+            <div className="stat-box" style={{minWidth:80}}>
+              <div className="stat-label">Subnets</div>
+              <div className="stat-value" style={{fontSize:15}}>{plan.totalSubnets}</div>
+            </div>
+            <div className="stat-box" style={{minWidth:80}}>
+              <div className="stat-label">Usable</div>
+              <div className="stat-value" style={{fontSize:15}}>{fmtInt(plan.subnetSize-5)}</div>
+            </div>
+            {cost.natCount>0&&(
+              <div className="stat-box cost-stat" style={{minWidth:80}}>
+                <div className="stat-label">NAT/mo</div>
+                <div className="stat-value" style={{fontSize:15}}>${cost.monthly.toFixed(0)}</div>
+              </div>
+            )}
+          </div>
+          <AddressBar vpc={vpc} subnets={plan.subnets} selectedId={null} onSelect={()=>{}}/>
+          <div className="legend" style={{marginTop:8}}>
+            {(plan.enabledTiers||[]).map(t=>(
+              <div className="legend-item" key={t.id}><span className="legend-swatch" style={{background:t.color}}/>{t.name}</div>
+            ))}
+          </div>
+        </>
+      )}
+      {plan.errors.length>0&&(
+        <div className="banner error" style={{marginTop:10}}>
+          <span className="icon">✕</span><span>{plan.errors[0]}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CompareView({savedConfig,currentConfig}){
+  return (
+    <>
+      <div className="compare-banner">
+        <span>Comparing Config A (saved) vs Current   edit in the wizard to update the right pane live.</span>
+      </div>
+      <div className="compare-wrap">
+        <ComparePane label="Config A   saved" config={savedConfig} isCurrent={false}/>
+        <ComparePane label="Current" config={currentConfig} isCurrent={true}/>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   BITWISE BREAKDOWN
+   ============================================================ */
+function BitwiseBreakdown({subnet}){
+  const vpcMask=subnet.vpcMask,subnetMask=subnet.mask,borrowedBits=subnet.borrowedBits;
+  const resultBits=subnet.networkInt.toString(2).padStart(32,'0').split('');
+  const indexBits=subnet.subnetIndex.toString(2).padStart(Math.max(borrowedBits,1),'0').split('');
+  const vpcRowBits=[];
+  for(let p=0;p<32;p++) vpcRowBits.push(p<vpcMask?resultBits[p]:'0');
+  const vpcStyle=p=>p<vpcMask?'network':'blank';
+  const indexRowBits=[];
+  for(let p=0;p<32;p++) indexRowBits.push((p>=vpcMask&&p<subnetMask)?indexBits[p-vpcMask]:'·');
+  const indexStyle=p=>(p>=vpcMask&&p<subnetMask)?'borrowed':'blank';
+  const resultStyle=p=>p<vpcMask?'network':p<subnetMask?'borrowed':'host';
+  const renderRow=(chars,styleFn)=>{
+    const groups=[];
+    for(let g=0;g<4;g++){
+      groups.push(
+        <span className="bit-octet" key={g}>
+          {chars.slice(g*8,g*8+8).map((c,i)=>{
+            const pos=g*8+i;
+            return <span key={i} className={"bit "+styleFn(pos)}>{c}</span>;
+          })}
+        </span>
+      );
+    }
+    return (
+      <div className="bit-row">
+        {groups.map((grp,i)=>(
+          <React.Fragment key={i}>{grp}{i<3&&<span className="bit-dot">.</span>}</React.Fragment>
+        ))}
+      </div>
+    );
+  };
+  return (
+    <div className="bitwise-block">
+      <p className="bitwise-why">
+        You need <b>{subnet.totalSubnets} subnets</b>, so the borrowed bits must satisfy 2<sup>bits</sup> ≥ {subnet.totalSubnets}.
+        {' '}2<sup>{Math.max(borrowedBits-1,0)}</sup> = {Math.pow(2,Math.max(borrowedBits-1,0))} isn't enough,
+        {' '}so it rounds up to <b>{borrowedBits} bit{borrowedBits===1?'':'s'}</b>: 2<sup>{borrowedBits}</sup> = {Math.pow(2,borrowedBits)} possible subnets
+        {Math.pow(2,borrowedBits)>subnet.totalSubnets?' ('+( Math.pow(2,borrowedBits)-subnet.totalSubnets)+' left unused for later growth).':'.'}
+      </p>
+      <div className="bitwise-label">VPC network · /{vpcMask}</div>
+      {renderRow(vpcRowBits,vpcStyle)}
+      <div className="bitwise-label" style={{marginTop:10}}>
+        + subnet #{subnet.subnetIndex} of {subnet.totalSubnets} · {borrowedBits} bit{borrowedBits===1?'':'s'} borrowed
+      </div>
+      {renderRow(indexRowBits,indexStyle)}
+      <div className="bitwise-label" style={{marginTop:10}}>= this subnet · /{subnetMask}</div>
+      {renderRow(resultBits,resultStyle)}
+      <div className="bitwise-legend">
+        <span><i className="sw network"/>network bits   fixed by the /{vpcMask} VPC CIDR</span>
+        <span><i className="sw borrowed"/>subnet ID bits   {borrowedBits} bits borrowed to number all {subnet.totalSubnets} subnets</span>
+        <span><i className="sw host"/>host bits   {32-subnetMask} left, {fmtInt(Math.pow(2,32-subnetMask)-5)} usable after AWS's 5 reserved</span>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   INSPECTOR DRAWER  (SG/NACL examples + console map + IPv6)
+   ============================================================ */
+function InspectorDrawer({subnet,natStrategy,hasPublic,hasPrivate,onClose,ipv6Enabled,ipv6Prefix,endpointS3,endpointDdb}){
+  if(!subnet) return null;
+  const vpcBase=(subnet.networkInt&((0xFFFFFFFF<<(32-subnet.vpcMask))>>>0))>>>0;
+  const localRoute=intToIp(vpcBase)+'/'+subnet.vpcMask+' (local)';
+  const routes=[];
+  if(subnet.tierId==='public'){
+    routes.push({dest:localRoute,target:'local'});
+    routes.push({dest:'0.0.0.0/0',target:'Internet Gateway'});
+  } else if(subnet.tierId==='private'){
+    routes.push({dest:localRoute,target:'local'});
+    routes.push({dest:'0.0.0.0/0',target:natStrategy==='per-az'?'NAT Gateway (this AZ)':'NAT Gateway (AZ-a)'});
+    if(endpointS3)  routes.push({dest:'pl-68a54001 (S3)',      target:'vpce-s3 (Gateway)'});
+    if(endpointDdb) routes.push({dest:'pl-b3a742da (DynamoDB)',target:'vpce-ddb (Gateway)'});
+  } else {
+    routes.push({dest:localRoute,target:'local'});
+    if(endpointS3)  routes.push({dest:'pl-68a54001 (S3)',      target:'vpce-s3 (Gateway)'});
+    if(endpointDdb) routes.push({dest:'pl-b3a742da (DynamoDB)',target:'vpce-ddb (Gateway)'});
+  }
+  const note=TIER_NOTES[subnet.tierId]||'Custom tier   route table and internet access depend on what you attach to it.';
+  const sgEx=SG_EXAMPLES[subnet.tierId]||SG_EXAMPLES.custom;
+  const naclEx=NACL_EXAMPLES[subnet.tierId]||NACL_EXAMPLES.custom;
+  const cmap=CONSOLE_MAP[subnet.tierId]||CONSOLE_MAP.custom;
+  const ipv6sub=ipv6Enabled&&ipv6Prefix?makeIpv6SubnetCidr(ipv6Prefix,subnet.subnetIndex):null;
+
+  return (
+    <>
+      <div className="drawer-overlay" onClick={onClose}/>
+      <div className="drawer">
+        <button className="drawer-close" onClick={onClose}>×</button>
+        <h2 style={{color:subnet.color}}>{subnet.cidr}</h2>
+        <div className="drawer-sub">{subnet.tierName} subnet · Availability Zone {subnet.azLabel.toUpperCase()}</div>
+
+        <div className="drawer-stat-grid">
+          <div className="drawer-stat"><div className="l">Subnet mask</div><div className="v">/{subnet.mask}</div></div>
+          <div className="drawer-stat"><div className="l">Total addresses</div><div className="v">{fmtInt(subnet.total)}</div></div>
+          <div className="drawer-stat"><div className="l">AWS reserves</div><div className="v">5 IPs</div></div>
+          <div className="drawer-stat"><div className="l">Usable hosts</div><div className="v">{fmtInt(subnet.usable)}</div></div>
+        </div>
+
+        <p className="note">{note}</p>
+
+        {ipv6Enabled&&ipv6sub&&(
+          <>
+            <h4>IPv6   dual-stack (illustrative)</h4>
+            <div>
+              <div className="ipv6-row"><span className="l">VPC /56 prefix</span><span className="v">{ipv6Prefix}</span></div>
+              <div className="ipv6-row"><span className="l">This subnet /64</span><span className="v">{ipv6sub}</span></div>
+              <div className="ipv6-row"><span className="l">Host capacity</span><span className="v">2⁶⁴ addresses</span></div>
+              <div className="ipv6-row" style={{borderBottom:'none'}}>
+                <span className="l">Note</span>
+                <span style={{fontSize:10,color:'var(--text-faint)',fontStyle:'italic',textAlign:'right',maxWidth:'60%'}}>AWS assigns the actual /56 at VPC creation. This prefix uses the 2001:db8 documentation range.</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        <h4>How this address was calculated</h4>
+        <BitwiseBreakdown subnet={subnet}/>
+
+        <h4>Route table</h4>
+        <table className="route-table">
+          <thead><tr><th>Destination</th><th>Target</th></tr></thead>
+          <tbody>
+            {routes.map((r,i)=><tr key={i}><td>{r.dest}</td><td>{r.target}</td></tr>)}
+          </tbody>
+        </table>
+
+        <h4>Security Group vs. NACL</h4>
+        <div className="compare-grid">
+          <div className="compare-card">
+            <div className="ct" style={{color:'var(--public)'}}>Security Group</div>
+            <ul>
+              <li>Attached to instances</li>
+              <li>Stateful   return traffic auto-allowed</li>
+              <li>Allow rules only</li>
+              <li>All rules evaluated</li>
+            </ul>
+            <div className="ex-direction">Inbound examples</div>
+            {sgEx.inbound.map((r,i)=><div key={i} className="ex-rule">{r}</div>)}
+            <div className="ex-direction">Outbound examples</div>
+            {sgEx.outbound.map((r,i)=><div key={i} className="ex-rule">{r}</div>)}
+          </div>
+          <div className="compare-card">
+            <div className="ct" style={{color:'var(--private)'}}>Network ACL</div>
+            <ul>
+              <li>Attached to this subnet</li>
+              <li>Stateless   return traffic needs its own rule</li>
+              <li>Allow and deny rules</li>
+              <li>Rules in number order</li>
+            </ul>
+            <div className="ex-direction">Inbound examples</div>
+            {naclEx.inbound.map((r,i)=><div key={i} className="ex-rule">{r}</div>)}
+            <div className="ex-direction">Outbound examples</div>
+            {naclEx.outbound.map((r,i)=><div key={i} className="ex-rule">{r}</div>)}
+          </div>
+        </div>
+
+        <h4>In the AWS Console</h4>
+        {cmap.map((c,i)=>(
+          <div key={i} className="cmap-item">
+            <span className="cmap-name">{c.item}</span>
+            <span>
+              <span className="cmap-path">{c.path}</span>
+              <a href={c.url} target="_blank" rel="noopener noreferrer" className="cmap-link">Open ↗</a>
+            </span>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   APP
+   ============================================================ */
+function App(){
+  const [activeStep,setActiveStep]=useState(0);
+  const [vpcInput,setVpcInput]=useState('10.0.0.0/16');
+  const [azCount,setAzCount]=useState(2);
+  const [tiers,setTiers]=useState(DEFAULT_TIERS);
+  const [natStrategy,setNatStrategy]=useState('per-az');
+  const [peeringEnabled,setPeeringEnabled]=useState(false);
+  const [peerInput,setPeerInput]=useState('172.16.0.0/16');
+  const [selectedId,setSelectedId]=useState(null);
+  // new state
+  const [region,setRegion]=useState('ap-south-1');
+  const [endpointS3,setEndpointS3]=useState(false);
+  const [endpointDdb,setEndpointDdb]=useState(false);
+  const [ipv6Enabled,setIpv6Enabled]=useState(false);
+  const [undoStack,setUndoStack]=useState([]);
+  const [savedConfig,setSavedConfig]=useState(null);
+  const [compareMode,setCompareMode]=useState(false);
+
+  // Always-current ref for snapshots (avoids stale closures in callbacks)
+  const snapRef=useRef({});
+  useEffect(()=>{
+    snapRef.current={
+      vpcInput,azCount,
+      tiers:JSON.parse(JSON.stringify(tiers)),
+      natStrategy,peeringEnabled,peerInput,
+    };
+  },[vpcInput,azCount,tiers,natStrategy,peeringEnabled,peerInput]);
+
+  const pushUndo=useCallback(()=>{
+    setUndoStack(prev=>[...prev.slice(-19),{...snapRef.current,tiers:JSON.parse(JSON.stringify(snapRef.current.tiers||[]))}]);
+  },[]);
+
+  const doUndo=useCallback(()=>{
+    setUndoStack(prev=>{
+      if(!prev.length) return prev;
+      const last=prev[prev.length-1];
+      setVpcInput(last.vpcInput);
+      setAzCount(last.azCount);
+      setTiers(last.tiers);
+      setNatStrategy(last.natStrategy);
+      setPeeringEnabled(last.peeringEnabled);
+      setPeerInput(last.peerInput);
+      return prev.slice(0,-1);
+    });
+  },[]);
+
+  const doReset=useCallback(()=>{
+    pushUndo();
+    setVpcInput('10.0.0.0/16');
+    setAzCount(2);
+    setTiers(DEFAULT_TIERS);
+    setNatStrategy('per-az');
+    setPeeringEnabled(false);
+    setPeerInput('172.16.0.0/16');
+    setEndpointS3(false);
+    setEndpointDdb(false);
+    setSelectedId(null);
+  },[pushUndo]);
+
+  const applyPreset=useCallback(p=>{
+    pushUndo();
+    setVpcInput(p.cidr);
+    setAzCount(p.azCount);
+    setTiers(DEFAULT_TIERS.map(t=>({...t,enabled:p.tiers.includes(t.id)})));
+    setNatStrategy('per-az');
+    setPeeringEnabled(false);
+    setSelectedId(null);
+  },[pushUndo]);
+
+  // Wrap major setters so they push undo
+  const setAzCountU =useCallback(v=>{pushUndo();setAzCount(v);},[pushUndo]);
+  const setTiersU   =useCallback(v=>{pushUndo();setTiers(v);},[pushUndo]);
+  const setNatStratU=useCallback(v=>{pushUndo();setNatStrategy(v);},[pushUndo]);
+
+  const enterCompare=useCallback(()=>{
+    setSavedConfig({...snapRef.current,tiers:JSON.parse(JSON.stringify(snapRef.current.tiers||[]))});
+    setCompareMode(true);
+  },[]);
+  const exitCompare=useCallback(()=>{setCompareMode(false);setSavedConfig(null);},[]);
+
+  // Computed
+  const vpc=useMemo(()=>parseCidr(vpcInput),[vpcInput]);
+  const peerParsed=useMemo(()=>peeringEnabled?parseCidr(peerInput):null,[peeringEnabled,peerInput]);
+  const peerError=useMemo(()=>{
+    if(!peeringEnabled) return null;
+    if(!peerParsed) return 'Enter a valid peer CIDR, e.g. 172.16.0.0/16';
+    if(vpc&&rangesOverlap(vpc,peerParsed)) return 'Peer CIDR overlaps the primary VPC   peering requires non-overlapping ranges.';
+    return null;
+  },[peeringEnabled,peerParsed,vpc]);
+  const plan=useMemo(()=>computeSubnetPlan(vpc,azCount,tiers,natStrategy),[vpc,azCount,tiers,natStrategy]);
+  const selectedSubnet=plan.subnets.find(s=>s.id===selectedId)||null;
+  const cost=useMemo(()=>calcCost(plan,natStrategy,region,endpointS3,endpointDdb),[plan,natStrategy,region,endpointS3,endpointDdb]);
+  const mistakes=useMemo(()=>findMistakes(vpc,plan,azCount,natStrategy,endpointS3),[vpc,plan,azCount,natStrategy,endpointS3]);
+  const ipv6Prefix=useMemo(()=>ipv6Enabled&&vpc?makeIpv6Prefix(vpc):null,[ipv6Enabled,vpc]);
+
+  const steps=['VPC Basics','AZ','Tiers','Advanced','Quiz'];
+
+  return (
+    <div className="app">
+      <div className="topbar">
+        <h1>VPC Architect <span className="dim">/ subnetting visualizer</span></h1>
+        <div className="topbar-actions">
+          <button
+            className={'toolbar-btn'+(ipv6Enabled?' active':'')}
+            onClick={()=>setIpv6Enabled(v=>!v)}
+            title="Show IPv6 /56 VPC and /64 subnet CIDRs alongside IPv4">
+            IPv6
+          </button>
+          <select value={region} onChange={e=>setRegion(e.target.value)} title="Pricing region">
+            {Object.entries(NAT_RATES).map(([k,v])=><option key={k} value={k}>{v.label}</option>)}
+          </select>
+          <button className="toolbar-btn" disabled={undoStack.length===0} onClick={doUndo}>↩ Undo</button>
+          <button className="toolbar-btn danger" onClick={doReset}>Reset</button>
+          {!compareMode
+            ?<button className="toolbar-btn active" onClick={enterCompare} disabled={plan.subnets.length===0} title="Save current config as Config A, then keep editing to compare side by side">Save Config A</button>
+            :<button className="toolbar-btn danger" onClick={exitCompare}>Exit Compare</button>}
+        </div>
+      </div>
+
+      <div className="layout">
+        <div className="wizard">
+          <div className="steps-tabs">
+            {steps.map((s,i)=>(
+              <button key={i} className={activeStep===i?'active':''} onClick={()=>setActiveStep(i)}>{s}</button>
+            ))}
+          </div>
+          {activeStep===0&&<StepBasics vpcInput={vpcInput} setVpcInput={setVpcInput} vpc={vpc} onApplyPreset={applyPreset}/>}
+          {activeStep===1&&<StepAZ azCount={azCount} setAzCount={setAzCountU}/>}
+          {activeStep===2&&<StepTiers tiers={tiers} setTiers={setTiersU}/>}
+          {activeStep===3&&<StepAdvanced
+            natStrategy={natStrategy} setNatStrategy={setNatStratU}
+            peeringEnabled={peeringEnabled} setPeeringEnabled={setPeeringEnabled}
+            peerInput={peerInput} setPeerInput={setPeerInput}
+            peerParsed={peerParsed} peerError={peerError}
+            endpointS3={endpointS3} setEndpointS3={setEndpointS3}
+            endpointDdb={endpointDdb} setEndpointDdb={setEndpointDdb}/>}
+          {activeStep===4&&<StepQuiz/>}
+        </div>
+
+        <div className="canvas">
+          {compareMode&&savedConfig?(
+            <CompareView savedConfig={savedConfig} currentConfig={snapRef.current}/>
+          ):(
+            <>
+              {plan.errors.map((e,i)=><div className="banner error" key={'e'+i}><span className="icon">✕</span><span>{e}</span></div>)}
+              {peerError&&peeringEnabled&&<div className="banner error"><span className="icon">✕</span><span>{peerError}</span></div>}
+              {plan.warnings.map((w,i)=><div className="banner warning" key={'w'+i}><span className="icon">!</span><span>{w}</span></div>)}
+
+              {mistakes.length>0&&<CommonMistakes mistakes={mistakes}/>}
+
+              {plan.subnets.length>0&&vpc&&(
+                <>
+                  <div className="stats-strip">
+                    <div className="stat-box">
+                      <div className="stat-label">VPC size</div>
+                      <div className="stat-value">/{vpc.mask}</div>
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-label">Total IPs</div>
+                      <div className="stat-value">{fmtInt(vpc.total)}</div>
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-label">Bits borrowed</div>
+                      <div className="stat-value">{plan.newMask-vpc.mask}</div>
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-label">Subnet size</div>
+                      <div className="stat-value">/{plan.newMask}</div>
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-label">Subnets</div>
+                      <div className="stat-value">{plan.totalSubnets}</div>
+                    </div>
+                    <div className="stat-box">
+                      <div className="stat-label">Usable / subnet</div>
+                      <div className="stat-value">{fmtInt(plan.subnetSize-5)}</div>
+                    </div>
+                    {cost.natCount>0&&(
+                      <div className="stat-box cost-stat">
+                        <div className="stat-label">Est. NAT cost</div>
+                        <div className="stat-value">${cost.monthly.toFixed(0)}<span style={{fontSize:12}}>/mo</span></div>
+                        <div className="stat-sub">{cost.natCount} gateway{cost.natCount!==1?'s':''} × ${cost.rate}/hr · +${cost.dataRate}/GB data</div>
+                      </div>
+                    )}
+                  </div>
+
+                  <IpLookupPanel subnets={plan.subnets}/>
+
+                  <div className="section-title">Address space allocation</div>
+                  <AddressBar vpc={vpc} subnets={plan.subnets} selectedId={selectedId} onSelect={setSelectedId}/>
+                  <div className="legend">
+                    {plan.enabledTiers.map(t=>(
+                      <div className="legend-item" key={t.id}><span className="legend-swatch" style={{background:t.color}}/>{t.name}</div>
+                    ))}
+                  </div>
+
+                  <div className="section-title">Subnets by availability zone</div>
+                  <SubnetGrid enabledTiers={plan.enabledTiers} subnets={plan.subnets} azCount={azCount}
+                    selectedId={selectedId} onSelect={setSelectedId}
+                    ipv6Enabled={ipv6Enabled} ipv6Prefix={ipv6Prefix}/>
+
+                  <div className="section-title">Network diagram</div>
+                  <div className="diagram-wrap">
+                    <NetworkDiagram enabledTiers={plan.enabledTiers} subnets={plan.subnets} azCount={azCount}
+                      natStrategy={natStrategy} peeringEnabled={peeringEnabled} peerParsed={peerParsed} peerError={peerError}
+                      vpc={vpc} selectedId={selectedId} onSelect={setSelectedId}
+                      endpointS3={endpointS3} endpointDdb={endpointDdb}/>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      {!compareMode&&(
+        <InspectorDrawer
+          subnet={selectedSubnet} natStrategy={natStrategy}
+          hasPublic={plan.enabledTiers&&plan.enabledTiers.some(t=>t.id==='public')}
+          hasPrivate={plan.enabledTiers&&plan.enabledTiers.some(t=>t.id==='private')}
+          onClose={()=>setSelectedId(null)}
+          ipv6Enabled={ipv6Enabled} ipv6Prefix={ipv6Prefix}
+          endpointS3={endpointS3} endpointDdb={endpointDdb}/>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
