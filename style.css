@@ -831,6 +831,119 @@ p {
   color: var(--green)
 }
 
+.publishing-section {
+  padding-top: 105px;
+  padding-bottom: 112px
+}
+
+.publishing-grid {
+  display: grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 18px;
+  align-items: stretch
+}
+
+.newsletter-card,
+.youtube-card {
+  border: 1px solid var(--line);
+  padding: clamp(22px, 3vw, 34px);
+  background: #eeede7
+}
+
+.newsletter-card h3,
+.youtube-card h3 {
+  font: 700 29px/1.15 var(--display);
+  letter-spacing: -.05em;
+  margin: 25px 0 10px
+}
+
+.newsletter-card>p:not(.edition-label),
+.youtube-card>p:not(.eyebrow) {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7
+}
+
+.edition-label {
+  font: 9px var(--mono);
+  letter-spacing: .09em;
+  color: var(--teal);
+  margin: 25px 0 6px
+}
+
+.edition-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px
+}
+
+.edition-list li {
+  border-bottom: 1px solid #d4d5cc
+}
+
+.edition-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 600
+}
+
+.edition-list a span {
+  color: var(--teal);
+  flex-shrink: 0
+}
+
+.edition-list a:hover,
+.publishing-cta:hover {
+  color: var(--teal)
+}
+
+.publishing-cta {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal)
+}
+
+.youtube-card {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.youtube-card .eyebrow {
+  margin-bottom: 0
+}
+
+.youtube-card h3 {
+  font-size: 34px
+}
+
+.video-mark {
+  width: 100%;
+  min-height: 155px;
+  background: var(--ink);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 19px 0 24px;
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: .13em
+}
+
+.video-mark span:first-child {
+  font-size: 28px
+}
+
+.youtube-card .button {
+  margin-top: auto
+}
+
 @media(max-width:850px) {
   .hero {
     grid-template-columns: 1fr .82fr;
@@ -879,6 +992,10 @@ p {
 
   .about-section {
     grid-template-columns: .28fr 1fr
+  }
+
+  .publishing-grid {
+    grid-template-columns: 1.15fr .85fr
   }
 }
 
@@ -1017,6 +1134,14 @@ p {
 
   .project-card {
     min-height: 190px
+  }
+
+  .publishing-section {
+    padding-block: 76px
+  }
+
+  .publishing-grid {
+    grid-template-columns: 1fr
   }
 
   .experience-inner {
